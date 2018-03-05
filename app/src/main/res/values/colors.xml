@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF3D00</color>
+    <color name="loginAccent">#FF9100</color>
+    <color name="registerAccent">#A8D1FF</color>
+    <color name="loginButton">#FF8A80</color>
+    <color name="registerButton">#80D8FF</color>
+    <color name="setupButton">#2E7D32</color>
+    <color name="translucentOverlay">#66000000</color>
+    <color name="translucentOverlay2">#44000000</color>
+    <color name="translucentOverlay3">#88FFFFFF</color>
+    <color name="lighterGray">#DDD</color>
+    <color name="toolbarBlack">#191919</color>
+    <color name="toolbarBlackDark">#131313</color>
+    <color name="whiteTrans">#99FFFFFF</color>
+    <color name="materialGray">#737373</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="darkerGray">#AAA</color>
+</resources>
