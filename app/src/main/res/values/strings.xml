@@ -16,7 +16,8 @@
     <!-- Strings related to bottom bar -->
     <string name="tab_home">Home</string>
     <string name="tab_account">Profile</string>
-    <string name="tab_camera">Camera</string>
+    <string name="tab_search">Search</string>
+    <string name="tab_meal_plan">Plan</string>
 
     <!-- Strings related to permission dialogs -->
     <string name="permission_read_storage_rationale">This app needs access to your storage so it can show your pictures.</string>
@@ -31,4 +32,6 @@
     <string name="success_register">Successfully registered</string>
     <string name="success_login">Successfully logged in</string>
     <string name="error_login_invalid">Your login session is no longer valid. Please log in again!</string>
+
+    <string name="prompt_search">Search for recipes…</string>
 </resources>

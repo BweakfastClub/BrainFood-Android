@@ -6,7 +6,7 @@
     <color name="loginAccent">#FF9100</color>
     <color name="registerAccent">#A8D1FF</color>
     <color name="loginButton">#FF8A80</color>
-    <color name="registerButton">#80D8FF</color>
+    <color name="registerButton">#009688</color>
     <color name="setupButton">#2E7D32</color>
     <color name="translucentOverlay">#66000000</color>
     <color name="translucentOverlay2">#44000000</color>
