@@ -39,7 +39,6 @@ class RegisterFragment : Fragment(), ErrorDisplay {
 
         inputValidators = mapOf(
             nameInputLayout to listOf(Validator.empty()),
-            usernameInputLayout to listOf(Validator.empty()),
             emailInputLayout to listOf(
                 Validator.empty(),
                 Validator.emailValid()
@@ -68,10 +67,7 @@ class RegisterFragment : Fragment(), ErrorDisplay {
     }
 
     override fun showError(error: String?) {
-        if (error == "Username is Null") {
-            usernameInputLayout?.error = getString(R.string.error_field_required)
-            usernameInputLayout?.requestFocus()
-        } else if (error == "Password is Null") {
+        if (error == "Password is Null") {
             passwordInputLayout?.error = getString(R.string.error_field_required)
             passwordInputLayout?.requestFocus()
         }
@@ -84,10 +80,9 @@ class RegisterFragment : Fragment(), ErrorDisplay {
             focusView.requestFocus()
         } else {
 //            val name = nameInputLayout.editText?.text.toString()
-//            val email = emailInputLayout.editText?.text.toString()
-            val username = usernameInputLayout.editText?.text.toString()
+            val email = emailInputLayout.editText?.text.toString()
             val password = passwordInputLayout.editText?.text.toString()
-            register.onNext(username to password)
+            register.onNext(email to password)
         }
     }
 

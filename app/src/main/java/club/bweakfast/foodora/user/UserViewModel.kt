@@ -9,8 +9,8 @@ import javax.inject.Inject
  */
 
 class UserViewModel @Inject constructor(private val service: AuthenticationService) {
-    fun login(username: String, password: String) = service.login(username, password).mapResponse()
+    fun login(email: String, password: String) = service.login(email, password).mapResponse()
 
-    fun register(username: String, password: String) =
-        service.register(username, password).mapResponse()
+    fun register(email: String, password: String) =
+        service.register(email, password).mapResponse()
 }

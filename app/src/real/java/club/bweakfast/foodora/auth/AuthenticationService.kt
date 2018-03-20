@@ -18,15 +18,15 @@ import javax.inject.Inject
 class AuthenticationService @Inject constructor(retrofit: Retrofit) {
     private val api: AuthenticationAPI = retrofit.create(AuthenticationAPI::class.java)
 
-    fun login(username: String, password: String) = api.login(username, password)
+    fun login(email: String, password: String) = api.login(email, password)
 
-    fun register(username: String, password: String) = api.register(username, password)
+    fun register(email: String, password: String) = api.register(email, password)
 
     interface AuthenticationAPI {
         @GET("/get")
-        fun login(@Query("username") username: String, @Query("password") password: String): Single<Response<ServerResponse<JsonObject>>>
+        fun login(@Query("email") email: String, @Query("password") password: String): Single<Response<ServerResponse<JsonObject>>>
 
         @GET("/ip")
-        fun register(@Query("username") username: String, @Query("password") password: String): Single<Response<ServerResponse<JsonObject>>>
+        fun register(@Query("email") email: String, @Query("password") password: String): Single<Response<ServerResponse<JsonObject>>>
     }
 }

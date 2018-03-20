@@ -40,7 +40,7 @@ class LoginFragment : Fragment(), ErrorDisplay {
         val loginButton = loginButton
         val registerButton = registerButton
         inputValidators = mapOf(
-            usernameInputLayout to listOf(Validator.empty()),
+            emailInputLayout to listOf(Validator.empty()),
             passwordInputLayout to listOf(Validator.empty(), Validator.passwordValid())
         )
 
@@ -62,9 +62,9 @@ class LoginFragment : Fragment(), ErrorDisplay {
     }
 
     override fun showError(error: String?) {
-        if (error == "Username is Null") {
-            usernameInputLayout.error = getString(R.string.error_field_required)
-            usernameInputLayout.requestFocus()
+        if (error == "Email is Null") {
+            emailInputLayout.error = getString(R.string.error_field_required)
+            emailInputLayout.requestFocus()
         } else if (error == "Password is Null") {
             passwordInputLayout.error = getString(R.string.error_field_required)
             passwordInputLayout.requestFocus()
@@ -77,9 +77,9 @@ class LoginFragment : Fragment(), ErrorDisplay {
         if (focusView != null) {
             focusView.requestFocus()
         } else {
-            val username = usernameInputLayout?.editText?.text.toString()
+            val email = emailInputLayout?.editText?.text.toString()
             val password = passwordInputLayout?.editText?.text.toString()
-            login.onNext(username to password)
+            login.onNext(email to password)
         }
     }
 

@@ -73,10 +73,10 @@ class AuthenticationActivity : AppCompatActivity() {
 //        }
     }
 
-    private fun login(username: String, password: String) {
+    private fun login(email: String, password: String) {
         loading = true
         subscriptions.add(
-            userViewModel.login(username, password)
+            userViewModel.login(email, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
@@ -92,10 +92,10 @@ class AuthenticationActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun register(username: String, password: String) {
+    private fun register(email: String, password: String) {
         loading = true
         subscriptions.add(
-            userViewModel.register(username, password)
+            userViewModel.register(email, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
@@ -118,7 +118,7 @@ class AuthenticationActivity : AppCompatActivity() {
                     .subscribeOn(AndroidSchedulers.mainThread())
                     .observeOn(Schedulers.trampoline())
                     .subscribe(
-                        { (username, password) -> login(username, password) },
+                        { (email, password) -> login(email, password) },
                         { onNetworkError(it) }
                     ),
                 fragment.loadRegisterPage
@@ -141,7 +141,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.trampoline())
                 .subscribe(
-                    { (username, password) -> register(username, password) },
+                    { (email, password) -> register(email, password) },
                     { onNetworkError(it) }
                 ),
             fragment.loadLoginPage

@@ -15,8 +15,8 @@ import javax.inject.Inject
  */
 
 class AuthenticationService @Inject constructor(retrofit: Retrofit) {
-    fun login(username: String, password: String): Single<Response<ServerResponse<JsonObject>>> =
-        if (username == "banana" && password == "banana") {
+    fun login(email: String, password: String): Single<Response<ServerResponse<JsonObject>>> =
+        if ((email == "banana" || email == "banana@apple.ca") && password == "banana") {
             Single
                 .just(Response.success(ServerResponse(JsonObject().apply {
                     this.addProperty("error", false)
@@ -35,7 +35,7 @@ class AuthenticationService @Inject constructor(retrofit: Retrofit) {
             )
         }
 
-    fun register(username: String, password: String): Single<Response<ServerResponse<JsonObject>>> =
+    fun register(email: String, password: String): Single<Response<ServerResponse<JsonObject>>> =
         Single.just(Response.success(ServerResponse(JsonObject().apply {
             addProperty("error", false)
             addProperty("data", "User has successfully register")
