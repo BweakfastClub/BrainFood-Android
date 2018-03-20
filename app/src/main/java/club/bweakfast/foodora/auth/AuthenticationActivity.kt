@@ -21,8 +21,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login_register.*
-import rbsoftware.friendstagram.service.NetworkService
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -56,7 +54,8 @@ class AuthenticationActivity : AppCompatActivity() {
         val daggerComponent = FoodoraApp.daggerComponent
         daggerComponent.inject(this)
 
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = Color.TRANSPARENT
         }
@@ -78,19 +77,11 @@ class AuthenticationActivity : AppCompatActivity() {
         loading = true
         subscriptions.add(
             userViewModel.login(username, password)
-                .delay(3, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ response ->
-                    if (response.isSuccessful) {
-                        response.body()?.data?.let {
-
-                        }
-                    } else {
-                        val error = NetworkService.parseError(response.errorBody())
-                        this.handleError(error)
-                    }
+                .subscribe({
                     loading = false
+                    onLoginSuccess()
                 }, this::onNetworkError)
         )
     }
@@ -107,18 +98,13 @@ class AuthenticationActivity : AppCompatActivity() {
             userViewModel.register(username, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ response ->
-                    if (response.isSuccessful) {
-                        Toast.makeText(
-                            applicationContext,
-                            getString(R.string.success_register),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        loadLoginPage()
-                    } else {
-                        val error: String? = NetworkService.parseError(response.errorBody())
-                        this.handleError(error)
-                    }
+                .subscribe({
+                    Toast.makeText(
+                        applicationContext,
+                        getString(R.string.success_register),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    loadLoginPage()
                     loading = false
                 }, this::onNetworkError)
         )

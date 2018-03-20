@@ -1,6 +1,7 @@
 package club.bweakfast.foodora.user
 
 import club.bweakfast.foodora.auth.AuthenticationService
+import rbsoftware.friendstagram.service.mapResponse
 import javax.inject.Inject
 
 /**
@@ -8,7 +9,8 @@ import javax.inject.Inject
  */
 
 class UserViewModel @Inject constructor(private val service: AuthenticationService) {
-    fun login(username: String, password: String) = service.login(username, password)
+    fun login(username: String, password: String) = service.login(username, password).mapResponse()
 
-    fun register(username: String, password: String) = service.register(username, password)
+    fun register(username: String, password: String) =
+        service.register(username, password).mapResponse()
 }

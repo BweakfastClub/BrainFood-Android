@@ -2,7 +2,10 @@ package rbsoftware.friendstagram.service
 
 import android.util.Log
 import club.bweakfast.foodora.network.ErrorResponse
+import io.reactivex.Single
 import okhttp3.ResponseBody
+import retrofit2.HttpException
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
@@ -33,5 +36,13 @@ object NetworkService {
             Log.e(TAG, "An error occurred", e)
             null
         }
+    }
+}
+
+fun <T> Single<Response<T>>.mapResponse(): Single<T> = flatMap {
+    if (!it.isSuccessful) {
+        Single.error(HttpException(it))
+    } else {
+        Single.just(it.body())
     }
 }
