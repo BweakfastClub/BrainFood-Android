@@ -1,4 +1,4 @@
-package club.bweakfast.foodora.search.category
+package club.bweakfast.foodora.browse.category
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

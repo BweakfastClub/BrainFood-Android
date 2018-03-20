@@ -1,7 +1,5 @@
 package club.bweakfast.foodora.search
 
-import club.bweakfast.foodora.Ingredient
-import club.bweakfast.foodora.Recipe
 import club.bweakfast.foodora.network.ServerResponse
 import com.github.salomonbrys.kotson.float
 import com.github.salomonbrys.kotson.fromJson

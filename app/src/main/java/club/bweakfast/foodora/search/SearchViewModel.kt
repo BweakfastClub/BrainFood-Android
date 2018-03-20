@@ -1,6 +1,5 @@
 package club.bweakfast.foodora.search
 
-import club.bweakfast.foodora.Recipe
 import club.bweakfast.foodora.network.ServerResponse
 import io.reactivex.Single
 import rbsoftware.friendstagram.service.mapResponse
