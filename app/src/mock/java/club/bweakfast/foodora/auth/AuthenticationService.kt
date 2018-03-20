@@ -7,6 +7,7 @@ import okhttp3.MediaType
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -16,10 +17,12 @@ import javax.inject.Inject
 class AuthenticationService @Inject constructor(retrofit: Retrofit) {
     fun login(username: String, password: String): Single<Response<ServerResponse<JsonObject>>> =
         if (username == "banana" && password == "banana") {
-            Single.just(Response.success(ServerResponse(JsonObject().apply {
-                this.addProperty("error", false)
-                this.addProperty("data", "User has successfully logged in")
-            })))
+            Single
+                .just(Response.success(ServerResponse(JsonObject().apply {
+                    this.addProperty("error", false)
+                    this.addProperty("data", "User has successfully logged in")
+                })))
+                .delay(2, TimeUnit.SECONDS)
         } else {
             Single.just(
                 Response.error(
