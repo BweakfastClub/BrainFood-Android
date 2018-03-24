@@ -8,5 +8,6 @@ data class Recipe(
     val ingredients: List<Ingredient>,
     val title: String,
     val nutrition: Map<String, String>,
-    val servings: Int
+    val servings: Int,
+    val imageURL: String
 )
