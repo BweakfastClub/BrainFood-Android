@@ -1,33 +1,37 @@
 package club.bweakfast.foodora.browse.category
 
+import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import club.bweakfast.foodora.R
+import club.bweakfast.foodora.browse.BrowseCategoryFragment
+import club.bweakfast.foodora.showFragment
 import com.facebook.drawee.view.SimpleDraweeView
 
 /**
  * Created by silve on 3/8/2018.
  */
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(val activity: FragmentActivity) : RecyclerView.Adapter<CategoryAdapter
+.CategoryViewHolder>() {
     private val categories = listOf(
         Category(
-            "Breakfast",
+            CategoryName.Breakfast,
             R.drawable.breakfast
         ),
         Category(
-            "Lunch",
+            CategoryName.Lunch,
             R.drawable.lunch
         ),
         Category(
-            "Dinner",
+            CategoryName.Dinner,
             R.drawable.dinner
         ),
         Category(
-            "Snacks",
+            CategoryName.Snacks,
             R.drawable.snacks
         )
     )
@@ -41,8 +45,11 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categories[position]
         with(holder) {
-            name.text = category.name
+            name.text = category.name.name
             image.setImageURI(category.imageURL)
+            itemView.setOnClickListener {
+                activity.showFragment(BrowseCategoryFragment.newInstance(category.name))
+            }
         }
     }
 

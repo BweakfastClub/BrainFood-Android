@@ -6,6 +6,6 @@ import android.support.annotation.DrawableRes
  * Created by silve on 3/8/2018.
  */
 
-class Category(val name: String, val imageURL: String) {
-    constructor(name: String, @DrawableRes imageID: Int): this(name, "res:/$imageID")
+class Category(val name: CategoryName, val imageURL: String) {
+    constructor(name: CategoryName, @DrawableRes imageID: Int): this(name, "res:/$imageID")
 }

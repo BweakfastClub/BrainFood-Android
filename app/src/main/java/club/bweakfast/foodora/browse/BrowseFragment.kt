@@ -28,7 +28,7 @@ class BrowseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         categoryGrid.layoutManager = SpanningGridLayoutManager(context!!, 2)
-        categoryGrid.adapter = CategoryAdapter()
+        categoryGrid.adapter = CategoryAdapter(activity!!)
     }
 
     companion object {
