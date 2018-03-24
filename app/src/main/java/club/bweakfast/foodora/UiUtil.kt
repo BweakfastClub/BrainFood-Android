@@ -1,6 +1,7 @@
 package club.bweakfast.foodora
 
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -12,7 +13,7 @@ import io.reactivex.Observable
  * Created by silve on 3/2/2018.
  */
 
-fun AppCompatActivity.showFragment(
+fun FragmentActivity.showFragment(
     fragment: Fragment,
     addToStack: Boolean = false,
     name: String? = "",
