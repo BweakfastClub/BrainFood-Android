@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Foodora.iml" filepath="$PROJECT_DIR$/Foodora.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/floatingsearchview/floatingsearchview.iml" filepath="$PROJECT_DIR$/floatingsearchview/floatingsearchview.iml" />
     </modules>
   </component>
 </project>
