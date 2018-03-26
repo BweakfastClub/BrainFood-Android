@@ -15,16 +15,14 @@ import io.reactivex.Observable
 
 fun FragmentActivity.showFragment(
     fragment: Fragment,
-    addToStack: Boolean = false,
-    name: String? = "",
+    name: String? = null,
     setAnimations: (FragmentTransaction) -> Unit = {}
 ) {
     val transaction = supportFragmentManager.beginTransaction()
 
     setAnimations(transaction)
     transaction.replace(R.id.container, fragment)
-    if (addToStack)
-        transaction.addToBackStack(name)
+    name?.let { transaction.addToBackStack(it) }
     transaction.commit()
 }
 

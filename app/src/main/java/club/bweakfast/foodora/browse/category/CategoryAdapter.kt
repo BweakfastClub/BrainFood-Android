@@ -37,8 +37,7 @@ class CategoryAdapter(val activity: FragmentActivity) : RecyclerView.Adapter<Cat
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
         return CategoryViewHolder(view)
     }
 
@@ -48,7 +47,10 @@ class CategoryAdapter(val activity: FragmentActivity) : RecyclerView.Adapter<Cat
             name.text = category.name.name
             image.setImageURI(category.imageURL)
             itemView.setOnClickListener {
-                activity.showFragment(BrowseCategoryFragment.newInstance(category.name))
+                activity.showFragment(
+                    BrowseCategoryFragment.newInstance(category.name),
+                    "Browse${category.name}Fragment"
+                )
             }
         }
     }

@@ -149,7 +149,7 @@ class AuthenticationActivity : AppCompatActivity() {
                 .observeOn(Schedulers.trampoline())
                 .subscribe({ loadLoginPage() }, { onNetworkError(it) })
         )
-        showFragment(fragment, true, "Register", setAnimations = this::showFragmentAnimations)
+        showFragment(fragment, "Register", setAnimations = this::showFragmentAnimations)
         loadRegisterBackground()
     }
 
