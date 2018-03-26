@@ -1,7 +1,7 @@
 package club.bweakfast.foodora
 
-import club.bweakfast.foodora.search.Ingredient
-import club.bweakfast.foodora.search.Recipe
+import club.bweakfast.foodora.recipe.Ingredient
+import club.bweakfast.foodora.recipe.Recipe
 
 val breakfastRecipes = listOf(
     Recipe(
@@ -477,7 +477,10 @@ val lunchRecipes = listOf(
     ), Recipe(
         listOf(
             Ingredient(6306, "2 tablespoons coconut oil"),
-            Ingredient(6494, "1 (16 ounce) package skinless, boneless chicken breast halves, cut into small cubes"),
+            Ingredient(
+                6494,
+                "1 (16 ounce) package skinless, boneless chicken breast halves, cut into small cubes"
+            ),
             Ingredient(3793, "1 (14 ounce) can cream of coconut (such as Trader Joe's® Extra Thick and Rich)"),
             Ingredient(12049, "1 (11 ounce) bottle red Thai curry sauce (such as Trader Joe's®)"),
             Ingredient(17518, "1/2 (16 ounce) package dried rice stick vermicelli noodles")

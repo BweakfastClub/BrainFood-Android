@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.search.Recipe
+import club.bweakfast.foodora.recipe.Recipe
 import com.facebook.drawee.view.SimpleDraweeView
 
 /**
