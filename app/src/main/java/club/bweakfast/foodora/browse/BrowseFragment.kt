@@ -3,11 +3,11 @@ package club.bweakfast.foodora.browse
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.SpanningGridLayoutManager
 import club.bweakfast.foodora.browse.category.CategoryAdapter
 import kotlinx.android.synthetic.main.fragment_browse.*
 
@@ -27,7 +27,7 @@ class BrowseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        categoryGrid.layoutManager = SpanningGridLayoutManager(context!!, 2)
+        categoryGrid.layoutManager = LinearLayoutManager(context!!)
         categoryGrid.adapter = CategoryAdapter(activity!!)
     }
 
