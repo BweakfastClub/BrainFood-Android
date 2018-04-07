@@ -1,5 +1,6 @@
 package club.bweakfast.foodora.di.module
 
+import android.content.Context
 import club.bweakfast.foodora.BuildConfig
 import club.bweakfast.foodora.auth.AuthenticationService
 import dagger.Module
@@ -13,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 
 @Module
-class FoodoraModule {
+class FoodoraModule(private val context: Context) {
     @Provides
     fun provideRetrofit(): Retrofit {
         val retrofit = Retrofit.Builder()
@@ -24,5 +25,5 @@ class FoodoraModule {
     }
 
     @Provides
-    fun provideAuthService(retrofit: Retrofit) = AuthenticationService(retrofit)
+    fun provideContext() = context
 }

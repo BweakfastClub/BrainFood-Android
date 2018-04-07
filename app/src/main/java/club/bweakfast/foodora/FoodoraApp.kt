@@ -3,6 +3,7 @@ package club.bweakfast.foodora
 import android.app.Application
 import club.bweakfast.foodora.di.component.DaggerFoodoraComponent
 import club.bweakfast.foodora.di.component.FoodoraComponent
+import club.bweakfast.foodora.di.module.FoodoraModule
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestLoggingListener
@@ -21,7 +22,9 @@ class FoodoraApp : Application() {
             .setRequestListeners(requestListeners)
             .build()
         daggerComponent = DaggerFoodoraComponent
-            .create()
+            .builder()
+            .foodoraModule(FoodoraModule(applicationContext))
+            .build()
 
         Fresco.initialize(this, frescoConfig)
     }
