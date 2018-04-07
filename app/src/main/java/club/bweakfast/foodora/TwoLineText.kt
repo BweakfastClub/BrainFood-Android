@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import androidx.content.res.use
+import androidx.core.content.res.use
 import kotlinx.android.synthetic.main.layout_two_line.view.*
 
 
