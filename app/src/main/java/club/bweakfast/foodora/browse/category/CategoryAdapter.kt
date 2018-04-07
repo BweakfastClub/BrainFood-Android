@@ -1,21 +1,19 @@
 package club.bweakfast.foodora.browse.category
 
-import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.browse.BrowseCategoryFragment
-import club.bweakfast.foodora.showFragment
 import com.facebook.drawee.view.SimpleDraweeView
+import io.reactivex.subjects.PublishSubject
 
 /**
  * Created by silve on 3/8/2018.
  */
 
-class CategoryAdapter(val activity: FragmentActivity) : RecyclerView.Adapter<CategoryAdapter
+class CategoryAdapter(val clickCategory: PublishSubject<CategoryName>) : RecyclerView.Adapter<CategoryAdapter
 .CategoryViewHolder>() {
     private val categories = listOf(
         Category(
@@ -46,12 +44,7 @@ class CategoryAdapter(val activity: FragmentActivity) : RecyclerView.Adapter<Cat
         with(holder) {
             name.text = category.name.name
             image.setImageURI(category.imageURL)
-            itemView.setOnClickListener {
-                activity.showFragment(
-                    BrowseCategoryFragment.newInstance(category.name),
-                    "Browse${category.name}Fragment"
-                )
-            }
+            itemView.setOnClickListener { clickCategory.onNext(category.name) }
         }
     }
 
