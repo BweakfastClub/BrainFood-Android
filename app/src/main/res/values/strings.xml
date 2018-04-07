@@ -34,4 +34,7 @@
     <string name="error_login_invalid">Your login session is no longer valid. Please log in again!</string>
 
     <string name="prompt_search">Search for recipes…</string>
+
+    <string name="header_ingredients">Ingredients</string>
+    <string name="ingredient_template">\u2022\t %1$s</string>
 </resources>
