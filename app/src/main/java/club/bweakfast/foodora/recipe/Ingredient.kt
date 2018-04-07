@@ -2,22 +2,23 @@ package club.bweakfast.foodora.recipe
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 data class Ingredient(
-    val id: Int,
+    @SerializedName("_id") val id: String,
     val name: String,
     val grams: Float,
     val displayType: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readFloat(),
         parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
+        parcel.writeString(id)
         parcel.writeString(name)
         parcel.writeFloat(grams)
         parcel.writeString(displayType)

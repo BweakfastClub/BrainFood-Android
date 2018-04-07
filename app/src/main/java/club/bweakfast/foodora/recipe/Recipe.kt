@@ -2,6 +2,7 @@ package club.bweakfast.foodora.recipe
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 data class Recipe(
     val ingredients: List<Ingredient>,
@@ -12,7 +13,7 @@ data class Recipe(
     val readyMinutes: Int,
     val imageURL: String
 ) : Parcelable {
-    var id = -1
+    @SerializedName("_id") var id = ""
     var nutrition = mutableMapOf<String, NutritionValue>()
 
     constructor(parcel: Parcel) : this(
@@ -24,7 +25,7 @@ data class Recipe(
         parcel.readInt(),
         parcel.readString()
     ) {
-        id = parcel.readInt()
+        id = parcel.readString()
         parcel.readMap(nutrition, NutritionValue::class.java.classLoader)
     }
 
@@ -36,7 +37,7 @@ data class Recipe(
         parcel.writeInt(cookMinutes)
         parcel.writeInt(readyMinutes)
         parcel.writeString(imageURL)
-        parcel.writeInt(id)
+        parcel.writeString(id)
         parcel.writeMap(nutrition)
     }
 
