@@ -1,5 +1,6 @@
 package club.bweakfast.foodora.di.module
 
+import club.bweakfast.foodora.BuildConfig
 import club.bweakfast.foodora.auth.AuthenticationService
 import dagger.Module
 import dagger.Provides
@@ -18,7 +19,7 @@ class FoodoraModule {
         val retrofit = Retrofit.Builder()
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://httpbin.org")
+            .baseUrl(BuildConfig.BASE_URL)
         return retrofit.build()
     }
 
