@@ -7,13 +7,13 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import club.bweakfast.foodora.ErrorDisplay
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.MainActivity
 import club.bweakfast.foodora.R
+import club.bweakfast.foodora.onError
 import club.bweakfast.foodora.showFragment
 import club.bweakfast.foodora.showProgress
 import club.bweakfast.foodora.user.UserViewModel
@@ -28,22 +28,16 @@ import javax.inject.Inject
  */
 
 class AuthenticationActivity : AppCompatActivity() {
-    private val TAG: String = "AuthenticationActivity"
     private val subscriptions: CompositeDisposable = CompositeDisposable()
 
     private var loading: Boolean = false
         set(value) {
-//            subscriptions.add(
             showProgress(value, progressView, container)
-            /*.subscribeOn(AndroidSchedulers.mainThread())
-            .observeOn(Schedulers.newThread())
-            .subscribe({*/ /* }, {})*/
             field = value
-//            )
         }
 
-    private lateinit var authService: AuthenticationService
-
+    @Inject
+    lateinit var authService: AuthenticationService
     @Inject
     lateinit var userViewModel: UserViewModel
 
@@ -54,8 +48,7 @@ class AuthenticationActivity : AppCompatActivity() {
         val daggerComponent = FoodoraApp.daggerComponent
         daggerComponent.inject(this)
 
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = Color.TRANSPARENT
         }
@@ -66,11 +59,11 @@ class AuthenticationActivity : AppCompatActivity() {
             }
         }
 
-//        if (authService.isLoggedIn) {
-//            onLoginSuccess()
-//        } else {
-        loadLoginPage()
-//        }
+        if (authService.isLoggedIn) {
+            onLoginSuccess()
+        } else {
+            loadLoginPage()
+        }
     }
 
     private fun login(email: String, password: String) {
@@ -79,10 +72,13 @@ class AuthenticationActivity : AppCompatActivity() {
             userViewModel.login(email, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({
-                    loading = false
-                    onLoginSuccess()
-                }, this::onNetworkError)
+                .subscribe(
+                    {
+                        loading = false
+                        onLoginSuccess()
+                    },
+                    ::onError
+                )
         )
     }
 
@@ -92,21 +88,24 @@ class AuthenticationActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun register(email: String, password: String) {
+    private fun register(name: String, email: String, password: String) {
         loading = true
         subscriptions.add(
-            userViewModel.register(email, password)
+            userViewModel.register(name, email, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({
-                    Toast.makeText(
-                        applicationContext,
-                        getString(R.string.success_register),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    loadLoginPage()
-                    loading = false
-                }, this::onNetworkError)
+                .subscribe(
+                    {
+                        Toast.makeText(
+                            applicationContext,
+                            getString(R.string.success_register),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        loadLoginPage()
+                        loading = false
+                    },
+                    ::onError
+                )
         )
     }
 
@@ -119,12 +118,12 @@ class AuthenticationActivity : AppCompatActivity() {
                     .observeOn(Schedulers.trampoline())
                     .subscribe(
                         { (email, password) -> login(email, password) },
-                        { onNetworkError(it) }
+                        ::onError
                     ),
                 fragment.loadRegisterPage
                     .subscribeOn(AndroidSchedulers.mainThread())
                     .observeOn(Schedulers.trampoline())
-                    .subscribe({ loadRegisterPage() }, { onNetworkError(it) })
+                    .subscribe({ loadRegisterPage() }, ::onError)
             )
             showFragment(fragment, setAnimations = this::showFragmentAnimations)
         } else {
@@ -141,13 +140,13 @@ class AuthenticationActivity : AppCompatActivity() {
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.trampoline())
                 .subscribe(
-                    { (email, password) -> register(email, password) },
-                    { onNetworkError(it) }
+                    { (name, email, password) -> register(name, email, password) },
+                    ::onError
                 ),
             fragment.loadLoginPage
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.trampoline())
-                .subscribe({ loadLoginPage() }, { onNetworkError(it) })
+                .subscribe({ loadLoginPage() }, ::onError)
         )
         showFragment(fragment, "Register", setAnimations = this::showFragmentAnimations)
         loadRegisterBackground()
@@ -164,14 +163,7 @@ class AuthenticationActivity : AppCompatActivity() {
     }
 
     private fun showFragmentAnimations(transaction: FragmentTransaction) {
-//        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-    }
-
-    private fun onNetworkError(error: Throwable) {
-        Log.e(TAG, "Network error", error)
-        loading = false
-        Toast.makeText(applicationContext, getString(R.string.error_occurred), Toast.LENGTH_SHORT)
-            .show()
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
     }
 
     private fun handleError(error: String?) {

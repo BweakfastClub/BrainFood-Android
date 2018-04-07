@@ -54,15 +54,16 @@ class SearchFragment : Fragment() {
         resultsList.layoutManager = LinearLayoutManager(requireContext())
         subscriptions.add(
             searchBox.listenForChanges()
+                .subscribeOn(Schedulers.trampoline())
                 .debounce(250, TimeUnit.MILLISECONDS)
                 .flatMapSingle { searchViewModel.search(it) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
                     if (adapter == null)
-                        adapter = RecipesAdapter(it.data!!)
+                        adapter = RecipesAdapter(it)
                     else
-                        adapter!!.submitList(it.data!!)
+                        adapter!!.submitList(it)
 
                     resultsList.adapter = adapter
                 }, ::onError)

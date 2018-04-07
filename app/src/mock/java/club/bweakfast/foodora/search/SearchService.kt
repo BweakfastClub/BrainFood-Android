@@ -17,15 +17,15 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class SearchService @Inject constructor(retrofit: Retrofit) {
+class SearchService @Inject constructor() {
     private val recipes = listOf(breakfastRecipes, lunchRecipes, dinnerRecipes, snacks).flatten()
 
-    fun search(query: String): Single<Response<ServerResponse<List<Recipe>>>> {
+    fun search(query: String): Single<Response<List<Recipe>>> {
         return Single.just(
             Response.success(
-                ServerResponse(recipes.filter {
+                recipes.filter {
                     it.title.contains(query)
-                })
+                }
             )
         )
     }

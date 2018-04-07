@@ -24,7 +24,7 @@ class RegisterFragment : Fragment(), ErrorDisplay {
     private lateinit var inputValidators: Map<TextInputLayout, List<Validator>>
 
     val loadLoginPage = PublishSubject.create<Irrelevant>()
-    val register = PublishSubject.create<Pair<String, String>>()
+    val register = PublishSubject.create<Triple<String, String, String>>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,10 +79,10 @@ class RegisterFragment : Fragment(), ErrorDisplay {
         if (focusView != null) {
             focusView.requestFocus()
         } else {
-//            val name = nameInputLayout.editText?.text.toString()
+            val name = nameInputLayout.editText?.text.toString()
             val email = emailInputLayout.editText?.text.toString()
             val password = passwordInputLayout.editText?.text.toString()
-            register.onNext(email to password)
+            register.onNext(Triple(name, email, password))
         }
     }
 

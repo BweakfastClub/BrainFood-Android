@@ -1,9 +1,8 @@
 package club.bweakfast.foodora.search
 
-import club.bweakfast.foodora.network.ServerResponse
-import io.reactivex.Single
 import club.bweakfast.foodora.network.mapResponse
 import club.bweakfast.foodora.recipe.Recipe
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
@@ -11,6 +10,5 @@ import javax.inject.Inject
  */
 
 class SearchViewModel @Inject constructor(private val searchService: SearchService) {
-    fun search(query: String): Single<ServerResponse<List<Recipe>>> =
-        searchService.search(query).mapResponse()
+    fun search(query: String): Single<List<Recipe>> = searchService.search(query).mapResponse()
 }

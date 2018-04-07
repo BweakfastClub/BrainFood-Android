@@ -1,10 +1,10 @@
 package club.bweakfast.foodora.search
 
-import club.bweakfast.foodora.network.ServerResponse
 import club.bweakfast.foodora.recipe.Recipe
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.http.GET
 import retrofit2.http.Query
 import javax.inject.Inject
 
@@ -18,6 +18,7 @@ class SearchService @Inject constructor(retrofit: Retrofit) {
     fun search(query: String) = api.search(query)
 
     interface SearchAPI {
-        fun search(@Query("q") query: String): Single<Response<ServerResponse<List<Recipe>>>>
+        @GET("/recipes/search")
+        fun search(@Query("keyword") query: String): Single<Response<List<Recipe>>>
     }
 }
