@@ -3,14 +3,15 @@ package club.bweakfast.foodora.search
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.R
+import club.bweakfast.foodora.browse.RecipesAdapter
 import club.bweakfast.foodora.listenForChanges
-import club.bweakfast.foodora.browse.category.CategoryAdapter
+import club.bweakfast.foodora.onError
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +27,9 @@ import javax.inject.Inject
  */
 class SearchFragment : Fragment() {
     private val subscriptions: CompositeDisposable = CompositeDisposable()
+    private var adapter: RecipesAdapter? = null
 
+    @Suppress("MemberVisibilityCanBePrivate")
     @Inject
     lateinit var searchViewModel: SearchViewModel
 
@@ -48,6 +51,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        resultsList.layoutManager = LinearLayoutManager(requireContext())
         subscriptions.add(
             searchBox.listenForChanges()
                 .debounce(250, TimeUnit.MILLISECONDS)
@@ -55,8 +59,13 @@ class SearchFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
-                    val recipes = it.data!!
-                }, {})
+                    if (adapter == null)
+                        adapter = RecipesAdapter(it.data!!)
+                    else
+                        adapter!!.submitList(it.data!!)
+
+                    resultsList.adapter = adapter
+                }, ::onError)
         )
     }
 
