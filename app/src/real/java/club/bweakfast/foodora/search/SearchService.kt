@@ -1,10 +1,8 @@
 package club.bweakfast.foodora.search
 
-import club.bweakfast.foodora.Recipe
 import club.bweakfast.foodora.network.ServerResponse
-import com.google.gson.JsonObject
+import club.bweakfast.foodora.recipe.Recipe
 import io.reactivex.Single
-import rbsoftware.friendstagram.service.mapResponse
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.Query

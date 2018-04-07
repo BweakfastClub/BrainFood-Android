@@ -1,7 +1,7 @@
 package club.bweakfast.foodora.user
 
 import club.bweakfast.foodora.auth.AuthenticationService
-import rbsoftware.friendstagram.service.mapResponse
+import club.bweakfast.foodora.network.mapResponse
 import javax.inject.Inject
 
 /**

@@ -4,6 +4,7 @@ import club.bweakfast.foodora.breakfastRecipes
 import club.bweakfast.foodora.dinnerRecipes
 import club.bweakfast.foodora.lunchRecipes
 import club.bweakfast.foodora.network.ServerResponse
+import club.bweakfast.foodora.recipe.Recipe
 import club.bweakfast.foodora.snacks
 import io.reactivex.Single
 import retrofit2.Response

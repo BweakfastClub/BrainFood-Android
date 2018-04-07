@@ -2,7 +2,8 @@ package club.bweakfast.foodora.search
 
 import club.bweakfast.foodora.network.ServerResponse
 import io.reactivex.Single
-import rbsoftware.friendstagram.service.mapResponse
+import club.bweakfast.foodora.network.mapResponse
+import club.bweakfast.foodora.recipe.Recipe
 import javax.inject.Inject
 
 /**
