@@ -11,7 +11,8 @@ data class Recipe(
     val prepMinutes: Int,
     val cookMinutes: Int,
     val readyMinutes: Int,
-    val imageURL: String
+    val imageURL: String,
+    var isFavourite: Boolean = false
 ) : Parcelable {
     @SerializedName("_id") var id = ""
     var nutrition = mutableMapOf<String, NutritionValue>()
@@ -23,7 +24,8 @@ data class Recipe(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readByte() == 1.toByte()
     ) {
         id = parcel.readString()
         parcel.readMap(nutrition, NutritionValue::class.java.classLoader)
@@ -37,6 +39,7 @@ data class Recipe(
         parcel.writeInt(cookMinutes)
         parcel.writeInt(readyMinutes)
         parcel.writeString(imageURL)
+        parcel.writeByte(if (isFavourite) 1 else 0)
         parcel.writeString(id)
         parcel.writeMap(nutrition)
     }
