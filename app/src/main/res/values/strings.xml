@@ -31,7 +31,7 @@
     <string name="error_occurred">An error occurred</string>
     <string name="success_register">Successfully registered</string>
     <string name="success_login">Successfully logged in</string>
-    <string name="error_login_invalid">Your login session is no longer valid. Please log in again!</string>
+    <string name="error_login_session_invalid">Your login session is no longer valid. Please log in again!</string>
 
     <string name="prompt_search">Search for recipes…</string>
 
