@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.TwoLineText
 import club.bweakfast.foodora.onError
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_recipe.*
 import kotlinx.android.synthetic.main.content_recipe.*
@@ -18,6 +20,7 @@ import javax.inject.Inject
 import kotlin.math.roundToInt
 
 class RecipeActivity : AppCompatActivity() {
+    private val subscriptions = CompositeDisposable()
     private var loading = false
         set(value) {
             if (value) {
@@ -39,14 +42,25 @@ class RecipeActivity : AppCompatActivity() {
         FoodoraApp.daggerComponent.inject(this)
 
         val recipe = intent.getParcelableExtra<Recipe>(Intents.INTENT_RECIPE_ACTIVITY)
-        fab.setOnClickListener { view ->
-            loading = true
-            with(recipe) {
-                val completable = if (isFavourite) {
-                    recipeViewModel.likeRecipe(id)
-                } else {
-                    recipeViewModel.unlikeRecipe(id)
-                }
+        fab.setOnClickListener({ clickOnFAB(recipe, it) })
+
+        init(recipe)
+    }
+
+    override fun onDestroy() {
+        subscriptions.clear()
+        super.onDestroy()
+    }
+
+    private fun clickOnFAB(recipe: Recipe, view: View) {
+        loading = true
+        with(recipe) {
+            val completable = if (isFavourite) {
+                recipeViewModel.likeRecipe(id)
+            } else {
+                recipeViewModel.unlikeRecipe(id)
+            }
+            subscriptions.add(
                 completable
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
@@ -61,13 +75,11 @@ class RecipeActivity : AppCompatActivity() {
                         isFavourite = !isFavourite
                         loading = false
                     }, {
-                        onError(it)
+                        onError(it, this@RecipeActivity)
                         loading = false
                     })
-            }
+            )
         }
-
-        init(recipe)
     }
 
     private fun init(recipe: Recipe) {
