@@ -5,6 +5,5 @@ package club.bweakfast.foodora.network
  */
 
 class ErrorResponse {
-    val error: Boolean = false
-    val data: String = ""
+    val error: String = ""
 }

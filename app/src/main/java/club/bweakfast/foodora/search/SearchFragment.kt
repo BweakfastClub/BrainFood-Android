@@ -66,8 +66,12 @@ class SearchFragment : Fragment() {
                         adapter!!.submitList(it)
 
                     resultsList.adapter = adapter
-                }, ::onError)
+                }, ::handleError)
         )
+    }
+
+    private fun handleError(throwable: Throwable) {
+        onError(throwable, requireContext())
     }
 
     companion object {

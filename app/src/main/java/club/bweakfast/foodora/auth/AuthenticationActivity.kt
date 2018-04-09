@@ -9,10 +9,10 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
-import club.bweakfast.foodora.ErrorDisplay
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.MainActivity
 import club.bweakfast.foodora.R
+import club.bweakfast.foodora.network.parseError
 import club.bweakfast.foodora.onError
 import club.bweakfast.foodora.showFragment
 import club.bweakfast.foodora.showProgress
@@ -21,6 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login_register.*
+import retrofit2.HttpException
 import javax.inject.Inject
 
 /**
@@ -74,11 +75,13 @@ class AuthenticationActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     {
-                        loading = false
                         onLoginSuccess()
-                    },
-                    ::onError
-                )
+                        loading = false
+                    }
+                ) {
+                    handleError(it)
+                    loading = false
+                }
         )
     }
 
@@ -104,7 +107,10 @@ class AuthenticationActivity : AppCompatActivity() {
                         loadLoginPage()
                         loading = false
                     },
-                    ::onError
+                    {
+                        handleError(it)
+                        loading = false
+                    }
                 )
         )
     }
@@ -118,12 +124,12 @@ class AuthenticationActivity : AppCompatActivity() {
                     .observeOn(Schedulers.trampoline())
                     .subscribe(
                         { (email, password) -> login(email, password) },
-                        ::onError
+                        ::handleError
                     ),
                 fragment.loadRegisterPage
                     .subscribeOn(AndroidSchedulers.mainThread())
                     .observeOn(Schedulers.trampoline())
-                    .subscribe({ loadRegisterPage() }, ::onError)
+                    .subscribe({ loadRegisterPage() }, ::handleError)
             )
             showFragment(fragment, setAnimations = this::showFragmentAnimations)
         } else {
@@ -141,12 +147,12 @@ class AuthenticationActivity : AppCompatActivity() {
                 .observeOn(Schedulers.trampoline())
                 .subscribe(
                     { (name, email, password) -> register(name, email, password) },
-                    ::onError
+                    { onError(it, this) }
                 ),
             fragment.loadLoginPage
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.trampoline())
-                .subscribe({ loadLoginPage() }, ::onError)
+                .subscribe({ loadLoginPage() }, ::handleError)
         )
         showFragment(fragment, "Register", setAnimations = this::showFragmentAnimations)
         loadRegisterBackground()
@@ -163,22 +169,25 @@ class AuthenticationActivity : AppCompatActivity() {
     }
 
     private fun showFragmentAnimations(transaction: FragmentTransaction) {
-        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
     }
 
-    private fun handleError(error: String?) {
-        when {
-            error == null -> Toast.makeText(
-                applicationContext,
-                getString(R.string.error_occurred),
-                Toast.LENGTH_SHORT
-            ).show()
-            error.contains("is Null") -> {
-                val fragment =
-                    supportFragmentManager.findFragmentById(R.id.container) as ErrorDisplay
-                fragment.showError(error)
+    private fun handleError(error: Throwable) {
+        onError(error, this) { _, _ ->
+            var message: String = getString(R.string.error_occurred)
+
+            if (error is HttpException) {
+                val errorMessage = parseError(error.response().errorBody())
+                if (errorMessage == null) {
+                    when (error.code()) {
+                        401 -> message = getString(R.string.error_login_invalid)
+                    }
+                } else {
+                    message = errorMessage
+                }
             }
-            else -> Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show()
+
+            message
         }
     }
 }

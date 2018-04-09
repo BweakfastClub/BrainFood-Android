@@ -52,13 +52,17 @@ class BrowseFragment : Fragment() {
                         fragment,
                         "Browse${it}Fragment"
                     )
-                }, ::onError)
+                }, ::handleError)
         )
     }
 
     override fun onStop() {
         super.onStop()
         subscriptions.clear()
+    }
+
+    private fun handleError(throwable: Throwable) {
+        onError(throwable, requireContext())
     }
 
     companion object {
