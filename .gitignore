@@ -8,3 +8,5 @@
 /captures
 .externalNativeBuild
 secret.properties
+app/real
+app/mock
