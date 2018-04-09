@@ -1,12 +1,14 @@
 package club.bweakfast.foodora
 
+import android.content.Context
+import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import android.widget.Toast
 import io.reactivex.Observable
 
 /**
@@ -41,6 +43,14 @@ fun EditText.listenForChanges(): Observable<String> {
         })
     }
 }
+
+fun Context.toast(@StringRes resId: Int) = toast(getString(resId))
+
+fun Context.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+
+fun Context.longToast(@StringRes resId: Int) = longToast(getString(resId))
+
+fun Context.longToast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 
 open class TextListener: TextWatcher {
     override fun afterTextChanged(s: Editable) {}
