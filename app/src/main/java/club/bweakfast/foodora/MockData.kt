@@ -1,16 +1,17 @@
 package club.bweakfast.foodora
 
-import club.bweakfast.foodora.recipe.Ingredient
-import club.bweakfast.foodora.recipe.NutritionValue
 import club.bweakfast.foodora.recipe.Recipe
+import club.bweakfast.foodora.recipe.ingredient.Ingredient
+import club.bweakfast.foodora.recipe.nutrition.NutritionValue
 
 val breakfastRecipes = listOf(Recipe(
+    25449,
     listOf(
-        Ingredient("2882", "2 cups soy sauce", 512.0f, "Normal"),
-        Ingredient("18888", "1 cup red wine vinegar", 257.14285f, "Normal"),
-        Ingredient("16406", "1/4 teaspoon ground black pepper", 0.525f, "Normal"),
-        Ingredient("5593", "3 drops hot pepper sauce", 2.82f, "Normal"),
-        Ingredient("4378", "2 pounds whole fresh mushrooms", 908.0f, "Normal")
+        Ingredient(2882, "2 cups soy sauce", 512.0f, "Normal"),
+        Ingredient(18888, "1 cup red wine vinegar", 257.14285f, "Normal"),
+        Ingredient(16406, "1/4 teaspoon ground black pepper", 0.525f, "Normal"),
+        Ingredient(5593, "3 drops hot pepper sauce", 2.82f, "Normal"),
+        Ingredient(4378, "2 pounds whole fresh mushrooms", 908.0f, "Normal")
     ),
     "Deb's Spicy Summer Evening Mushrooms",
     8,
@@ -42,19 +43,20 @@ val breakfastRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 1.666506f, "g", "1.7", null, false)
     )
 }, Recipe(
+    237491,
     listOf(
-        Ingredient("16133", "1 cup chicken broth", 198.0f, "Normal"),
-        Ingredient("16248", "2 pounds shredded American cheese", 908.0f, "Normal"),
-        Ingredient("6307", "1 tablespoon olive oil", 13.5f, "Normal"),
-        Ingredient("6494", "2 skinless, boneless chicken breast halves - cut into cubes", 236.0f, "Normal"),
-        Ingredient("5821", "3 links Mexican chorizo, casing removed and meat crumbled", 180.0f, "Normal"),
-        Ingredient("4378", "1 (10 ounce) package sliced button mushrooms", 280.0f, "Normal"),
-        Ingredient("4572", "2 tomatoes, seeded and diced", 296.0f, "Normal"),
-        Ingredient("4397", "1/2 yellow onion, diced", 113.5f, "Normal"),
-        Ingredient("3725", "2 jalapenos, seeded and diced", 28.0f, "Normal"),
-        Ingredient("4405", "2 green onions, diced", 30.0f, "Normal"),
-        Ingredient("4342", "1 clove garlic, or to taste, minced", 3.0f, "Normal"),
-        Ingredient("16215", "8 ounces shredded Cheddar cheese", 226.8f, "Normal")
+        Ingredient(16133, "1 cup chicken broth", 198.0f, "Normal"),
+        Ingredient(16248, "2 pounds shredded American cheese", 908.0f, "Normal"),
+        Ingredient(6307, "1 tablespoon olive oil", 13.5f, "Normal"),
+        Ingredient(6494, "2 skinless, boneless chicken breast halves - cut into cubes", 236.0f, "Normal"),
+        Ingredient(5821, "3 links Mexican chorizo, casing removed and meat crumbled", 180.0f, "Normal"),
+        Ingredient(4378, "1 (10 ounce) package sliced button mushrooms", 280.0f, "Normal"),
+        Ingredient(4572, "2 tomatoes, seeded and diced", 296.0f, "Normal"),
+        Ingredient(4397, "1/2 yellow onion, diced", 113.5f, "Normal"),
+        Ingredient(3725, "2 jalapenos, seeded and diced", 28.0f, "Normal"),
+        Ingredient(4405, "2 green onions, diced", 30.0f, "Normal"),
+        Ingredient(4342, "1 clove garlic, or to taste, minced", 3.0f, "Normal"),
+        Ingredient(16215, "8 ounces shredded Cheddar cheese", 226.8f, "Normal")
     ),
     "Loaded Queso Fundido",
     8,
@@ -86,27 +88,28 @@ val breakfastRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 1.232927f, "g", "1.2", null, false)
     )
 }, Recipe(
+    246256,
     listOf(
-        Ingredient("5375", "4 strips bacon", 113.6f, "Normal"),
-        Ingredient("0", "Dipping Sauce:", 0.0f, "Heading"),
-        Ingredient("16223", "1/2 cup cream cheese, softened", 116.0f, "Normal"),
-        Ingredient("20573", "1/4 cup creme fraiche or sour cream", 57.0f, "Normal"),
-        Ingredient("4405", "2 tablespoons minced green onions, plus some for garnish", 12.0f, "Normal"),
-        Ingredient("5112", "1 teaspoon fresh lime juice", 5.125f, "Normal"),
-        Ingredient("0", "", 0.0f, "BlankLine"),
-        Ingredient("0", "Dough:", 0.0f, "Heading"),
-        Ingredient("2496", "2/3 cup water", 158.0f, "Normal"),
-        Ingredient("16157", "3 tablespoons butter", 42.6f, "Normal"),
-        Ingredient("7184", "1 tablespoon bacon fat", 14.0f, "Normal"),
-        Ingredient("18866", "1 teaspoon kosher salt", 4.8f, "Normal"),
-        Ingredient("1684", "2/3 cup all-purpose flour", 83.333336f, "Normal"),
-        Ingredient("0", "", 0.0f, "BlankLine"),
-        Ingredient("16317", "2 eggs", 100.0f, "Normal"),
-        Ingredient("20474", "2 ounces shredded extra-sharp white Cheddar cheese", 56.7f, "Normal"),
-        Ingredient("3725", "1/2 cup finely diced jalapeno peppers", 45.0f, "Normal"),
-        Ingredient("16407", "1 pinch cayenne pepper", 0.2f, "Normal"),
-        Ingredient("16406", "1 pinch freshly ground black pepper", 1.0f, "Normal"),
-        Ingredient("20482", "2 cups vegetable oil for deep frying, or as needed", 440.0f, "Normal")
+        Ingredient(5375, "4 strips bacon", 113.6f, "Normal"),
+        Ingredient(0, "Dipping Sauce:", 0.0f, "Heading"),
+        Ingredient(16223, "1/2 cup cream cheese, softened", 116.0f, "Normal"),
+        Ingredient(20573, "1/4 cup creme fraiche or sour cream", 57.0f, "Normal"),
+        Ingredient(4405, "2 tablespoons minced green onions, plus some for garnish", 12.0f, "Normal"),
+        Ingredient(5112, "1 teaspoon fresh lime juice", 5.125f, "Normal"),
+        Ingredient(0, "", 0.0f, "BlankLine"),
+        Ingredient(0, "Dough:", 0.0f, "Heading"),
+        Ingredient(2496, "2/3 cup water", 158.0f, "Normal"),
+        Ingredient(16157, "3 tablespoons butter", 42.6f, "Normal"),
+        Ingredient(7184, "1 tablespoon bacon fat", 14.0f, "Normal"),
+        Ingredient(18866, "1 teaspoon kosher salt", 4.8f, "Normal"),
+        Ingredient(1684, "2/3 cup all-purpose flour", 83.333336f, "Normal"),
+        Ingredient(0, "", 0.0f, "BlankLine"),
+        Ingredient(16317, "2 eggs", 100.0f, "Normal"),
+        Ingredient(20474, "2 ounces shredded extra-sharp white Cheddar cheese", 56.7f, "Normal"),
+        Ingredient(3725, "1/2 cup finely diced jalapeno peppers", 45.0f, "Normal"),
+        Ingredient(16407, "1 pinch cayenne pepper", 0.2f, "Normal"),
+        Ingredient(16406, "1 pinch freshly ground black pepper", 1.0f, "Normal"),
+        Ingredient(20482, "2 cups vegetable oil for deep frying, or as needed", 440.0f, "Normal")
     ),
     "Bacon Jalapeno Popper Puffs",
     8,
@@ -138,18 +141,19 @@ val breakfastRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.51118f, "g", "0.5", null, false)
     )
 }, Recipe(
+    51147,
     listOf(
-        Ingredient("3103", "1 pound ground beef", 454.0f, "Normal"),
-        Ingredient("18765", "1 (1.25 ounce) package taco seasoning mix", 35.5f, "Normal"),
-        Ingredient("2496", "3/4 cup water", 177.75f, "Normal"),
-        Ingredient("1320", "1 (18 ounce) package restaurant-style tortilla chips", 504.0f, "Normal"),
-        Ingredient("16215", "1 cup shredded sharp Cheddar cheese, or more to taste", 113.0f, "Normal"),
-        Ingredient("2863", "1 (15.5 ounce) can refried beans", 434.0f, "Normal"),
-        Ingredient("5588", "1 cup salsa", 259.0f, "Normal"),
-        Ingredient("16261", "1 cup sour cream, or more to taste", 230.0f, "Normal"),
-        Ingredient("5133", "1 (10 ounce) can pitted black olives, drained and chopped", 280.0f, "Normal"),
-        Ingredient("4405", "4 green onions, diced", 60.0f, "Normal"),
-        Ingredient("4634", "1 (4 ounce) can sliced jalapeno peppers, drained", 112.0f, "Normal")
+        Ingredient(3103, "1 pound ground beef", 454.0f, "Normal"),
+        Ingredient(18765, "1 (1.25 ounce) package taco seasoning mix", 35.5f, "Normal"),
+        Ingredient(2496, "3/4 cup water", 177.75f, "Normal"),
+        Ingredient(1320, "1 (18 ounce) package restaurant-style tortilla chips", 504.0f, "Normal"),
+        Ingredient(16215, "1 cup shredded sharp Cheddar cheese, or more to taste", 113.0f, "Normal"),
+        Ingredient(2863, "1 (15.5 ounce) can refried beans", 434.0f, "Normal"),
+        Ingredient(5588, "1 cup salsa", 259.0f, "Normal"),
+        Ingredient(16261, "1 cup sour cream, or more to taste", 230.0f, "Normal"),
+        Ingredient(5133, "1 (10 ounce) can pitted black olives, drained and chopped", 280.0f, "Normal"),
+        Ingredient(4405, "4 green onions, diced", 60.0f, "Normal"),
+        Ingredient(4634, "1 (4 ounce) can sliced jalapeno peppers, drained", 112.0f, "Normal")
     ),
     "Super Nachos",
     12,
@@ -181,24 +185,25 @@ val breakfastRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 5.6075f, "g", "5.6", null, false)
     )
 }, Recipe(
+    241000,
     listOf(
-        Ingredient("0", "Cheese Sauce:", 0.0f, "Heading"),
-        Ingredient("16157", "2 tablespoons butter, or as needed", 28.4f, "Normal"),
-        Ingredient("1684", "2 tablespoons all-purpose flour, or as needed", 15.625f, "Normal"),
-        Ingredient("16278", "1 cup cold milk", 244.0f, "Normal"),
-        Ingredient("16241", "2 ounces shredded provolone cheese, or more to taste", 56.7f, "Normal"),
-        Ingredient("16401", "1 pinch ground nutmeg", 1.0f, "Normal"),
-        Ingredient("16407", "1 pinch cayenne pepper", 0.2f, "Normal"),
-        Ingredient("16421", "salt to taste", 0.4f, "HideAmounts"),
-        Ingredient("0", "", 0.0f, "BlankLine"),
-        Ingredient("26706", "1 (12 ounce) skirt steak", 340.0f, "Normal"),
-        Ingredient("16421", "salt and freshly ground black pepper to taste", 0.4f, "HideAmounts"),
-        Ingredient("6307", "3 tablespoons olive oil, divided, or as needed", 40.5f, "Normal"),
-        Ingredient("2496", "1/4 cup water", 59.25f, "Normal"),
-        Ingredient("4397", "1/3 cup diced onion", 53.333336f, "Normal"),
-        Ingredient("4786", "1/3 cup diced sweet peppers", 51.90167f, "Normal"),
-        Ingredient("20414", "2 baguettes, or as needed, cut into 48 1/2-inch thick slices", 680.0f, "Normal"),
-        Ingredient("16241", "1/4 cup shredded provolone cheese, or as needed", 33.0f, "Normal")
+        Ingredient(0, "Cheese Sauce:", 0.0f, "Heading"),
+        Ingredient(16157, "2 tablespoons butter, or as needed", 28.4f, "Normal"),
+        Ingredient(1684, "2 tablespoons all-purpose flour, or as needed", 15.625f, "Normal"),
+        Ingredient(16278, "1 cup cold milk", 244.0f, "Normal"),
+        Ingredient(16241, "2 ounces shredded provolone cheese, or more to taste", 56.7f, "Normal"),
+        Ingredient(16401, "1 pinch ground nutmeg", 1.0f, "Normal"),
+        Ingredient(16407, "1 pinch cayenne pepper", 0.2f, "Normal"),
+        Ingredient(16421, "salt to taste", 0.4f, "HideAmounts"),
+        Ingredient(0, "", 0.0f, "BlankLine"),
+        Ingredient(26706, "1 (12 ounce) skirt steak", 340.0f, "Normal"),
+        Ingredient(16421, "salt and freshly ground black pepper to taste", 0.4f, "HideAmounts"),
+        Ingredient(6307, "3 tablespoons olive oil, divided, or as needed", 40.5f, "Normal"),
+        Ingredient(2496, "1/4 cup water", 59.25f, "Normal"),
+        Ingredient(4397, "1/3 cup diced onion", 53.333336f, "Normal"),
+        Ingredient(4786, "1/3 cup diced sweet peppers", 51.90167f, "Normal"),
+        Ingredient(20414, "2 baguettes, or as needed, cut into 48 1/2-inch thick slices", 680.0f, "Normal"),
+        Ingredient(16241, "1/4 cup shredded provolone cheese, or as needed", 33.0f, "Normal")
     ),
     "Mini Philly Cheesesteaks",
     12,
@@ -230,19 +235,20 @@ val breakfastRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 1.579514f, "g", "1.6", null, false)
     )
 }, Recipe(
+    237835,
     listOf(
-        Ingredient("10536", "cooking spray", 0.266f, "HideAmounts"),
-        Ingredient("16157", "2 tablespoons butter, melted", 28.4f, "Normal"),
+        Ingredient(10536, "cooking spray", 0.266f, "HideAmounts"),
+        Ingredient(16157, "2 tablespoons butter, melted", 28.4f, "Normal"),
         Ingredient(
-            "2061",
+            2061,
             "1 (16.3 ounce) package refrigerated buttermilk biscuit dough, separated and each portion cut into quarters",
             456.4f,
             "Normal"
         ),
-        Ingredient("16215", "1 1/4 cups shredded Cheddar cheese, divided", 141.25f, "Normal"),
-        Ingredient("3725", "3/4 cup jalapeno pepper slices, divided", 67.5f, "Normal"),
-        Ingredient("16405", "3/4 teaspoon dried parsley flakes, divided", 0.3441735f, "Normal"),
-        Ingredient("16234", "1/4 cup shredded mozzarella cheese", 28.25f, "Normal")
+        Ingredient(16215, "1 1/4 cups shredded Cheddar cheese, divided", 141.25f, "Normal"),
+        Ingredient(3725, "3/4 cup jalapeno pepper slices, divided", 67.5f, "Normal"),
+        Ingredient(16405, "3/4 teaspoon dried parsley flakes, divided", 0.3441735f, "Normal"),
+        Ingredient(16234, "1/4 cup shredded mozzarella cheese", 28.25f, "Normal")
     ),
     "Big Ray's Mexican Monkey Bread",
     12,
@@ -274,13 +280,19 @@ val breakfastRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.4233949f, "g", "0.4", null, false)
     )
 }, Recipe(
+    22617,
     listOf(
-        Ingredient("6294", "1 cup mayonnaise", 220.0f, "Normal"),
-        Ingredient("16261", "1 (16 ounce) container sour cream", 454.4f, "Normal"),
-        Ingredient("5528", "1 (1.8 ounce) package dry leek soup mix", 50.4f, "Normal"),
-        Ingredient("4607", "1 (4 ounce) can water chestnuts, drained and chopped", 28.0f, "Normal"),
-        Ingredient("4520", "1/2 (10 ounce) package frozen chopped spinach, thawed and drained", 142.0f, "Normal"),
-        Ingredient("20487", "1 (1 pound) loaf round sourdough bread", 448.0f, "Normal")
+        Ingredient(6294, "1 cup mayonnaise", 220.0f, "Normal"),
+        Ingredient(16261, "1 (16 ounce) container sour cream", 454.4f, "Normal"),
+        Ingredient(5528, "1 (1.8 ounce) package dry leek soup mix", 50.4f, "Normal"),
+        Ingredient(4607, "1 (4 ounce) can water chestnuts, drained and chopped", 28.0f, "Normal"),
+        Ingredient(
+            4520,
+            "1/2 (10 ounce) package frozen chopped spinach, thawed and drained",
+            142.0f,
+            "Normal"
+        ),
+        Ingredient(20487, "1 (1 pound) loaf round sourdough bread", 448.0f, "Normal")
     ),
     "Best Spinach Dip Ever",
     6,
@@ -312,23 +324,24 @@ val breakfastRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 2.8974f, "g", "2.9", null, false)
     )
 }, Recipe(
+    231170,
     listOf(
-        Ingredient("16223", "2 (8 ounce) packages cream cheese, softened", 448.0f, "Normal"),
-        Ingredient("2740", "1 pound lump crabmeat, drained", 454.0f, "Normal"),
-        Ingredient("126", "1 (14 ounce) can artichoke bottoms, drained and chopped", 240.0f, "Normal"),
-        Ingredient("16215", "6 ounces shredded white Cheddar cheese", 170.1f, "Normal"),
-        Ingredient("4786", "1/2 cup finely diced red bell pepper", 74.5f, "Normal"),
-        Ingredient("4405", "1/3 cup chopped green onions", 33.333332f, "Normal"),
-        Ingredient("16261", "1/2 cup sour cream", 115.0f, "Normal"),
-        Ingredient("6294", "1/4 cup mayonnaise", 55.0f, "Normal"),
-        Ingredient("4342", "3 cloves garlic, minced", 9.0f, "Normal"),
-        Ingredient("5106", "1 lemon, zested and juiced", 112.0f, "Normal"),
-        Ingredient("18774", "2 teaspoons chopped fresh tarragon", 4.0f, "Normal"),
-        Ingredient("7428", "1 teaspoon Worcestershire sauce", 5.6666665f, "Normal"),
-        Ingredient("16407", "1 pinch cayenne pepper, or more to taste", 0.2f, "Normal"),
-        Ingredient("16421", "salt and freshly ground black pepper to taste", 0.4f, "HideAmounts"),
-        Ingredient("20487", "1 round loaf sourdough bread", 454.0f, "Normal"),
-        Ingredient("16215", "2 tablespoons shredded white Cheddar cheese", 16.638655f, "Normal")
+        Ingredient(16223, "2 (8 ounce) packages cream cheese, softened", 448.0f, "Normal"),
+        Ingredient(2740, "1 pound lump crabmeat, drained", 454.0f, "Normal"),
+        Ingredient(126, "1 (14 ounce) can artichoke bottoms, drained and chopped", 240.0f, "Normal"),
+        Ingredient(16215, "6 ounces shredded white Cheddar cheese", 170.1f, "Normal"),
+        Ingredient(4786, "1/2 cup finely diced red bell pepper", 74.5f, "Normal"),
+        Ingredient(4405, "1/3 cup chopped green onions", 33.333332f, "Normal"),
+        Ingredient(16261, "1/2 cup sour cream", 115.0f, "Normal"),
+        Ingredient(6294, "1/4 cup mayonnaise", 55.0f, "Normal"),
+        Ingredient(4342, "3 cloves garlic, minced", 9.0f, "Normal"),
+        Ingredient(5106, "1 lemon, zested and juiced", 112.0f, "Normal"),
+        Ingredient(18774, "2 teaspoons chopped fresh tarragon", 4.0f, "Normal"),
+        Ingredient(7428, "1 teaspoon Worcestershire sauce", 5.6666665f, "Normal"),
+        Ingredient(16407, "1 pinch cayenne pepper, or more to taste", 0.2f, "Normal"),
+        Ingredient(16421, "salt and freshly ground black pepper to taste", 0.4f, "HideAmounts"),
+        Ingredient(20487, "1 round loaf sourdough bread", 454.0f, "Normal"),
+        Ingredient(16215, "2 tablespoons shredded white Cheddar cheese", 16.638655f, "Normal")
     ),
     "Baked Crab and Artichoke Dip",
     12,
@@ -360,14 +373,15 @@ val breakfastRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 2.278245f, "g", "2.3", null, false)
     )
 }, Recipe(
+    234476,
     listOf(
-        Ingredient("10536", "cooking spray", 0.266f, "HideAmounts"),
-        Ingredient("3103", "1 pound ground beef", 454.0f, "Normal"),
-        Ingredient("2863", "2 (16 ounce) cans refried beans", 896.0f, "Normal"),
-        Ingredient("578", "4 cups shredded Colby-Monterey Jack cheese, divided", 540.0f, "Normal"),
-        Ingredient("16261", "1 cup sour cream", 230.0f, "Normal"),
-        Ingredient("16223", "1 (4 ounce) package cream cheese, softened", 113.0f, "Normal"),
-        Ingredient("18765", "1 (1.25 ounce) package taco seasoning mix", 35.5f, "Normal")
+        Ingredient(10536, "cooking spray", 0.266f, "HideAmounts"),
+        Ingredient(3103, "1 pound ground beef", 454.0f, "Normal"),
+        Ingredient(2863, "2 (16 ounce) cans refried beans", 896.0f, "Normal"),
+        Ingredient(578, "4 cups shredded Colby-Monterey Jack cheese, divided", 540.0f, "Normal"),
+        Ingredient(16261, "1 cup sour cream", 230.0f, "Normal"),
+        Ingredient(16223, "1 (4 ounce) package cream cheese, softened", 113.0f, "Normal"),
+        Ingredient(18765, "1 (1.25 ounce) package taco seasoning mix", 35.5f, "Normal")
     ),
     "Cheesy Burrito Game Day Dip",
     8,
@@ -399,12 +413,13 @@ val breakfastRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 5.936f, "g", "5.9", null, false)
     )
 }, Recipe(
+    237562,
     listOf(
-        Ingredient("2496", "2 cups water, or as needed", 474.0f, "Normal"),
-        Ingredient("16317", "8 fresh eggs", 400.0f, "Normal"),
-        Ingredient("0", "", 0.0f, "BlankLine"),
-        Ingredient("2496", "4 cups cold water", 948.0f, "Normal"),
-        Ingredient("20382", "4 cups ice cubes", 948.0f, "Normal")
+        Ingredient(2496, "2 cups water, or as needed", 474.0f, "Normal"),
+        Ingredient(16317, "8 fresh eggs", 400.0f, "Normal"),
+        Ingredient(0, "", 0.0f, "BlankLine"),
+        Ingredient(2496, "4 cups cold water", 948.0f, "Normal"),
+        Ingredient(20382, "4 cups ice cubes", 948.0f, "Normal")
     ),
     "Pressure Cooker Hard-Boiled Eggs",
     4,
@@ -437,12 +452,13 @@ val breakfastRecipes = listOf(Recipe(
     )
 })
 val lunchRecipes = listOf(Recipe(
+    16700,
     listOf(
-        Ingredient("6494", "4 skinless, boneless chicken breast halves", 472.0f, "Normal"),
-        Ingredient("18765", "4 teaspoons taco seasoning mix", 12.0f, "Normal"),
-        Ingredient("5588", "1 cup salsa", 259.0f, "Normal"),
-        Ingredient("16215", "1 cup shredded Cheddar cheese", 113.0f, "Normal"),
-        Ingredient("16261", "2 tablespoons sour cream (optional)", 28.75f, "OptionalIngredient")
+        Ingredient(6494, "4 skinless, boneless chicken breast halves", 472.0f, "Normal"),
+        Ingredient(18765, "4 teaspoons taco seasoning mix", 12.0f, "Normal"),
+        Ingredient(5588, "1 cup salsa", 259.0f, "Normal"),
+        Ingredient(16215, "1 cup shredded Cheddar cheese", 113.0f, "Normal"),
+        Ingredient(16261, "2 tablespoons sour cream (optional)", 28.75f, "OptionalIngredient")
     ),
     "Salsa Chicken",
     4,
@@ -474,24 +490,30 @@ val lunchRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 1.036f, "g", "1", null, false)
     )
 }, Recipe(
+    232279,
     listOf(
-        Ingredient("1636", "2 tablespoons cornstarch", 16.0f, "Normal"),
-        Ingredient("2496", "1 1/2 tablespoons water", 22.1775f, "Normal"),
-        Ingredient("16133", "6 cups chicken broth", 1188.0f, "Normal"),
-        Ingredient("2882", "2 1/2 tablespoons soy sauce", 40.0f, "Normal"),
-        Ingredient("5597", "1 tablespoon fish sauce", 14.175f, "Normal"),
-        Ingredient("18868", "1 tablespoon rice vinegar", 15.884933f, "Normal"),
-        Ingredient("12057", "1 tablespoon chile-garlic sauce (such as SrirachaÂ®), or more to taste", 16.0f, "Normal"),
-        Ingredient("6305", "2 teaspoons vegetable oil", 9.083333f, "Normal"),
-        Ingredient("4343", "2 teaspoons minced fresh ginger root", 3.73332f, "Normal"),
-        Ingredient("4342", "2 cloves garlic, minced", 6.0f, "Normal"),
-        Ingredient("18844", "1 teaspoon ground coriander", 2.0f, "Normal"),
-        Ingredient("1728", "1 (16 ounce) package thick rice noodles", 448.0f, "Normal"),
-        Ingredient("4529", "1 cup sliced zucchini", 113.0f, "Normal"),
-        Ingredient("4786", "1 cup sliced red bell pepper", 92.0f, "Normal"),
-        Ingredient("6496", "2 cooked chicken breasts, cut into 1-inch cubes", 172.0f, "Normal"),
-        Ingredient("2850", "1/4 cup crushed peanuts (optional)", 35.55f, "OptionalIngredient"),
-        Ingredient("3717", "1/4 cup chopped fresh cilantro (optional)", 11.5f, "OptionalIngredient")
+        Ingredient(1636, "2 tablespoons cornstarch", 16.0f, "Normal"),
+        Ingredient(2496, "1 1/2 tablespoons water", 22.1775f, "Normal"),
+        Ingredient(16133, "6 cups chicken broth", 1188.0f, "Normal"),
+        Ingredient(2882, "2 1/2 tablespoons soy sauce", 40.0f, "Normal"),
+        Ingredient(5597, "1 tablespoon fish sauce", 14.175f, "Normal"),
+        Ingredient(18868, "1 tablespoon rice vinegar", 15.884933f, "Normal"),
+        Ingredient(
+            12057,
+            "1 tablespoon chile-garlic sauce (such as SrirachaÂ®), or more to taste",
+            16.0f,
+            "Normal"
+        ),
+        Ingredient(6305, "2 teaspoons vegetable oil", 9.083333f, "Normal"),
+        Ingredient(4343, "2 teaspoons minced fresh ginger root", 3.73332f, "Normal"),
+        Ingredient(4342, "2 cloves garlic, minced", 6.0f, "Normal"),
+        Ingredient(18844, "1 teaspoon ground coriander", 2.0f, "Normal"),
+        Ingredient(1728, "1 (16 ounce) package thick rice noodles", 448.0f, "Normal"),
+        Ingredient(4529, "1 cup sliced zucchini", 113.0f, "Normal"),
+        Ingredient(4786, "1 cup sliced red bell pepper", 92.0f, "Normal"),
+        Ingredient(6496, "2 cooked chicken breasts, cut into 1-inch cubes", 172.0f, "Normal"),
+        Ingredient(2850, "1/4 cup crushed peanuts (optional)", 35.55f, "OptionalIngredient"),
+        Ingredient(3717, "1/4 cup chopped fresh cilantro (optional)", 11.5f, "OptionalIngredient")
     ),
     "One Pot Thai-Style Rice Noodles",
     4,
@@ -523,12 +545,28 @@ val lunchRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 3.912717f, "g", "3.9", null, false)
     )
 }, Recipe(
+    261479,
     listOf(
-        Ingredient("6306", "2 tablespoons coconut oil", 27.2f, "Normal"),
-        Ingredient("6494", "1 (16 ounce) package skinless, boneless chicken breast halves, cut into small cubes", 453.6f, "Normal"),
-        Ingredient("3793", "1 (14 ounce) can cream of coconut (such as Trader Joe'sÂ® Extra Thick and Rich)", 392.0f, "Normal"),
-        Ingredient("12049", "1 (11 ounce) bottle red Thai curry sauce (such as Trader Joe'sÂ®)", 312.4f, "Normal"),
-        Ingredient("17518", "1/2 (16 ounce) package dried rice stick vermicelli noodles", 226.8f, "Normal")
+        Ingredient(6306, "2 tablespoons coconut oil", 27.2f, "Normal"),
+        Ingredient(
+            6494,
+            "1 (16 ounce) package skinless, boneless chicken breast halves, cut into small cubes",
+            453.6f,
+            "Normal"
+        ),
+        Ingredient(
+            3793,
+            "1 (14 ounce) can cream of coconut (such as Trader Joe'sÂ® Extra Thick and Rich)",
+            392.0f,
+            "Normal"
+        ),
+        Ingredient(
+            12049,
+            "1 (11 ounce) bottle red Thai curry sauce (such as Trader Joe'sÂ®)",
+            312.4f,
+            "Normal"
+        ),
+        Ingredient(17518, "1/2 (16 ounce) package dried rice stick vermicelli noodles", 226.8f, "Normal")
     ),
     "Four-Ingredient Red Curry Chicken",
     6,
@@ -560,14 +598,15 @@ val lunchRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 1.181578f, "g", "1.2", null, false)
     )
 }, Recipe(
+    246274,
     listOf(
-        Ingredient("20384", "2 (3 1/2) pound whole chickens, wingtips removed", 3178.0f, "Normal"),
-        Ingredient("16421", "2 teaspoons salt", 12.0f, "Normal"),
-        Ingredient("18710", "1 teaspoon dried tarragon", 1.6f, "Normal"),
-        Ingredient("16404", "1 teaspoon paprika", 2.2808332f, "Normal"),
-        Ingredient("16406", "1/4 teaspoon black pepper", 0.525f, "Normal"),
-        Ingredient("6307", "4 teaspoons olive oil", 19.030836f, "Normal"),
-        Ingredient("5106", "2 lemons, thinly sliced and seeded", 0.0f, "Normal")
+        Ingredient(20384, "2 (3 1/2) pound whole chickens, wingtips removed", 3178.0f, "Normal"),
+        Ingredient(16421, "2 teaspoons salt", 12.0f, "Normal"),
+        Ingredient(18710, "1 teaspoon dried tarragon", 1.6f, "Normal"),
+        Ingredient(16404, "1 teaspoon paprika", 2.2808332f, "Normal"),
+        Ingredient(16406, "1/4 teaspoon black pepper", 0.525f, "Normal"),
+        Ingredient(6307, "4 teaspoons olive oil", 19.030836f, "Normal"),
+        Ingredient(5106, "2 lemons, thinly sliced and seeded", 0.0f, "Normal")
     ),
     "Spatchcock Chicken",
     8,
@@ -599,14 +638,15 @@ val lunchRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.1376196f, "g", "0.1", null, false)
     )
 }, Recipe(
+    261536,
     listOf(
-        Ingredient("10536", "cooking spray", 0.266f, "HideAmounts"),
-        Ingredient("2351", "10 (6 inch) corn tortillas, cut into quarters", 260.0f, "Normal"),
-        Ingredient("16215", "1 (8 ounce) package sharp Cheddar cheese, cubed", 224.0f, "Normal"),
-        Ingredient("4397", "1 onion, chopped", 110.0f, "Normal"),
-        Ingredient("5133", "1 (3.8 ounce) can sliced black olives", 107.73f, "Normal"),
-        Ingredient("7432", "1 (16 ounce) can green chile enchilada sauce", 480.0f, "Normal"),
-        Ingredient("445", "2 cups shredded Mexican cheese blend", 267.2f, "Normal")
+        Ingredient(10536, "cooking spray", 0.266f, "HideAmounts"),
+        Ingredient(2351, "10 (6 inch) corn tortillas, cut into quarters", 260.0f, "Normal"),
+        Ingredient(16215, "1 (8 ounce) package sharp Cheddar cheese, cubed", 224.0f, "Normal"),
+        Ingredient(4397, "1 onion, chopped", 110.0f, "Normal"),
+        Ingredient(5133, "1 (3.8 ounce) can sliced black olives", 107.73f, "Normal"),
+        Ingredient(7432, "1 (16 ounce) can green chile enchilada sauce", 480.0f, "Normal"),
+        Ingredient(445, "2 cups shredded Mexican cheese blend", 267.2f, "Normal")
     ),
     "Cheesy Vegetarian Enchilada Casserole",
     6,
@@ -638,16 +678,22 @@ val lunchRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 4.841827f, "g", "4.8", null, false)
     )
 }, Recipe(
+    240400,
     listOf(
-        Ingredient("4397", "1/4 cup chopped onion", 40.0f, "Normal"),
-        Ingredient("2882", "5 tablespoons soy sauce", 80.0f, "Normal"),
-        Ingredient("1525", "2 1/2 tablespoons brown sugar", 33.920704f, "Normal"),
-        Ingredient("4342", "2 tablespoons minced garlic", 16.77533f, "Normal"),
-        Ingredient("6309", "2 tablespoons sesame oil", 27.2f, "Normal"),
-        Ingredient("3752", "1 tablespoon sesame seeds", 9.0f, "Normal"),
-        Ingredient("16407", "1/2 teaspoon cayenne", 0.9f, "Normal"),
-        Ingredient("16421", "salt and ground black pepper to taste", 0.4f, "HideAmounts"),
-        Ingredient("6494", "1 pound skinless, boneless chicken breasts, cut into thin strips", 454.4f, "Normal")
+        Ingredient(4397, "1/4 cup chopped onion", 40.0f, "Normal"),
+        Ingredient(2882, "5 tablespoons soy sauce", 80.0f, "Normal"),
+        Ingredient(1525, "2 1/2 tablespoons brown sugar", 33.920704f, "Normal"),
+        Ingredient(4342, "2 tablespoons minced garlic", 16.77533f, "Normal"),
+        Ingredient(6309, "2 tablespoons sesame oil", 27.2f, "Normal"),
+        Ingredient(3752, "1 tablespoon sesame seeds", 9.0f, "Normal"),
+        Ingredient(16407, "1/2 teaspoon cayenne", 0.9f, "Normal"),
+        Ingredient(16421, "salt and ground black pepper to taste", 0.4f, "HideAmounts"),
+        Ingredient(
+            6494,
+            "1 pound skinless, boneless chicken breasts, cut into thin strips",
+            454.4f,
+            "Normal"
+        )
     ),
     "Skillet Chicken Bulgogi",
     4,
@@ -679,15 +725,16 @@ val lunchRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.7447705f, "g", "0.7", null, false)
     )
 }, Recipe(
+    255462,
     listOf(
-        Ingredient("16243", "1 (15 ounce) container ricotta cheese", 426.0f, "Normal"),
-        Ingredient("16234", "1 (8 ounce) package shredded mozzarella cheese, divided", 224.0f, "Normal"),
-        Ingredient("16238", "1 (3 ounce) package Parmesan cheese", 84.0f, "Normal"),
-        Ingredient("16317", "1 egg", 50.0f, "Normal"),
-        Ingredient("20245", "2 teaspoons Italian seasoning", 3.0f, "Normal"),
-        Ingredient("5861", "1 pound sausage", 454.0f, "Normal"),
-        Ingredient("5803", "1/2 (26 ounce) jar marinara sauce", 364.0f, "Normal"),
-        Ingredient("28648", "6 flatbreads", 318.0f, "Normal")
+        Ingredient(16243, "1 (15 ounce) container ricotta cheese", 426.0f, "Normal"),
+        Ingredient(16234, "1 (8 ounce) package shredded mozzarella cheese, divided", 224.0f, "Normal"),
+        Ingredient(16238, "1 (3 ounce) package Parmesan cheese", 84.0f, "Normal"),
+        Ingredient(16317, "1 egg", 50.0f, "Normal"),
+        Ingredient(20245, "2 teaspoons Italian seasoning", 3.0f, "Normal"),
+        Ingredient(5861, "1 pound sausage", 454.0f, "Normal"),
+        Ingredient(5803, "1/2 (26 ounce) jar marinara sauce", 364.0f, "Normal"),
+        Ingredient(28648, "6 flatbreads", 318.0f, "Normal")
     ),
     "Lasagna Flatbread",
     6,
@@ -719,15 +766,16 @@ val lunchRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 10.79133f, "g", "10.8", null, false)
     )
 }, Recipe(
+    253161,
     listOf(
-        Ingredient("2829", "1 cup lentils", 192.0f, "Normal"),
-        Ingredient("4397", "2 onions, diced", 454.0f, "Normal"),
-        Ingredient("4147", "1 pound lean ground beef", 454.0f, "Normal"),
-        Ingredient("4432", "1 large green bell pepper, diced", 164.0f, "Normal"),
-        Ingredient("3686", "3/4 cup ketchup", 180.0f, "Normal"),
-        Ingredient("16169", "3/4 cup barbeque sauce", 187.5f, "Normal"),
-        Ingredient("7428", "1 tablespoon Worcestershire sauce", 17.0f, "Normal"),
-        Ingredient("4342", "1 tablespoon minced garlic", 8.387665f, "Normal")
+        Ingredient(2829, "1 cup lentils", 192.0f, "Normal"),
+        Ingredient(4397, "2 onions, diced", 454.0f, "Normal"),
+        Ingredient(4147, "1 pound lean ground beef", 454.0f, "Normal"),
+        Ingredient(4432, "1 large green bell pepper, diced", 164.0f, "Normal"),
+        Ingredient(3686, "3/4 cup ketchup", 180.0f, "Normal"),
+        Ingredient(16169, "3/4 cup barbeque sauce", 187.5f, "Normal"),
+        Ingredient(7428, "1 tablespoon Worcestershire sauce", 17.0f, "Normal"),
+        Ingredient(4342, "1 tablespoon minced garlic", 8.387665f, "Normal")
     ),
     "Andie's Quick 'n Easy Sneaky Sloppy Joes",
     8,
@@ -759,14 +807,15 @@ val lunchRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 8.863392f, "g", "8.9", null, false)
     )
 }, Recipe(
+    247285,
     listOf(
-        Ingredient("2633", "1 pound fresh speckled trout", 454.0f, "Normal"),
-        Ingredient("16157", "2 tablespoons butter", 28.4f, "Normal"),
-        Ingredient("18845", "1 tablespoon lemon pepper", 6.0125f, "Normal"),
-        Ingredient("16427", "1 teaspoon capers", 2.8666666f, "Normal"),
-        Ingredient("16404", "1 pinch paprika, or to taste", 1.0f, "Normal"),
-        Ingredient("3474", "1/4 cup white cooking wine", 62.480736f, "Normal"),
-        Ingredient("4409", "1 teaspoon minced fresh parsley, or to taste", 1.25f, "Normal")
+        Ingredient(2633, "1 pound fresh speckled trout", 454.0f, "Normal"),
+        Ingredient(16157, "2 tablespoons butter", 28.4f, "Normal"),
+        Ingredient(18845, "1 tablespoon lemon pepper", 6.0125f, "Normal"),
+        Ingredient(16427, "1 teaspoon capers", 2.8666666f, "Normal"),
+        Ingredient(16404, "1 pinch paprika, or to taste", 1.0f, "Normal"),
+        Ingredient(3474, "1/4 cup white cooking wine", 62.480736f, "Normal"),
+        Ingredient(4409, "1 teaspoon minced fresh parsley, or to taste", 1.25f, "Normal")
     ),
     "Speckled Trout in Capers and White Wine",
     2,
@@ -798,21 +847,22 @@ val lunchRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.3998359f, "g", "0.4", null, false)
     )
 }, Recipe(
+    229960,
     listOf(
-        Ingredient("17673", "1 (16 ounce) package linguine pasta", 448.0f, "Normal"),
-        Ingredient("16157", "2 tablespoons butter", 28.4f, "Normal"),
-        Ingredient("9725", "2 tablespoons extra-virgin olive oil", 27.0f, "Normal"),
-        Ingredient("4663", "2 shallots, finely diced", 100.0f, "Normal"),
-        Ingredient("4342", "2 cloves garlic, minced", 6.0f, "Normal"),
-        Ingredient("20244", "1 pinch red pepper flakes (optional)", 1.0f, "OptionalIngredient"),
-        Ingredient("2664", "1 pound shrimp, peeled and deveined", 454.0f, "Normal"),
-        Ingredient("18866", "1 pinch kosher salt and freshly ground pepper", 1.0f, "Normal"),
-        Ingredient("3474", "1/2 cup dry white wine", 124.96147f, "Normal"),
-        Ingredient("5107", "1 lemon, juiced", 45.0f, "Normal"),
-        Ingredient("16157", "2 tablespoons butter", 28.4f, "Normal"),
-        Ingredient("9725", "2 tablespoons extra-virgin olive oil", 27.0f, "Normal"),
-        Ingredient("4409", "1/4 cup finely chopped fresh parsley leaves", 15.0f, "Normal"),
-        Ingredient("9725", "1 teaspoon extra-virgin olive oil, or to taste", 4.6666665f, "Normal")
+        Ingredient(17673, "1 (16 ounce) package linguine pasta", 448.0f, "Normal"),
+        Ingredient(16157, "2 tablespoons butter", 28.4f, "Normal"),
+        Ingredient(9725, "2 tablespoons extra-virgin olive oil", 27.0f, "Normal"),
+        Ingredient(4663, "2 shallots, finely diced", 100.0f, "Normal"),
+        Ingredient(4342, "2 cloves garlic, minced", 6.0f, "Normal"),
+        Ingredient(20244, "1 pinch red pepper flakes (optional)", 1.0f, "OptionalIngredient"),
+        Ingredient(2664, "1 pound shrimp, peeled and deveined", 454.0f, "Normal"),
+        Ingredient(18866, "1 pinch kosher salt and freshly ground pepper", 1.0f, "Normal"),
+        Ingredient(3474, "1/2 cup dry white wine", 124.96147f, "Normal"),
+        Ingredient(5107, "1 lemon, juiced", 45.0f, "Normal"),
+        Ingredient(16157, "2 tablespoons butter", 28.4f, "Normal"),
+        Ingredient(9725, "2 tablespoons extra-virgin olive oil", 27.0f, "Normal"),
+        Ingredient(4409, "1/4 cup finely chopped fresh parsley leaves", 15.0f, "Normal"),
+        Ingredient(9725, "1 teaspoon extra-virgin olive oil, or to taste", 4.6666665f, "Normal")
     ),
     "Shrimp Scampi with Pasta",
     6,
@@ -845,11 +895,12 @@ val lunchRecipes = listOf(Recipe(
     )
 })
 val dinnerRecipes = listOf(Recipe(
+    31827,
     listOf(
-        Ingredient("1525", "2/3 cup packed light brown sugar", 146.66667f, "Normal"),
-        Ingredient("21883", "1/4 cup cinnamon applesauce", 63.75f, "Normal"),
-        Ingredient("16397", "1 1/2 teaspoons ground ginger", 2.6999998f, "Normal"),
-        Ingredient("5278", "2 pounds boneless pork loin roast", 907.2f, "Normal")
+        Ingredient(1525, "2/3 cup packed light brown sugar", 146.66667f, "Normal"),
+        Ingredient(21883, "1/4 cup cinnamon applesauce", 63.75f, "Normal"),
+        Ingredient(16397, "1 1/2 teaspoons ground ginger", 2.6999998f, "Normal"),
+        Ingredient(5278, "2 pounds boneless pork loin roast", 907.2f, "Normal")
     ),
     "Easy Roasted Pork",
     6,
@@ -881,15 +932,16 @@ val dinnerRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.2222656f, "g", "0.2", null, false)
     )
 }, Recipe(
+    237297,
     listOf(
-        Ingredient("16421", "1 1/2 teaspoons salt", 9.0f, "Normal"),
-        Ingredient("16404", "1 teaspoon paprika", 2.2808332f, "Normal"),
-        Ingredient("16382", "1 teaspoon ground cardamom", 2.0f, "Normal"),
-        Ingredient("18844", "1 teaspoon ground coriander", 2.0f, "Normal"),
-        Ingredient("16406", "1/2 teaspoon ground black pepper", 1.05f, "Normal"),
-        Ingredient("6378", "1/4 cup grapeseed oil", 54.5f, "Normal"),
-        Ingredient("1536", "2 tablespoons maple syrup", 40.0f, "Normal"),
-        Ingredient("2750", "1 (2 pound) salmon fillet, cut into 3-inch pieces", 908.0f, "Normal")
+        Ingredient(16421, "1 1/2 teaspoons salt", 9.0f, "Normal"),
+        Ingredient(16404, "1 teaspoon paprika", 2.2808332f, "Normal"),
+        Ingredient(16382, "1 teaspoon ground cardamom", 2.0f, "Normal"),
+        Ingredient(18844, "1 teaspoon ground coriander", 2.0f, "Normal"),
+        Ingredient(16406, "1/2 teaspoon ground black pepper", 1.05f, "Normal"),
+        Ingredient(6378, "1/4 cup grapeseed oil", 54.5f, "Normal"),
+        Ingredient(1536, "2 tablespoons maple syrup", 40.0f, "Normal"),
+        Ingredient(2750, "1 (2 pound) salmon fillet, cut into 3-inch pieces", 908.0f, "Normal")
     ),
     "Cardamom Maple Salmon",
     6,
@@ -921,16 +973,22 @@ val dinnerRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.4585469f, "g", "0.5", null, false)
     )
 }, Recipe(
+    88123,
     listOf(
-        Ingredient("6307", "3 tablespoons olive oil", 40.5f, "Normal"),
-        Ingredient("5320", "4 pork loin chops", 452.0f, "Normal"),
-        Ingredient("18741", "seasoning salt to taste", 1.0f, "HideAmounts"),
-        Ingredient("16406", "black pepper to taste", 1.0f, "HideAmounts"),
-        Ingredient("16396", "garlic powder to taste", 1.0f, "HideAmounts"),
-        Ingredient("16410", "1/2 teaspoon poultry seasoning", 0.6166667f, "Normal"),
-        Ingredient("7428", "3 tablespoons Worcestershire sauce", 51.0f, "Normal"),
-        Ingredient("24031", "1 (8 ounce) container frozen apple cider concentrate, undiluted", 227.0f, "Normal"),
-        Ingredient("15720", "1/4 cup dry sherry", 59.8021f, "Normal")
+        Ingredient(6307, "3 tablespoons olive oil", 40.5f, "Normal"),
+        Ingredient(5320, "4 pork loin chops", 452.0f, "Normal"),
+        Ingredient(18741, "seasoning salt to taste", 1.0f, "HideAmounts"),
+        Ingredient(16406, "black pepper to taste", 1.0f, "HideAmounts"),
+        Ingredient(16396, "garlic powder to taste", 1.0f, "HideAmounts"),
+        Ingredient(16410, "1/2 teaspoon poultry seasoning", 0.6166667f, "Normal"),
+        Ingredient(7428, "3 tablespoons Worcestershire sauce", 51.0f, "Normal"),
+        Ingredient(
+            24031,
+            "1 (8 ounce) container frozen apple cider concentrate, undiluted",
+            227.0f,
+            "Normal"
+        ),
+        Ingredient(15720, "1/4 cup dry sherry", 59.8021f, "Normal")
     ),
     "Apple Cider Sauce and Pork Loin Chops",
     4,
@@ -962,16 +1020,17 @@ val dinnerRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.3417208f, "g", "0.3", null, false)
     )
 }, Recipe(
+    9023,
     listOf(
-        Ingredient("1636", "1 tablespoon cornstarch", 8.0f, "Normal"),
-        Ingredient("2496", "1 tablespoon cold water", 14.785f, "Normal"),
-        Ingredient("1526", "1/2 cup white sugar", 100.0f, "Normal"),
-        Ingredient("2882", "1/2 cup soy sauce", 128.0f, "Normal"),
-        Ingredient("16422", "1/4 cup cider vinegar", 59.75f, "Normal"),
-        Ingredient("4342", "1 clove garlic, minced", 3.0f, "Normal"),
-        Ingredient("16397", "1/2 teaspoon ground ginger", 0.9f, "Normal"),
-        Ingredient("16406", "1/4 teaspoon ground black pepper", 0.525f, "Normal"),
-        Ingredient("6527", "12 skinless chicken thighs", 828.0f, "Normal")
+        Ingredient(1636, "1 tablespoon cornstarch", 8.0f, "Normal"),
+        Ingredient(2496, "1 tablespoon cold water", 14.785f, "Normal"),
+        Ingredient(1526, "1/2 cup white sugar", 100.0f, "Normal"),
+        Ingredient(2882, "1/2 cup soy sauce", 128.0f, "Normal"),
+        Ingredient(16422, "1/4 cup cider vinegar", 59.75f, "Normal"),
+        Ingredient(4342, "1 clove garlic, minced", 3.0f, "Normal"),
+        Ingredient(16397, "1/2 teaspoon ground ginger", 0.9f, "Normal"),
+        Ingredient(16406, "1/4 teaspoon ground black pepper", 0.525f, "Normal"),
+        Ingredient(6527, "12 skinless chicken thighs", 828.0f, "Normal")
     ),
     "Baked Teriyaki Chicken",
     6,
@@ -1003,19 +1062,20 @@ val dinnerRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.2351042f, "g", "0.2", null, false)
     )
 }, Recipe(
+    213742,
     listOf(
-        Ingredient("22104", "1 pound extra lean ground beef", 454.0f, "Normal"),
-        Ingredient("18752", "1/2 teaspoon sea salt", 2.75f, "Normal"),
-        Ingredient("4397", "1 small onion, diced", 70.0f, "Normal"),
-        Ingredient("18740", "1/2 teaspoon garlic salt", 2.75f, "Normal"),
-        Ingredient("20245", "1 1/2 teaspoons Italian seasoning", 2.25f, "Normal"),
-        Ingredient("16403", "3/4 teaspoon dried oregano", 1.125f, "Normal"),
-        Ingredient("20244", "3/4 teaspoon crushed red pepper flakes", 2.25f, "Normal"),
-        Ingredient("5592", "1 dash hot pepper sauce (such as Frank's RedHotÂ®), or to taste", 1.0f, "Normal"),
-        Ingredient("7428", "1 1/2 tablespoons Worcestershire sauce", 25.5f, "Normal"),
-        Ingredient("16284", "1/3 cup skim milk", 81.666664f, "Normal"),
-        Ingredient("16238", "1/4 cup grated Parmesan cheese", 20.0f, "Normal"),
-        Ingredient("2363", "1/2 cup seasoned bread crumbs", 60.0f, "Normal")
+        Ingredient(22104, "1 pound extra lean ground beef", 454.0f, "Normal"),
+        Ingredient(18752, "1/2 teaspoon sea salt", 2.75f, "Normal"),
+        Ingredient(4397, "1 small onion, diced", 70.0f, "Normal"),
+        Ingredient(18740, "1/2 teaspoon garlic salt", 2.75f, "Normal"),
+        Ingredient(20245, "1 1/2 teaspoons Italian seasoning", 2.25f, "Normal"),
+        Ingredient(16403, "3/4 teaspoon dried oregano", 1.125f, "Normal"),
+        Ingredient(20244, "3/4 teaspoon crushed red pepper flakes", 2.25f, "Normal"),
+        Ingredient(5592, "1 dash hot pepper sauce (such as Frank's RedHotÂ®), or to taste", 1.0f, "Normal"),
+        Ingredient(7428, "1 1/2 tablespoons Worcestershire sauce", 25.5f, "Normal"),
+        Ingredient(16284, "1/3 cup skim milk", 81.666664f, "Normal"),
+        Ingredient(16238, "1/4 cup grated Parmesan cheese", 20.0f, "Normal"),
+        Ingredient(2363, "1/2 cup seasoned bread crumbs", 60.0f, "Normal")
     ),
     "Meatball Nirvana",
     4,
@@ -1047,18 +1107,19 @@ val dinnerRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 1.549341f, "g", "1.5", null, false)
     )
 }, Recipe(
+    8701,
     listOf(
-        Ingredient("6494", "4 skinless, boneless chicken breasts", 472.0f, "Normal"),
-        Ingredient("16421", "salt and pepper to taste", 0.0f, "HideAmounts"),
-        Ingredient("4378", "3/4 pound fresh mushrooms, sliced", 340.5f, "Normal"),
-        Ingredient("1684", "2 tablespoons all-purpose flour", 15.625f, "Normal"),
-        Ingredient("6307", "2 tablespoons olive oil", 27.0f, "Normal"),
-        Ingredient("4342", "6 cloves garlic", 18.0f, "Normal"),
-        Ingredient("18930", "1/4 cup balsamic vinegar", 60.0f, "Normal"),
-        Ingredient("16133", "3/4 cup chicken broth", 148.5f, "Normal"),
-        Ingredient("16380", "1 bay leaf", 0.15f, "Normal"),
-        Ingredient("16417", "1/4 teaspoon dried thyme", 0.35833332f, "Normal"),
-        Ingredient("16157", "1 tablespoon butter", 14.2f, "Normal")
+        Ingredient(6494, "4 skinless, boneless chicken breasts", 472.0f, "Normal"),
+        Ingredient(16421, "salt and pepper to taste", 0.0f, "HideAmounts"),
+        Ingredient(4378, "3/4 pound fresh mushrooms, sliced", 340.5f, "Normal"),
+        Ingredient(1684, "2 tablespoons all-purpose flour", 15.625f, "Normal"),
+        Ingredient(6307, "2 tablespoons olive oil", 27.0f, "Normal"),
+        Ingredient(4342, "6 cloves garlic", 18.0f, "Normal"),
+        Ingredient(18930, "1/4 cup balsamic vinegar", 60.0f, "Normal"),
+        Ingredient(16133, "3/4 cup chicken broth", 148.5f, "Normal"),
+        Ingredient(16380, "1 bay leaf", 0.15f, "Normal"),
+        Ingredient(16417, "1/4 teaspoon dried thyme", 0.35833332f, "Normal"),
+        Ingredient(16157, "1 tablespoon butter", 14.2f, "Normal")
     ),
     "Chicken Breasts with Balsamic Vinegar and Garlic",
     4,
@@ -1090,22 +1151,23 @@ val dinnerRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 1.094227f, "g", "1.1", null, false)
     )
 }, Recipe(
+    220125,
     listOf(
-        Ingredient("3898", "1 (5 pound) bone-in beef pot roast", 2268.0f, "Normal"),
-        Ingredient("16421", "salt and pepper to taste", 0.4f, "HideAmounts"),
-        Ingredient("1684", "1 tablespoon all-purpose flour, or as needed", 7.8125f, "Normal"),
-        Ingredient("6379", "2 tablespoons vegetable oil", 27.5f, "Normal"),
-        Ingredient("4378", "8 ounces sliced mushrooms", 224.0f, "Normal"),
-        Ingredient("4397", "1 medium onion, chopped", 110.0f, "Normal"),
-        Ingredient("4342", "2 cloves garlic, minced", 6.0f, "Normal"),
-        Ingredient("16157", "1 tablespoon butter", 14.2f, "Normal"),
-        Ingredient("1684", "1 1/2 tablespoons all-purpose flour", 11.71875f, "Normal"),
-        Ingredient("3640", "1 tablespoon tomato paste", 16.23009f, "Normal"),
-        Ingredient("16133", "2 1/2 cups chicken broth", 495.0f, "Normal"),
-        Ingredient("4279", "3 medium carrots, cut into chunks", 183.0f, "Normal"),
-        Ingredient("4292", "2 stalks celery, cut into chunks", 80.0f, "Normal"),
-        Ingredient("16429", "1 sprig fresh rosemary", 0.7f, "Normal"),
-        Ingredient("16423", "2 sprigs fresh thyme", 0.8f, "Normal")
+        Ingredient(3898, "1 (5 pound) bone-in beef pot roast", 2268.0f, "Normal"),
+        Ingredient(16421, "salt and pepper to taste", 0.4f, "HideAmounts"),
+        Ingredient(1684, "1 tablespoon all-purpose flour, or as needed", 7.8125f, "Normal"),
+        Ingredient(6379, "2 tablespoons vegetable oil", 27.5f, "Normal"),
+        Ingredient(4378, "8 ounces sliced mushrooms", 224.0f, "Normal"),
+        Ingredient(4397, "1 medium onion, chopped", 110.0f, "Normal"),
+        Ingredient(4342, "2 cloves garlic, minced", 6.0f, "Normal"),
+        Ingredient(16157, "1 tablespoon butter", 14.2f, "Normal"),
+        Ingredient(1684, "1 1/2 tablespoons all-purpose flour", 11.71875f, "Normal"),
+        Ingredient(3640, "1 tablespoon tomato paste", 16.23009f, "Normal"),
+        Ingredient(16133, "2 1/2 cups chicken broth", 495.0f, "Normal"),
+        Ingredient(4279, "3 medium carrots, cut into chunks", 183.0f, "Normal"),
+        Ingredient(4292, "2 stalks celery, cut into chunks", 80.0f, "Normal"),
+        Ingredient(16429, "1 sprig fresh rosemary", 0.7f, "Normal"),
+        Ingredient(16423, "2 sprigs fresh thyme", 0.8f, "Normal")
     ),
     "Slow Cooker Beef Pot Roast",
     8,
@@ -1137,21 +1199,22 @@ val dinnerRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 1.483977f, "g", "1.5", null, false)
     )
 }, Recipe(
+    223499,
     listOf(
-        Ingredient("6305", "1 teaspoon vegetable oil", 4.5416665f, "Normal"),
-        Ingredient("5937", "7 slices turkey bacon, or more to taste", 196.0f, "Normal"),
-        Ingredient("22113", "1 pound extra lean ground turkey", 454.0f, "Normal"),
-        Ingredient("16215", "1 cup shredded Cheddar cheese", 113.0f, "Normal"),
-        Ingredient("16317", "1 egg", 50.0f, "Normal"),
-        Ingredient("4397", "1/2 small onion, diced", 35.0f, "Normal"),
-        Ingredient("2073", "1 slice French bread, crumbled", 25.0f, "Normal"),
-        Ingredient("7428", "2 tablespoons Worcestershire sauce, or more to taste", 34.0f, "Normal"),
-        Ingredient("16396", "2 teaspoons garlic powder", 5.5533333f, "Normal"),
-        Ingredient("16406", "1/4 teaspoon ground black pepper", 0.525f, "Normal"),
-        Ingredient("0", "", 0.0f, "BlankLine"),
-        Ingredient("3686", "1/4 cup ketchup", 60.0f, "Normal"),
-        Ingredient("16420", "2 tablespoons prepared yellow mustard", 30.837004f, "Normal"),
-        Ingredient("1525", "1 1/2 tablespoons brown sugar", 20.352423f, "Normal")
+        Ingredient(6305, "1 teaspoon vegetable oil", 4.5416665f, "Normal"),
+        Ingredient(5937, "7 slices turkey bacon, or more to taste", 196.0f, "Normal"),
+        Ingredient(22113, "1 pound extra lean ground turkey", 454.0f, "Normal"),
+        Ingredient(16215, "1 cup shredded Cheddar cheese", 113.0f, "Normal"),
+        Ingredient(16317, "1 egg", 50.0f, "Normal"),
+        Ingredient(4397, "1/2 small onion, diced", 35.0f, "Normal"),
+        Ingredient(2073, "1 slice French bread, crumbled", 25.0f, "Normal"),
+        Ingredient(7428, "2 tablespoons Worcestershire sauce, or more to taste", 34.0f, "Normal"),
+        Ingredient(16396, "2 teaspoons garlic powder", 5.5533333f, "Normal"),
+        Ingredient(16406, "1/4 teaspoon ground black pepper", 0.525f, "Normal"),
+        Ingredient(0, "", 0.0f, "BlankLine"),
+        Ingredient(3686, "1/4 cup ketchup", 60.0f, "Normal"),
+        Ingredient(16420, "2 tablespoons prepared yellow mustard", 30.837004f, "Normal"),
+        Ingredient(1525, "1 1/2 tablespoons brown sugar", 20.352423f, "Normal")
     ),
     "Turkey Cheeseburger Meatloaf",
     6,
@@ -1183,27 +1246,33 @@ val dinnerRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.5135877f, "g", "0.5", null, false)
     )
 }, Recipe(
+    222002,
     listOf(
-        Ingredient("1650", "1 cup uncooked long grain white rice", 185.0f, "Normal"),
-        Ingredient("2496", "2 cups water", 474.0f, "Normal"),
-        Ingredient("0", "Sauce:", 0.0f, "Heading"),
-        Ingredient("4397", "1 onion, diced", 110.0f, "Normal"),
-        Ingredient("6307", "1 tablespoon olive oil", 13.5f, "Normal"),
-        Ingredient("5803", "2 cups marinara sauce", 500.0f, "Normal"),
-        Ingredient("5460", "1 cup beef broth", 242.0f, "Normal"),
-        Ingredient("18930", "1 tablespoon balsamic vinegar", 15.0f, "Normal"),
-        Ingredient("20244", "1/4 teaspoon crushed red pepper flakes", 0.75f, "Normal"),
-        Ingredient("0", "Peppers:", 0.0f, "Heading"),
-        Ingredient("4147", "1 pound lean ground beef", 454.0f, "Normal"),
-        Ingredient("21886", "1/4 pound hot Italian pork sausage, casing removed", 113.5f, "Normal"),
-        Ingredient("10498", "1 (10 ounce) can diced tomatoes", 283.5f, "Normal"),
-        Ingredient("20699", "1/4 cup chopped fresh Italian parsley", 15.0f, "Normal"),
-        Ingredient("4342", "4 cloves garlic, minced", 12.0f, "Normal"),
-        Ingredient("16421", "2 teaspoons salt", 12.0f, "Normal"),
-        Ingredient("16406", "1 teaspoon freshly ground black pepper", 2.1f, "Normal"),
-        Ingredient("16407", "1 pinch ground cayenne pepper", 0.2f, "Normal"),
-        Ingredient("4432", "4 large green bell peppers, halved lengthwise and seeded", 656.0f, "Normal"),
-        Ingredient("16238", "1 cup finely grated Parmigiano-Reggiano cheese, plus more for topping", 80.0f, "Normal")
+        Ingredient(1650, "1 cup uncooked long grain white rice", 185.0f, "Normal"),
+        Ingredient(2496, "2 cups water", 474.0f, "Normal"),
+        Ingredient(0, "Sauce:", 0.0f, "Heading"),
+        Ingredient(4397, "1 onion, diced", 110.0f, "Normal"),
+        Ingredient(6307, "1 tablespoon olive oil", 13.5f, "Normal"),
+        Ingredient(5803, "2 cups marinara sauce", 500.0f, "Normal"),
+        Ingredient(5460, "1 cup beef broth", 242.0f, "Normal"),
+        Ingredient(18930, "1 tablespoon balsamic vinegar", 15.0f, "Normal"),
+        Ingredient(20244, "1/4 teaspoon crushed red pepper flakes", 0.75f, "Normal"),
+        Ingredient(0, "Peppers:", 0.0f, "Heading"),
+        Ingredient(4147, "1 pound lean ground beef", 454.0f, "Normal"),
+        Ingredient(21886, "1/4 pound hot Italian pork sausage, casing removed", 113.5f, "Normal"),
+        Ingredient(10498, "1 (10 ounce) can diced tomatoes", 283.5f, "Normal"),
+        Ingredient(20699, "1/4 cup chopped fresh Italian parsley", 15.0f, "Normal"),
+        Ingredient(4342, "4 cloves garlic, minced", 12.0f, "Normal"),
+        Ingredient(16421, "2 teaspoons salt", 12.0f, "Normal"),
+        Ingredient(16406, "1 teaspoon freshly ground black pepper", 2.1f, "Normal"),
+        Ingredient(16407, "1 pinch ground cayenne pepper", 0.2f, "Normal"),
+        Ingredient(4432, "4 large green bell peppers, halved lengthwise and seeded", 656.0f, "Normal"),
+        Ingredient(
+            16238,
+            "1 cup finely grated Parmigiano-Reggiano cheese, plus more for topping",
+            80.0f,
+            "Normal"
+        )
     ),
     "Chef John's Stuffed Peppers",
     8,
@@ -1235,23 +1304,24 @@ val dinnerRecipes = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 4.041484f, "g", "4", null, false)
     )
 }, Recipe(
+    16707,
     listOf(
-        Ingredient("6494", "6 skinless, boneless chicken breast halves", 708.0f, "Normal"),
-        Ingredient("1684", "1/4 cup all-purpose flour", 31.25f, "Normal"),
-        Ingredient("16421", "1/2 teaspoon salt", 3.0f, "Normal"),
-        Ingredient("16406", "1 pinch ground black pepper", 1.0f, "Normal"),
-        Ingredient("16157", "3 tablespoons butter", 42.6f, "Normal"),
-        Ingredient("4575", "1 (14.5 ounce) can stewed tomatoes, with liquid", 406.0f, "Normal"),
-        Ingredient("2496", "1/2 cup water", 118.5f, "Normal"),
-        Ingredient("1525", "2 tablespoons brown sugar", 27.136564f, "Normal"),
-        Ingredient("7842", "2 tablespoons distilled white vinegar", 29.603525f, "Normal"),
-        Ingredient("7428", "2 tablespoons Worcestershire sauce", 34.0f, "Normal"),
-        Ingredient("16421", "1 teaspoon salt", 6.0f, "Normal"),
-        Ingredient("16385", "2 teaspoons chili powder", 5.2949777f, "Normal"),
-        Ingredient("16400", "1 teaspoon mustard powder", 3.7333333f, "Normal"),
-        Ingredient("16383", "1/2 teaspoon celery seed", 1.08333f, "Normal"),
-        Ingredient("4342", "1 clove garlic, minced", 3.0f, "Normal"),
-        Ingredient("5593", "1/8 teaspoon hot pepper sauce", 0.5875f, "Normal")
+        Ingredient(6494, "6 skinless, boneless chicken breast halves", 708.0f, "Normal"),
+        Ingredient(1684, "1/4 cup all-purpose flour", 31.25f, "Normal"),
+        Ingredient(16421, "1/2 teaspoon salt", 3.0f, "Normal"),
+        Ingredient(16406, "1 pinch ground black pepper", 1.0f, "Normal"),
+        Ingredient(16157, "3 tablespoons butter", 42.6f, "Normal"),
+        Ingredient(4575, "1 (14.5 ounce) can stewed tomatoes, with liquid", 406.0f, "Normal"),
+        Ingredient(2496, "1/2 cup water", 118.5f, "Normal"),
+        Ingredient(1525, "2 tablespoons brown sugar", 27.136564f, "Normal"),
+        Ingredient(7842, "2 tablespoons distilled white vinegar", 29.603525f, "Normal"),
+        Ingredient(7428, "2 tablespoons Worcestershire sauce", 34.0f, "Normal"),
+        Ingredient(16421, "1 teaspoon salt", 6.0f, "Normal"),
+        Ingredient(16385, "2 teaspoons chili powder", 5.2949777f, "Normal"),
+        Ingredient(16400, "1 teaspoon mustard powder", 3.7333333f, "Normal"),
+        Ingredient(16383, "1/2 teaspoon celery seed", 1.08333f, "Normal"),
+        Ingredient(4342, "1 clove garlic, minced", 3.0f, "Normal"),
+        Ingredient(5593, "1/8 teaspoon hot pepper sauce", 0.5875f, "Normal")
     ),
     "Chicken Breasts Pierre",
     6,
@@ -1284,16 +1354,17 @@ val dinnerRecipes = listOf(Recipe(
     )
 })
 val snacks = listOf(Recipe(
+    7519,
     listOf(
-        Ingredient("16318", "10 egg whites", 334.0f, "Normal"),
-        Ingredient("2360", "1 teaspoon cream of tartar", 3.0f, "Normal"),
-        Ingredient("16421", "1/2 teaspoon salt", 3.0f, "Normal"),
-        Ingredient("1526", "1 1/4 cups white sugar, divided", 250.0f, "Normal"),
-        Ingredient("1687", "3/4 cup sifted cake flour", 107.37375f, "Normal"),
-        Ingredient("16319", "6 egg yolks", 99.600006f, "Normal"),
-        Ingredient("20221", "1/2 teaspoon orange extract", 2.4f, "Normal"),
-        Ingredient("1687", "1/2 cup sifted cake flour", 68.5f, "Normal"),
-        Ingredient("16424", "1 teaspoon vanilla extract", 4.3333335f, "Normal")
+        Ingredient(16318, "10 egg whites", 334.0f, "Normal"),
+        Ingredient(2360, "1 teaspoon cream of tartar", 3.0f, "Normal"),
+        Ingredient(16421, "1/2 teaspoon salt", 3.0f, "Normal"),
+        Ingredient(1526, "1 1/4 cups white sugar, divided", 250.0f, "Normal"),
+        Ingredient(1687, "3/4 cup sifted cake flour", 107.37375f, "Normal"),
+        Ingredient(16319, "6 egg yolks", 99.600006f, "Normal"),
+        Ingredient(20221, "1/2 teaspoon orange extract", 2.4f, "Normal"),
+        Ingredient(1687, "1/2 cup sifted cake flour", 68.5f, "Normal"),
+        Ingredient(16424, "1 teaspoon vanilla extract", 4.3333335f, "Normal")
     ),
     "Daffodil Cake",
     12,
@@ -1325,15 +1396,16 @@ val snacks = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.2496545f, "g", "0.2", null, false)
     )
 }, Recipe(
+    12101,
     listOf(
-        Ingredient("1525", "1 cup packed light brown sugar", 220.0f, "Normal"),
-        Ingredient("1636", "4 tablespoons cornstarch", 32.0f, "Normal"),
-        Ingredient("16421", "1/2 teaspoon salt", 3.0f, "Normal"),
-        Ingredient("16278", "2 cups milk", 488.0f, "Normal"),
-        Ingredient("16319", "2 egg yolks, beaten", 33.2f, "Normal"),
-        Ingredient("16157", "1 tablespoon butter", 14.2f, "Normal"),
-        Ingredient("16424", "1 teaspoon vanilla extract", 4.3333335f, "Normal"),
-        Ingredient("2327", "1 (9 inch) pie crust, baked", 126.0f, "Normal")
+        Ingredient(1525, "1 cup packed light brown sugar", 220.0f, "Normal"),
+        Ingredient(1636, "4 tablespoons cornstarch", 32.0f, "Normal"),
+        Ingredient(16421, "1/2 teaspoon salt", 3.0f, "Normal"),
+        Ingredient(16278, "2 cups milk", 488.0f, "Normal"),
+        Ingredient(16319, "2 egg yolks, beaten", 33.2f, "Normal"),
+        Ingredient(16157, "1 tablespoon butter", 14.2f, "Normal"),
+        Ingredient(16424, "1 teaspoon vanilla extract", 4.3333335f, "Normal"),
+        Ingredient(2327, "1 (9 inch) pie crust, baked", 126.0f, "Normal")
     ),
     "Grandma's Butterscotch Pie",
     8,
@@ -1365,22 +1437,23 @@ val snacks = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.1935f, "g", "0.2", null, false)
     )
 }, Recipe(
+    7570,
     listOf(
-        Ingredient("16157", "1 cup butter, softened", 227.0f, "Normal"),
-        Ingredient("1526", "1 cup white sugar", 200.0f, "Normal"),
-        Ingredient("16317", "3 eggs", 150.0f, "Normal"),
-        Ingredient("16424", "1/4 teaspoon vanilla extract", 1.0833334f, "Normal"),
-        Ingredient("1684", "2 cups all-purpose flour", 250.0f, "Normal"),
-        Ingredient("2356", "1 teaspoon baking powder", 4.6f, "Normal"),
-        Ingredient("16421", "1/8 teaspoon salt", 0.75f, "Normal"),
-        Ingredient("20185", "2 drops red food coloring", 2.0f, "Normal"),
-        Ingredient("1593", "1 cup apricot preserves", 320.0f, "Normal"),
-        Ingredient("0", "", 0.0f, "BlankLine"),
-        Ingredient("3767", "2 cups ground almonds", 340.0f, "Normal"),
-        Ingredient("1527", "3 cups confectioners' sugar", 360.0f, "Normal"),
-        Ingredient("16317", "1 egg, room temperature", 50.0f, "Normal"),
-        Ingredient("5107", "1 1/2 teaspoons lemon juice", 8.061674f, "Normal"),
-        Ingredient("19113", "1/4 teaspoon almond extract", 1.1510416f, "Normal")
+        Ingredient(16157, "1 cup butter, softened", 227.0f, "Normal"),
+        Ingredient(1526, "1 cup white sugar", 200.0f, "Normal"),
+        Ingredient(16317, "3 eggs", 150.0f, "Normal"),
+        Ingredient(16424, "1/4 teaspoon vanilla extract", 1.0833334f, "Normal"),
+        Ingredient(1684, "2 cups all-purpose flour", 250.0f, "Normal"),
+        Ingredient(2356, "1 teaspoon baking powder", 4.6f, "Normal"),
+        Ingredient(16421, "1/8 teaspoon salt", 0.75f, "Normal"),
+        Ingredient(20185, "2 drops red food coloring", 2.0f, "Normal"),
+        Ingredient(1593, "1 cup apricot preserves", 320.0f, "Normal"),
+        Ingredient(0, "", 0.0f, "BlankLine"),
+        Ingredient(3767, "2 cups ground almonds", 340.0f, "Normal"),
+        Ingredient(1527, "3 cups confectioners' sugar", 360.0f, "Normal"),
+        Ingredient(16317, "1 egg, room temperature", 50.0f, "Normal"),
+        Ingredient(5107, "1 1/2 teaspoons lemon juice", 8.061674f, "Normal"),
+        Ingredient(19113, "1/4 teaspoon almond extract", 1.1510416f, "Normal")
     ),
     "Battenburg Cake",
     12,
@@ -1412,16 +1485,27 @@ val snacks = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 3.989287f, "g", "4", null, false)
     )
 }, Recipe(
+    261757,
     listOf(
-        Ingredient("5135", "2 large organic oranges, scrubbed and coarsely chopped (with the skin)", 368.0f, "Normal"),
-        Ingredient("16317", "5 eggs, separated", 250.0f, "Normal"),
-        Ingredient("1526", "1 cup white sugar, divided", 200.0f, "Normal"),
-        Ingredient("22884", "3/4 cup ground almonds", 93.72f, "Normal"),
-        Ingredient("1670", "3/4 cup semolina flour", 125.25f, "Normal"),
-        Ingredient("16424", "1/2 teaspoon vanilla extract", 2.1666667f, "Normal"),
-        Ingredient("0", "1/2 teaspoon fiori di Sicilia (optional)", 0.0f, "WriteIn"),
-        Ingredient("20667", "3 tablespoons brandy-based orange liqueur (such as Grand MarnierÂ®)", 42.0f, "Normal"),
-        Ingredient("1527", "1/2 teaspoon confectioners' sugar (optional)", 1.25f, "OptionalIngredient")
+        Ingredient(
+            5135,
+            "2 large organic oranges, scrubbed and coarsely chopped (with the skin)",
+            368.0f,
+            "Normal"
+        ),
+        Ingredient(16317, "5 eggs, separated", 250.0f, "Normal"),
+        Ingredient(1526, "1 cup white sugar, divided", 200.0f, "Normal"),
+        Ingredient(22884, "3/4 cup ground almonds", 93.72f, "Normal"),
+        Ingredient(1670, "3/4 cup semolina flour", 125.25f, "Normal"),
+        Ingredient(16424, "1/2 teaspoon vanilla extract", 2.1666667f, "Normal"),
+        Ingredient(0, "1/2 teaspoon fiori di Sicilia (optional)", 0.0f, "WriteIn"),
+        Ingredient(
+            20667,
+            "3 tablespoons brandy-based orange liqueur (such as Grand MarnierÂ®)",
+            42.0f,
+            "Normal"
+        ),
+        Ingredient(1527, "1/2 teaspoon confectioners' sugar (optional)", 1.25f, "OptionalIngredient")
     ),
     "Orange Cake with Semolina and Almonds",
     10,
@@ -1453,17 +1537,18 @@ val snacks = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 2.361675f, "g", "2.4", null, false)
     )
 }, Recipe(
+    262623,
     listOf(
-        Ingredient("1684", "2 cups all-purpose flour", 250.0f, "Normal"),
-        Ingredient("22884", "2 cups finely ground almonds", 249.92f, "Normal"),
-        Ingredient("1526", "1 1/4 cups white sugar", 250.0f, "Normal"),
-        Ingredient("2356", "1 teaspoon baking powder", 4.6f, "Normal"),
-        Ingredient("16386", "1/2 teaspoon ground cinnamon", 1.15f, "Normal"),
-        Ingredient("16387", "1/8 teaspoon ground cloves", 0.2625f, "Normal"),
-        Ingredient("16339", "1 1/8 cups unsalted butter", 255.375f, "Normal"),
-        Ingredient("16319", "2 egg yolks", 33.2f, "Normal"),
-        Ingredient("18419", "6 tablespoons red currant jam", 120.0f, "Normal"),
-        Ingredient("16319", "2 egg yolks, lightly beaten", 33.2f, "Normal")
+        Ingredient(1684, "2 cups all-purpose flour", 250.0f, "Normal"),
+        Ingredient(22884, "2 cups finely ground almonds", 249.92f, "Normal"),
+        Ingredient(1526, "1 1/4 cups white sugar", 250.0f, "Normal"),
+        Ingredient(2356, "1 teaspoon baking powder", 4.6f, "Normal"),
+        Ingredient(16386, "1/2 teaspoon ground cinnamon", 1.15f, "Normal"),
+        Ingredient(16387, "1/8 teaspoon ground cloves", 0.2625f, "Normal"),
+        Ingredient(16339, "1 1/8 cups unsalted butter", 255.375f, "Normal"),
+        Ingredient(16319, "2 egg yolks", 33.2f, "Normal"),
+        Ingredient(18419, "6 tablespoons red currant jam", 120.0f, "Normal"),
+        Ingredient(16319, "2 egg yolks, lightly beaten", 33.2f, "Normal")
     ),
     "Austrian Linzer Torte ",
     12,
@@ -1495,16 +1580,22 @@ val snacks = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 2.821635f, "g", "2.8", null, false)
     )
 }, Recipe(
+    261483,
     listOf(
-        Ingredient("10536", "cooking spray", 0.266f, "HideAmounts"),
-        Ingredient("15899", "1 (15.25 ounce) package spiced cake mix (such as Betty CrockerÂ®)", 427.0f, "Normal"),
-        Ingredient("2496", "1 cup water", 237.0f, "Normal"),
-        Ingredient("16317", "3 eggs", 150.0f, "Normal"),
-        Ingredient("6305", "1/3 cup vegetable oil", 72.66667f, "Normal"),
-        Ingredient("3819", "1 cup chopped walnuts", 117.0f, "Normal"),
-        Ingredient("1338", "1 cup semisweet chocolate chips", 168.0f, "Normal"),
-        Ingredient("1460", "1 (16 ounce) can prepared chocolate frosting", 454.0f, "Normal"),
-        Ingredient("1527", "1 tablespoon confectioners' sugar (optional)", 7.4008813f, "OptionalIngredient")
+        Ingredient(10536, "cooking spray", 0.266f, "HideAmounts"),
+        Ingredient(
+            15899,
+            "1 (15.25 ounce) package spiced cake mix (such as Betty CrockerÂ®)",
+            427.0f,
+            "Normal"
+        ),
+        Ingredient(2496, "1 cup water", 237.0f, "Normal"),
+        Ingredient(16317, "3 eggs", 150.0f, "Normal"),
+        Ingredient(6305, "1/3 cup vegetable oil", 72.66667f, "Normal"),
+        Ingredient(3819, "1 cup chopped walnuts", 117.0f, "Normal"),
+        Ingredient(1338, "1 cup semisweet chocolate chips", 168.0f, "Normal"),
+        Ingredient(1460, "1 (16 ounce) can prepared chocolate frosting", 454.0f, "Normal"),
+        Ingredient(1527, "1 tablespoon confectioners' sugar (optional)", 7.4008813f, "OptionalIngredient")
     ),
     "Can't Wait Microwave Lava Cake",
     4,
@@ -1536,19 +1627,20 @@ val snacks = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 7.68075f, "g", "7.7", null, false)
     )
 }, Recipe(
+    261413,
     listOf(
-        Ingredient("2377", "1 (14.1 ounce) package pie crust pastry", 399.735f, "Normal"),
-        Ingredient("18427", "3/4 (10 ounce) jar seedless raspberry jam", 210.0f, "Normal"),
-        Ingredient("16339", "3/4 cup unsalted butter", 170.25f, "Normal"),
-        Ingredient("1526", "3/4 cup white sugar", 150.0f, "Normal"),
-        Ingredient("1526", "2 tablespoons white sugar", 25.0f, "Normal"),
-        Ingredient("16317", "4 eggs", 200.0f, "Normal"),
-        Ingredient("5107", "1 1/2 tablespoons lemon juice", 22.572687f, "Normal"),
-        Ingredient("19113", "2 teaspoons almond extract", 9.208333f, "Normal"),
-        Ingredient("5110", "1 teaspoon lemon zest", 2.0f, "Normal"),
-        Ingredient("22884", "2 cups ground almonds", 249.92f, "Normal"),
-        Ingredient("10866", "1/2 cup sliced almonds", 47.0f, "Normal"),
-        Ingredient("1527", "confectioners' sugar", 16.0f, "HideAmounts")
+        Ingredient(2377, "1 (14.1 ounce) package pie crust pastry", 399.735f, "Normal"),
+        Ingredient(18427, "3/4 (10 ounce) jar seedless raspberry jam", 210.0f, "Normal"),
+        Ingredient(16339, "3/4 cup unsalted butter", 170.25f, "Normal"),
+        Ingredient(1526, "3/4 cup white sugar", 150.0f, "Normal"),
+        Ingredient(1526, "2 tablespoons white sugar", 25.0f, "Normal"),
+        Ingredient(16317, "4 eggs", 200.0f, "Normal"),
+        Ingredient(5107, "1 1/2 tablespoons lemon juice", 22.572687f, "Normal"),
+        Ingredient(19113, "2 teaspoons almond extract", 9.208333f, "Normal"),
+        Ingredient(5110, "1 teaspoon lemon zest", 2.0f, "Normal"),
+        Ingredient(22884, "2 cups ground almonds", 249.92f, "Normal"),
+        Ingredient(10866, "1/2 cup sliced almonds", 47.0f, "Normal"),
+        Ingredient(1527, "confectioners' sugar", 16.0f, "HideAmounts")
     ),
     "Bakewell Slice",
     12,
@@ -1580,19 +1672,20 @@ val snacks = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 3.757273f, "g", "3.8", null, false)
     )
 }, Recipe(
+    262588,
     listOf(
-        Ingredient("0", "Caramel:", 0.0f, "Heading"),
-        Ingredient("1526", "1 cup white sugar", 200.0f, "Normal"),
-        Ingredient("2496", "1/2 cup water", 118.5f, "Normal"),
-        Ingredient("2496", "1 tablespoon water", 14.785f, "Normal"),
-        Ingredient("0", "Pudding:", 0.0f, "Heading"),
-        Ingredient("2496", "2 cups water", 474.0f, "Normal"),
-        Ingredient("1526", "2 cups white sugar", 400.0f, "Normal"),
-        Ingredient("5375", "4 slices smoked bacon, finely chopped", 112.0f, "Normal"),
-        Ingredient("20303", "2 cinnamon sticks", 4.0f, "Normal"),
-        Ingredient("5110", "peels from 2 lemons, white pith removed", 6.0f, "HideAmounts"),
-        Ingredient("16319", "15 egg yolks", 249.0f, "Normal"),
-        Ingredient("20492", "1/2 cup port wine", 117.0f, "Normal")
+        Ingredient(0, "Caramel:", 0.0f, "Heading"),
+        Ingredient(1526, "1 cup white sugar", 200.0f, "Normal"),
+        Ingredient(2496, "1/2 cup water", 118.5f, "Normal"),
+        Ingredient(2496, "1 tablespoon water", 14.785f, "Normal"),
+        Ingredient(0, "Pudding:", 0.0f, "Heading"),
+        Ingredient(2496, "2 cups water", 474.0f, "Normal"),
+        Ingredient(1526, "2 cups white sugar", 400.0f, "Normal"),
+        Ingredient(5375, "4 slices smoked bacon, finely chopped", 112.0f, "Normal"),
+        Ingredient(20303, "2 cinnamon sticks", 4.0f, "Normal"),
+        Ingredient(5110, "peels from 2 lemons, white pith removed", 6.0f, "HideAmounts"),
+        Ingredient(16319, "15 egg yolks", 249.0f, "Normal"),
+        Ingredient(20492, "1/2 cup port wine", 117.0f, "Normal")
     ),
     "Abade Prisco's Pudding",
     8,
@@ -1624,18 +1717,19 @@ val snacks = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 0.345f, "g", "0.3", null, false)
     )
 }, Recipe(
+    261295,
     listOf(
-        Ingredient("4978", "12 apples, cored and cut into 8 wedges", 1656.0f, "Normal"),
-        Ingredient("1525", "3/4 cup brown sugar", 108.75f, "Normal"),
-        Ingredient("16386", "2 teaspoons ground cinnamon, divided", 4.6f, "Normal"),
-        Ingredient("1684", "1 cup all-purpose flour, divided", 125.0f, "Normal"),
-        Ingredient("16157", "1/2 cup cold butter", 113.5f, "Normal"),
-        Ingredient("19148", "1 1/2 cups old-fashioned rolled oats", 120.0f, "Normal"),
-        Ingredient("3819", "1 cup chopped walnuts", 120.0f, "Normal"),
-        Ingredient("1536", "1/3 cup maple syrup", 105.0f, "Normal"),
-        Ingredient("16411", "1 teaspoon pumpkin pie spice", 1.7f, "Normal"),
-        Ingredient("16424", "1 teaspoon vanilla extract", 4.3333335f, "Normal"),
-        Ingredient("16421", "1/2 teaspoon salt", 3.0f, "Normal")
+        Ingredient(4978, "12 apples, cored and cut into 8 wedges", 1656.0f, "Normal"),
+        Ingredient(1525, "3/4 cup brown sugar", 108.75f, "Normal"),
+        Ingredient(16386, "2 teaspoons ground cinnamon, divided", 4.6f, "Normal"),
+        Ingredient(1684, "1 cup all-purpose flour, divided", 125.0f, "Normal"),
+        Ingredient(16157, "1/2 cup cold butter", 113.5f, "Normal"),
+        Ingredient(19148, "1 1/2 cups old-fashioned rolled oats", 120.0f, "Normal"),
+        Ingredient(3819, "1 cup chopped walnuts", 120.0f, "Normal"),
+        Ingredient(1536, "1/3 cup maple syrup", 105.0f, "Normal"),
+        Ingredient(16411, "1 teaspoon pumpkin pie spice", 1.7f, "Normal"),
+        Ingredient(16424, "1 teaspoon vanilla extract", 4.3333335f, "Normal"),
+        Ingredient(16421, "1/2 teaspoon salt", 3.0f, "Normal")
     ),
     "Sheet Pan Apple Crisp",
     12,
@@ -1667,17 +1761,18 @@ val snacks = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 5.487767f, "g", "5.5", null, false)
     )
 }, Recipe(
+    16875,
     listOf(
-        Ingredient("2216", "2 cups vanilla wafer crumbs", 360.0f, "Normal"),
-        Ingredient("5015", "3 bananas, sliced into 1/4 inch slices", 354.0f, "Normal"),
-        Ingredient("1526", "1 1/2 cups white sugar", 300.0f, "Normal"),
-        Ingredient("1684", "1/4 cup all-purpose flour", 31.25f, "Normal"),
-        Ingredient("16278", "2 cups milk", 488.0f, "Normal"),
-        Ingredient("16319", "3 egg yolks", 49.800003f, "Normal"),
-        Ingredient("16157", "2 teaspoons butter", 10.0f, "Normal"),
-        Ingredient("16424", "2 teaspoons vanilla extract", 8.666667f, "Normal"),
-        Ingredient("16318", "3 egg whites", 100.200005f, "Normal"),
-        Ingredient("1526", "1/4 cup white sugar", 50.0f, "Normal")
+        Ingredient(2216, "2 cups vanilla wafer crumbs", 360.0f, "Normal"),
+        Ingredient(5015, "3 bananas, sliced into 1/4 inch slices", 354.0f, "Normal"),
+        Ingredient(1526, "1 1/2 cups white sugar", 300.0f, "Normal"),
+        Ingredient(1684, "1/4 cup all-purpose flour", 31.25f, "Normal"),
+        Ingredient(16278, "2 cups milk", 488.0f, "Normal"),
+        Ingredient(16319, "3 egg yolks", 49.800003f, "Normal"),
+        Ingredient(16157, "2 teaspoons butter", 10.0f, "Normal"),
+        Ingredient(16424, "2 teaspoons vanilla extract", 8.666667f, "Normal"),
+        Ingredient(16318, "3 egg whites", 100.200005f, "Normal"),
+        Ingredient(1526, "1/4 cup white sugar", 50.0f, "Normal")
     ),
     "Homemade Banana Pudding Pie",
     8,

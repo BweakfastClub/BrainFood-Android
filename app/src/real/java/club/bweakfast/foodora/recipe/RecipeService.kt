@@ -10,9 +10,9 @@ import javax.inject.Inject
 class RecipeService @Inject constructor(retrofit: Retrofit) {
     private val api = retrofit.create(RecipeAPI::class.java)
 
-    fun likeRecipe(recipeID: String) = api.likeRecipe(mapOf("recipeId" to recipeID))
+    fun likeRecipe(recipeID: Int) = api.likeRecipe(mapOf("recipeId" to recipeID.toString()))
 
-    fun unlikeRecipe(recipeID: String) = api.unlikeRecipe(mapOf("recipeId" to recipeID))
+    fun unlikeRecipe(recipeID: Int) = api.unlikeRecipe(mapOf("recipeId" to recipeID.toString()))
 
     interface RecipeAPI {
         @POST("/users/likes_recipe")
