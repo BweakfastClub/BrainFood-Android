@@ -7,12 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import club.bweakfast.foodora.ErrorDisplay
-import club.bweakfast.foodora.Irrelevant
-import club.bweakfast.foodora.R
-import club.bweakfast.foodora.Validator
-import club.bweakfast.foodora.addValidation
-import club.bweakfast.foodora.validate
+import club.bweakfast.foodora.*
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -37,14 +32,12 @@ class LoginFragment : Fragment(), ErrorDisplay {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val loginButton = loginButton
-        val registerButton = registerButton
         inputValidators = mapOf(
             emailInputLayout to listOf(Validator.empty()),
             passwordInputLayout to listOf(Validator.empty(), Validator.passwordValid())
         )
 
-        passwordInputLayout?.editText?.setOnEditorActionListener { _, id, _ ->
+        passwordInputLayout.editText?.setOnEditorActionListener { _, id, _ ->
             if (id == R.integer.action_login_id || id == EditorInfo.IME_ACTION_UNSPECIFIED) {
                 attemptLogin()
                 return@setOnEditorActionListener true
@@ -52,8 +45,8 @@ class LoginFragment : Fragment(), ErrorDisplay {
                 false
             }
         }
-        loginButton?.setOnClickListener { attemptLogin() }
-        registerButton?.setOnClickListener { loadRegisterPage.onNext(Irrelevant.INSTANCE) }
+        loginButton.setOnClickListener { attemptLogin() }
+        registerButton.setOnClickListener { loadRegisterPage.onNext(Irrelevant.INSTANCE) }
         inputValidators.forEach { (inputLayout, validators) ->
             validators.forEach {
                 inputLayout.addValidation(it.validate, it.errorMessage)
@@ -77,8 +70,8 @@ class LoginFragment : Fragment(), ErrorDisplay {
         if (focusView != null) {
             focusView.requestFocus()
         } else {
-            val email = emailInputLayout?.editText?.text.toString()
-            val password = passwordInputLayout?.editText?.text.toString()
+            val email = emailInputLayout.editText?.text.toString()
+            val password = passwordInputLayout.editText?.text.toString()
             login.onNext(email to password)
         }
     }
