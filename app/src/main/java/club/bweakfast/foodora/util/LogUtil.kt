@@ -1,7 +1,8 @@
-package club.bweakfast.foodora
+package club.bweakfast.foodora.util
 
 import android.content.Context
 import android.util.Log
+import club.bweakfast.foodora.R
 
 /**
  * Created by silve on 3/26/2018.

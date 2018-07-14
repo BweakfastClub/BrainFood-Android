@@ -1,4 +1,4 @@
-package club.bweakfast.foodora
+package club.bweakfast.foodora.util
 
 import android.view.View
 import android.widget.ProgressBar

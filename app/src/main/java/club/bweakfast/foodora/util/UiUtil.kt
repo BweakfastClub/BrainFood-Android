@@ -1,4 +1,4 @@
-package club.bweakfast.foodora
+package club.bweakfast.foodora.util
 
 import android.content.Context
 import android.support.annotation.StringRes
@@ -9,6 +9,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.Toast
+import club.bweakfast.foodora.R
 import io.reactivex.Observable
 
 /**
@@ -52,7 +53,7 @@ fun Context.longToast(@StringRes resId: Int) = longToast(getString(resId))
 
 fun Context.longToast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 
-open class TextListener: TextWatcher {
+open class TextListener : TextWatcher {
     override fun afterTextChanged(s: Editable) {}
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, end: Int, count: Int) {}

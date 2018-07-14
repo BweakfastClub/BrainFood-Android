@@ -1,4 +1,4 @@
-package club.bweakfast.foodora.network
+package club.bweakfast.foodora.util
 
 import android.util.Log
 import club.bweakfast.foodora.BuildConfig
