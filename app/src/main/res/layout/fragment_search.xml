@@ -11,13 +11,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/prompt_search"
-        android:inputType="textAutoCorrect"
-        app:layout_constraintTop_toBottomOf="parent" />
+        android:inputType="textAutoCorrect" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/resultsList"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
