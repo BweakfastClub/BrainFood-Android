@@ -7,7 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import club.bweakfast.foodora.*
+import club.bweakfast.foodora.ErrorDisplay
+import club.bweakfast.foodora.Irrelevant
+import club.bweakfast.foodora.R
+import club.bweakfast.foodora.Validator
+import club.bweakfast.foodora.addValidation
+import club.bweakfast.foodora.validate
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_login.*
 

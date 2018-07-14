@@ -2,7 +2,7 @@ package club.bweakfast.foodora.user
 
 import club.bweakfast.foodora.StorageService
 import club.bweakfast.foodora.auth.AuthenticationService
-import club.bweakfast.foodora.network.mapResponse
+import club.bweakfast.foodora.util.mapResponse
 import io.reactivex.Completable
 import javax.inject.Inject
 

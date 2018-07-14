@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.browse.RecipesAdapter
-import club.bweakfast.foodora.listenForChanges
-import club.bweakfast.foodora.onError
+import club.bweakfast.foodora.util.listenForChanges
+import club.bweakfast.foodora.util.onError
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

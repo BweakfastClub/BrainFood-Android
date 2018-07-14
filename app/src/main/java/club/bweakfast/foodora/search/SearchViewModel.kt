@@ -1,7 +1,7 @@
 package club.bweakfast.foodora.search
 
-import club.bweakfast.foodora.network.mapResponse
 import club.bweakfast.foodora.recipe.Recipe
+import club.bweakfast.foodora.util.mapResponse
 import io.reactivex.Single
 import javax.inject.Inject
 

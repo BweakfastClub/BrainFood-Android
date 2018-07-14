@@ -4,21 +4,19 @@ package club.bweakfast.foodora.browse
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.browse.category.CategoryAdapter
 import club.bweakfast.foodora.browse.category.CategoryName
-import club.bweakfast.foodora.onError
-import club.bweakfast.foodora.showFragment
+import club.bweakfast.foodora.util.onError
+import club.bweakfast.foodora.util.showFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_browse.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
 
 
 /**

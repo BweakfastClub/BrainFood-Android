@@ -7,5 +7,5 @@ import android.support.annotation.DrawableRes
  */
 
 class Category(val name: CategoryName, val imageURL: String) {
-    constructor(name: CategoryName, @DrawableRes imageID: Int): this(name, "res:/$imageID")
+    constructor(name: CategoryName, @DrawableRes imageID: Int) : this(name, "res:/$imageID")
 }

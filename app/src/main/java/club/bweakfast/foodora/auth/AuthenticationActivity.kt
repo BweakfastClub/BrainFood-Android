@@ -12,11 +12,11 @@ import android.widget.Toast
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.MainActivity
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.network.parseError
-import club.bweakfast.foodora.onError
-import club.bweakfast.foodora.showFragment
-import club.bweakfast.foodora.showProgress
 import club.bweakfast.foodora.user.UserViewModel
+import club.bweakfast.foodora.util.onError
+import club.bweakfast.foodora.util.parseError
+import club.bweakfast.foodora.util.showFragment
+import club.bweakfast.foodora.util.showProgress
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
