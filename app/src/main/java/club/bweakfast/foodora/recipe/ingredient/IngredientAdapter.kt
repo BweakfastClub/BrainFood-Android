@@ -1,4 +1,4 @@
-package club.bweakfast.foodora.recipe
+package club.bweakfast.foodora.recipe.ingredient
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ class IngredientAdapter(private val ingredients: List<Ingredient>) :
             parent,
             false
         )
-        
+
         return if (viewType == R.layout.item_ingredient) {
             IngredientViewHolder(view)
         } else {
