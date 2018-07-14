@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import club.bweakfast.foodora.browse.BrowseFragment
 import club.bweakfast.foodora.search.SearchFragment
+import club.bweakfast.foodora.util.showFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

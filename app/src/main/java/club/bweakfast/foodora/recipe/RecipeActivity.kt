@@ -9,7 +9,8 @@ import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.TwoLineText
-import club.bweakfast.foodora.onError
+import club.bweakfast.foodora.recipe.ingredient.IngredientAdapter
+import club.bweakfast.foodora.util.onError
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -42,7 +43,7 @@ class RecipeActivity : AppCompatActivity() {
         FoodoraApp.daggerComponent.inject(this)
 
         val recipe = intent.getParcelableExtra<Recipe>(Intents.INTENT_RECIPE_ACTIVITY)
-        fab.setOnClickListener({ clickOnFAB(recipe, it) })
+        fab.setOnClickListener { clickOnFAB(recipe, it) }
 
         init(recipe)
     }
@@ -56,9 +57,9 @@ class RecipeActivity : AppCompatActivity() {
         loading = true
         with(recipe) {
             val completable = if (isFavourite) {
-                recipeViewModel.likeRecipe(id)
+                recipeViewModel.unlikeRecipe(this)
             } else {
-                recipeViewModel.unlikeRecipe(id)
+                recipeViewModel.likeRecipe(this)
             }
             subscriptions.add(
                 completable
@@ -66,10 +67,10 @@ class RecipeActivity : AppCompatActivity() {
                     .subscribeOn(Schedulers.io())
                     .subscribe({
                         setFABIcon(isFavourite)
-                        val snackbarText = if (!isFavourite) {
-                            "Added to favourites"
-                        } else {
+                        val snackbarText = if (isFavourite) {
                             "Removed from favourites"
+                        } else {
+                            "Added to favourites"
                         }
                         Snackbar.make(view, snackbarText, Snackbar.LENGTH_LONG).show()
                         isFavourite = !isFavourite

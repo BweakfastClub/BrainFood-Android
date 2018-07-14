@@ -2,8 +2,12 @@ package club.bweakfast.foodora.di.module
 
 import android.content.Context
 import club.bweakfast.foodora.BuildConfig
+import club.bweakfast.foodora.FoodoraDB
 import club.bweakfast.foodora.StorageService
-import club.bweakfast.foodora.auth.AuthenticationService
+import club.bweakfast.foodora.favourite.FavouriteDao
+import club.bweakfast.foodora.favourite.FavouriteDaoImpl
+import club.bweakfast.foodora.recipe.RecipeDao
+import club.bweakfast.foodora.recipe.RecipeDaoImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -42,4 +46,13 @@ class FoodoraModule(private val context: Context) {
 
     @Provides
     fun provideContext() = context
+
+    @Provides
+    fun provideDB(context: Context) = FoodoraDB(context)
+
+    @Provides
+    fun provideFavouriteDao(db: FoodoraDB): FavouriteDao = FavouriteDaoImpl(db)
+
+    @Provides
+    fun provideRecipeDao(db: FoodoraDB): RecipeDao = RecipeDaoImpl(db)
 }
