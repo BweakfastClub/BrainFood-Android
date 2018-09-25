@@ -15,4 +15,5 @@
     <color name="transparent">#00000000</color>
     <color name="black">#000000</color>
     <color name="darkerGray">#AAA</color>
+    <color name="titleBackground">#F3F3F3</color>
 </resources>

@@ -47,4 +47,7 @@
     <string name="more_nutritional_info">More nutritional info…</string>
     <string name="header_ingredients">Ingredients</string>
     <string name="ingredient_template">\u2022\t %1$s</string>
+    <string name="title_top_picks">Top Picks</string>
+    <string name="title_recommended_breakfast">Recommended Breakfasts</string>
+    <string name="title_recommended_lunches">Recommended Lunches</string>
 </resources>

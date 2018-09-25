@@ -1,5 +1,6 @@
 package club.bweakfast.foodora
 
+import club.bweakfast.foodora.browse.category.CategoryName
 import club.bweakfast.foodora.recipe.Recipe
 import club.bweakfast.foodora.recipe.ingredient.Ingredient
 import club.bweakfast.foodora.recipe.nutrition.NutritionValue
@@ -1804,3 +1805,24 @@ val snacks = listOf(Recipe(
         "fiber" to NutritionValue("Dietary Fiber", 2.155969f, "g", "2.2", null, false)
     )
 })
+
+private val categoryMapping = mapOf(
+    CategoryName.Breakfast to breakfastRecipes,
+    CategoryName.Lunch to lunchRecipes,
+    CategoryName.Dinner to dinnerRecipes,
+    CategoryName.Snacks to snacks
+)
+
+fun getRandomRecipes(count: Int = 10, categories: List<CategoryName> = emptyList()) : List<Recipe> {
+    val recipeCategories = if (categories.isEmpty()) categoryMapping.keys.toList() else categories
+    val categoryCount = categoryMapping
+        .map { (category, _) -> category to count / recipeCategories.size }
+        .associate { it }
+    val missingCount = count - categoryCount.asIterable().sumBy { it.value }
+
+    return categoryCount
+        .asIterable()
+        .mapIndexed { index, (category, count) -> category to if (index < missingCount) count + 1 else count }
+        .flatMap { (category, count) -> categoryMapping.getValue(category).shuffled().take(count) }
+        .shuffled()
+}

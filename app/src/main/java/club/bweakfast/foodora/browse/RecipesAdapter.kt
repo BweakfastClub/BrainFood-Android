@@ -3,10 +3,12 @@ package club.bweakfast.foodora.browse
 import android.content.Intent
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
@@ -18,15 +20,16 @@ import com.facebook.drawee.view.SimpleDraweeView
  * Created by silve on 3/20/2018.
  */
 
-class RecipesAdapter(recipes: List<Recipe>) :
+class RecipesAdapter(recipes: List<Recipe>, private val itemHasMatchParent: Boolean = false) :
     ListAdapter<Recipe, RecipesAdapter.RecipeViewHolder>(diffCallback) {
-
     init {
         submitList(recipes)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recipe, parent, false)
+        if (itemHasMatchParent) view.layoutParams.width = FrameLayout.LayoutParams.MATCH_PARENT
+
         return RecipeViewHolder(view)
     }
 
