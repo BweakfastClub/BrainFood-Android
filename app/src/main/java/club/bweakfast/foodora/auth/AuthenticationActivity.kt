@@ -16,6 +16,7 @@ import club.bweakfast.foodora.user.UserViewModel
 import club.bweakfast.foodora.util.onError
 import club.bweakfast.foodora.util.parseError
 import club.bweakfast.foodora.util.showFragment
+import club.bweakfast.foodora.util.showLightStatusBar
 import club.bweakfast.foodora.util.showProgress
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -53,12 +54,7 @@ class AuthenticationActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = Color.TRANSPARENT
         }
-
-        supportFragmentManager.addOnBackStackChangedListener {
-            if (supportFragmentManager.backStackEntryCount == 0) {
-                loadLoginBackground()
-            }
-        }
+        showLightStatusBar(window.decorView, true)
 
         if (authService.isLoggedIn) {
             onLoginSuccess()
@@ -135,8 +131,6 @@ class AuthenticationActivity : AppCompatActivity() {
         } else {
             supportFragmentManager.popBackStack()
         }
-
-        loadLoginBackground()
     }
 
     private fun loadRegisterPage() {
@@ -155,17 +149,6 @@ class AuthenticationActivity : AppCompatActivity() {
                 .subscribe({ loadLoginPage() }, ::handleError)
         )
         showFragment(fragment, "Register", setAnimations = this::showFragmentAnimations)
-        loadRegisterBackground()
-    }
-
-    private fun loadLoginBackground() {
-        val backgroundURI = "res:/${R.drawable.bg_login}"
-        background.setImageURI(Uri.parse(backgroundURI))
-    }
-
-    private fun loadRegisterBackground() {
-        val backgroundURI = "res:/${R.drawable.bg_register}"
-        background.setImageURI(Uri.parse(backgroundURI))
     }
 
     private fun showFragmentAnimations(transaction: FragmentTransaction) {

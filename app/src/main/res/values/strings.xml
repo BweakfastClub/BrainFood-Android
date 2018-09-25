@@ -1,12 +1,15 @@
 <resources>
-    <string name="app_name">Foodora</string>
+    <string name="app_name">BrainFood</string>
 
-    <!-- Strings related to login -->
+    <!-- Strings related to authentication -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_name">Name</string>
-    <string name="action_login">Log in</string>
+    <string name="action_login">Login</string>
     <string name="action_register">Register</string>
+    <string name="action_forgot_password">Forgot Password?</string>
+    <string name="question_login">Already have an account? Login!</string>
+    <string name="question_register">Don\'t have an account? Sign up!</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>

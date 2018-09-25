@@ -3,6 +3,10 @@ package club.bweakfast.foodora.auth
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,6 +68,16 @@ class RegisterFragment : Fragment(), ErrorDisplay {
                 inputLayout.addValidation(it.validate, it.errorMessage)
             }
         }
+
+        val loginText = loginButton.text
+        val colorSpan = SpannableString(loginText)
+        colorSpan.setSpan(
+            ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.colorAccent)),
+            loginText.indexOf("Login!"),
+            loginText.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        loginButton.text = colorSpan
     }
 
     override fun showError(error: String?) {

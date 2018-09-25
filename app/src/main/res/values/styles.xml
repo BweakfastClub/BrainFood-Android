@@ -1,10 +1,11 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/black</item>
     </style>
 
     <style name="PicturesTheme" parent="AppTheme">
@@ -12,36 +13,37 @@
         <item name="colorPrimaryDark">@color/toolbarBlackDark</item>
     </style>
 
-    <style name="LoginTheme" parent="AppTheme">
-        <item name="colorAccent">@color/loginAccent</item>
-    </style>
-
-    <style name="RegisterTheme" parent="AppTheme">
-        <item name="colorAccent">@color/registerAccent</item>
-    </style>
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.LoginButton" parent="Base.Widget.AppCompat.Button">
-        <item name="colorButtonNormal">@color/loginButton</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="AppTheme.RegisterButton" parent="Base.Widget.AppCompat.Button">
-        <item name="colorButtonNormal">@color/registerButton</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="AppTheme.SetupButton" parent="Base.Widget.AppCompat.Button">
-        <item name="colorButtonNormal">@color/setupButton</item>
-        <item name="android:textColor">@color/white</item>
+    <style name="EditTextHint">
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlHighlight">@color/black</item>
+    </style>
 
+    <style name="AuthFormElement">
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <style name="ColoredElement">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="EditTextHint">

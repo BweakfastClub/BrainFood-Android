@@ -45,6 +45,17 @@ fun EditText.listenForChanges(): Observable<String> {
     }
 }
 
+fun showLightStatusBar(decorView: View, show: Boolean) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (show) decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        else decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+    }
+}
+
+fun Int.toDP(context: Context) = this.toFloat().toDP(context).toInt()
+
+fun Float.toDP(context: Context) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, context.resources.displayMetrics)
+
 fun Context.toast(@StringRes resId: Int) = toast(getString(resId))
 
 fun Context.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
