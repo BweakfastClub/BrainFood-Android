@@ -37,6 +37,11 @@
     <string name="error_login_session_invalid">Your login session is no longer valid. Please log in again!</string>
     <string name="error_login_invalid">Invalid username/password combination</string>
 
+    <!-- Strings related to toolbar -->
+    <string name="description_profile">Profile</string>
+    <string name="description_settings">Settings</string>
+    <string name="message_not_logged_in">Doesn\'t seem like you\'re logged in…</string>
+
     <string name="prompt_search">Search for recipes…</string>
 
     <string name="more_nutritional_info">More nutritional info…</string>
