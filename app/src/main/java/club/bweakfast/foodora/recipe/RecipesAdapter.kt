@@ -1,9 +1,8 @@
-package club.bweakfast.foodora.browse
+package club.bweakfast.foodora.recipe
 
 import android.content.Intent
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
-import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,6 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.recipe.Recipe
-import club.bweakfast.foodora.recipe.RecipeActivity
 import com.facebook.drawee.view.SimpleDraweeView
 
 /**

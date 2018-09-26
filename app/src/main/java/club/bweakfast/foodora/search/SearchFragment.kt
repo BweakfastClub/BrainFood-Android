@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.browse.RecipesAdapter
+import club.bweakfast.foodora.recipe.RecipesAdapter
 import club.bweakfast.foodora.util.onError
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
