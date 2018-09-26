@@ -5,7 +5,7 @@
         <attr name="text2" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="RecipeListView">
+    <declare-styleable name="SectionTitleLayout">
         <attr name="title" format="string" />
     </declare-styleable>
 </resources>

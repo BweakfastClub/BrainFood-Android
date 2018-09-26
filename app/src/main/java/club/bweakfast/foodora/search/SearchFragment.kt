@@ -15,7 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.view_recipe_list.view.*
+import kotlinx.android.synthetic.main.view_section_title.view.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

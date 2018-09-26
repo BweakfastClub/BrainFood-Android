@@ -13,7 +13,7 @@ import club.bweakfast.foodora.recipe.RecipesAdapter
 import club.bweakfast.foodora.browse.category.CategoryName
 import club.bweakfast.foodora.getRandomRecipes
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.view_recipe_list.view.*
+import kotlinx.android.synthetic.main.view_section_title.view.*
 
 /**
  * A simple [Fragment] subclass.

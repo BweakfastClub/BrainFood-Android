@@ -1,21 +1,20 @@
 package club.bweakfast.foodora.custom
 
 import android.content.Context
+import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.core.content.res.use
 import club.bweakfast.foodora.R
-import kotlinx.android.synthetic.main.view_recipe_list.view.*
+import kotlinx.android.synthetic.main.view_section_title.view.*
 
 /**
  * TODO: document your custom view class.
  */
-class RecipeListView : LinearLayout {
-    var title: String = ""
-        set(value) {
-            titleTxt.text = value
-        }
+class RecipeListView : SectionTitleLayout {
+    lateinit var recyclerView: RecyclerView
+        private set
 
     constructor(context: Context) : super(context) {
         init(null, 0)
@@ -29,14 +28,10 @@ class RecipeListView : LinearLayout {
         init(attrs, defStyle)
     }
 
-    private fun init(attrs: AttributeSet?, defStyle: Int) {
-        LayoutInflater.from(context).inflate(R.layout.view_recipe_list, this, true)
+    override fun init(attrs: AttributeSet?, defStyle: Int) {
+        super.init(attrs, defStyle)
 
-        // Load attributes
-        context.obtainStyledAttributes(attrs, R.styleable.RecipeListView, defStyle, 0).use {
-            title = it.getString(R.styleable.RecipeListView_title)
-        }
-
-        orientation = LinearLayout.VERTICAL
+        recyclerView = RecyclerView(context)
+        addView(recyclerView)
     }
 }
