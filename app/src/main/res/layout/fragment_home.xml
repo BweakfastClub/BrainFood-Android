@@ -9,19 +9,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <club.bweakfast.foodora.recipe.RecipeListView
+        <club.bweakfast.foodora.custom.RecipeListView
             android:id="@+id/topBreakfastList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="@string/title_recommended_breakfast" />
 
-        <club.bweakfast.foodora.recipe.RecipeListView
+        <club.bweakfast.foodora.custom.RecipeListView
             android:id="@+id/topLunchList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="@string/title_recommended_lunches" />
 
-        <club.bweakfast.foodora.recipe.RecipeListView
+        <club.bweakfast.foodora.custom.RecipeListView
             android:id="@+id/topRecipesGrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

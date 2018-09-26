@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="club.bweakfast.foodora.search.SearchFragment">
 
-    <club.bweakfast.foodora.recipe.RecipeListView
+    <club.bweakfast.foodora.custom.RecipeListView
         android:id="@+id/resultsList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

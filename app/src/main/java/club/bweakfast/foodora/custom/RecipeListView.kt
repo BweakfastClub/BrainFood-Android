@@ -1,4 +1,4 @@
-package club.bweakfast.foodora.recipe
+package club.bweakfast.foodora.custom
 
 import android.content.Context
 import android.util.AttributeSet

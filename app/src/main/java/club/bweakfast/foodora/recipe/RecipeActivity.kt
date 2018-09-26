@@ -13,8 +13,7 @@ import android.view.MenuItem
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.TwoLineText
-import club.bweakfast.foodora.getRandomRecipes
+import club.bweakfast.foodora.custom.TwoLineText
 import club.bweakfast.foodora.recipe.ingredient.IngredientAdapter
 import club.bweakfast.foodora.util.log
 import club.bweakfast.foodora.util.onError
