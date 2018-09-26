@@ -12,26 +12,14 @@ import kotlinx.android.synthetic.main.view_section_title.view.*
 /**
  * TODO: document your custom view class.
  */
-class RecipeListView : SectionTitleLayout {
-    lateinit var recyclerView: RecyclerView
-        private set
+class RecipeListView(context: Context, attrs: AttributeSet?, defStyle: Int) : SectionTitleLayout(context, attrs, defStyle) {
+    val recyclerView = RecyclerView(context)
 
-    constructor(context: Context) : super(context) {
-        init(null, 0)
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(attrs, 0)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
-        init(attrs, defStyle)
-    }
-
-    override fun init(attrs: AttributeSet?, defStyle: Int) {
-        super.init(attrs, defStyle)
-
-        recyclerView = RecyclerView(context)
+    init {
         addView(recyclerView)
     }
+
+    constructor(context: Context) : this(context, null, 0)
+
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 }

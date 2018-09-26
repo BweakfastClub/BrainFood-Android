@@ -9,20 +9,14 @@ import androidx.core.content.res.use
 import club.bweakfast.foodora.R
 import kotlinx.android.synthetic.main.view_section_title.view.*
 
-open class SectionTitleLayout : LinearLayout {
-    lateinit var titleTxt: TextView
+open class SectionTitleLayout(context: Context, attrs: AttributeSet?, defStyle: Int) : LinearLayout(context, attrs, defStyle) {
+    var titleTxt: TextView
     var title: String = ""
         set(value) {
             titleTxt.text = value
         }
 
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle)
-
-    protected open fun init(attrs: AttributeSet?, defStyle: Int) {
+    init {
         val sectionTitleLayout = LayoutInflater.from(context).inflate(R.layout.view_section_title, this, false)
         titleTxt = sectionTitleLayout.titleTxt
 
@@ -34,4 +28,8 @@ open class SectionTitleLayout : LinearLayout {
         orientation = LinearLayout.VERTICAL
         addView(sectionTitleLayout)
     }
+
+    constructor(context: Context) : this(context, null, 0)
+
+    constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 }
