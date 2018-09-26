@@ -5,7 +5,8 @@
     android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="32dp"
+    android:clipToPadding="false"
+    android:paddingTop="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_recipe">
 
@@ -18,9 +19,9 @@
             android:id="@+id/nutritionInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             android:baselineAligned="false"
             android:orientation="horizontal">
 
@@ -75,15 +76,18 @@
             style="@style/Base.TextAppearance.AppCompat.Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/header_ingredients" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/ingredientList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:clipToPadding="false"
+            android:paddingBottom="64dp"
+            tools:listitem="@layout/item_ingredient" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

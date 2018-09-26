@@ -24,16 +24,13 @@ class IngredientAdapter(private val ingredients: List<Ingredient>) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val ingredient = ingredients[position]
-
-        if (holder is IngredientViewHolder) {
-            val text = if (ingredient.name.isNotBlank()) holder.itemView.context.getString(
-                R.string.ingredient_template,
-                ingredient.name
-            ) else ""
-            holder.ingredientText.text = text
-        } else if (holder is IngredientHeaderViewHolder) {
-            holder.ingredientHeader.text = ingredient.name
+        val ingredientText = when (holder) {
+            is IngredientViewHolder -> holder.ingredientText
+            is IngredientHeaderViewHolder -> holder.ingredientHeader
+            else -> throw IllegalArgumentException("Invalid holder")
         }
+
+        ingredientText.text = ingredient.name
     }
 
     override fun getItemViewType(position: Int): Int {

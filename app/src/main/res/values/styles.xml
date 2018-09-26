@@ -8,11 +8,6 @@
         <item name="android:textColorPrimary">@color/black</item>
     </style>
 
-    <style name="PicturesTheme" parent="AppTheme">
-        <item name="colorPrimary">@color/toolbarBlack</item>
-        <item name="colorPrimaryDark">@color/toolbarBlackDark</item>
-    </style>
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
     </style>

@@ -1,16 +1,25 @@
 package club.bweakfast.foodora.recipe
 
+import android.graphics.PorterDuff
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.View
+import android.view.Menu
+import android.view.MenuItem
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.TwoLineText
+import club.bweakfast.foodora.getRandomRecipes
 import club.bweakfast.foodora.recipe.ingredient.IngredientAdapter
+import club.bweakfast.foodora.util.log
 import club.bweakfast.foodora.util.onError
+import club.bweakfast.foodora.util.showDarkStatusIcons
+import club.bweakfast.foodora.util.toDP
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -20,16 +29,9 @@ import kotlinx.android.synthetic.main.layout_two_line.view.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class RecipeActivity : AppCompatActivity() {
+class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener {
     private val subscriptions = CompositeDisposable()
-    private var loading = false
-        set(value) {
-            if (value) {
-                fabProgressCircle.show()
-            } else {
-                fabProgressCircle.hide()
-            }
-        }
+    private lateinit var recipe: Recipe
 
     @Inject
     lateinit var recipeViewModel: RecipeViewModel
@@ -39,13 +41,40 @@ class RecipeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_recipe)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbarLayout.setCollapsedTitleTextColor(ContextCompat.getColor(this, R.color.black))
+        toolbarLayout.setExpandedTitleColor(ContextCompat.getColor(this, R.color.white))
+        ViewCompat.setElevation(fab, 6f.toDP(this))
 
         FoodoraApp.daggerComponent.inject(this)
 
-        val recipe = intent.getParcelableExtra<Recipe>(Intents.INTENT_RECIPE_ACTIVITY)
-        fab.setOnClickListener { clickOnFAB(recipe, it) }
+        recipe = intent.getParcelableExtra(Intents.INTENT_RECIPE_ACTIVITY)
 
         init(recipe)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_recipe, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_like -> {
+                clickOnLikeItem(recipe, item)
+                true
+            }
+            else -> false
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        appBar.addOnOffsetChangedListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        appBar.removeOnOffsetChangedListener(this)
     }
 
     override fun onDestroy() {
@@ -53,31 +82,38 @@ class RecipeActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun clickOnFAB(recipe: Recipe, view: View) {
-        loading = true
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        log("Vertical offset: $verticalOffset")
+
+        val isCollapsed = verticalOffset < -119
+        showDarkStatusIcons(window.decorView, isCollapsed)
+
+        val iconColor = ContextCompat.getColor(
+            this,
+            if (isCollapsed) R.color.materialGray else R.color.white
+        )
+        toolbar.navigationIcon!!.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP)
+        toolbar.menu.findItem(R.id.menu_like)?.icon?.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP)
+    }
+
+    private fun clickOnLikeItem(recipe: Recipe, menuItem: MenuItem) {
         with(recipe) {
             val completable = if (isFavourite) {
                 recipeViewModel.unlikeRecipe(this)
             } else {
                 recipeViewModel.likeRecipe(this)
             }
+            setLikeIcon(isFavourite, menuItem)
             subscriptions.add(
                 completable
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe({
-                        setFABIcon(isFavourite)
-                        val snackbarText = if (isFavourite) {
-                            "Removed from favourites"
-                        } else {
-                            "Added to favourites"
-                        }
-                        Snackbar.make(view, snackbarText, Snackbar.LENGTH_LONG).show()
+                        val snackbarText = if (isFavourite) "Removed from favourites" else "Added to favourites"
+                        Snackbar.make(rootLayout, snackbarText, Snackbar.LENGTH_LONG).show()
                         isFavourite = !isFavourite
-                        loading = false
                     }, {
                         onError(it, this@RecipeActivity)
-                        loading = false
                     })
             )
         }
@@ -110,12 +146,9 @@ class RecipeActivity : AppCompatActivity() {
         nestedScrollView.requestFocus()
     }
 
-    private fun setFABIcon(isFavourite: Boolean) {
-        if (!isFavourite) {
-            fab.setImageResource(R.drawable.ic_heart)
-        } else {
-            fab.setImageResource(R.drawable.ic_heart_outline)
-        }
+    private fun setLikeIcon(isFavourite: Boolean, menuItem: MenuItem) {
+        val iconResource = if (isFavourite) R.drawable.ic_heart_outline else R.drawable.ic_heart
+        menuItem.icon = ContextCompat.getDrawable(this, iconResource)
     }
 
     private inner class NutritionView(val key: String, val layoutID: Int, val useUnit: Boolean = true) {
