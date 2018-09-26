@@ -1,6 +1,5 @@
 package club.bweakfast.foodora.search
 
-
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -10,15 +9,15 @@ import android.view.ViewGroup
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.browse.RecipesAdapter
-import club.bweakfast.foodora.util.listenForChanges
 import club.bweakfast.foodora.util.onError
+import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.view_recipe_list.view.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-
 
 /**
  * A simple [Fragment] subclass.
@@ -32,6 +31,7 @@ class SearchFragment : Fragment() {
     @Suppress("MemberVisibilityCanBePrivate")
     @Inject
     lateinit var searchViewModel: SearchViewModel
+    lateinit var searchListener: Flowable<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,21 +51,20 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        resultsList.layoutManager = LinearLayoutManager(requireContext())
+        resultsList.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         subscriptions.add(
-            searchBox.listenForChanges()
-                .subscribeOn(Schedulers.trampoline())
+            searchListener
+                .subscribeOn(Schedulers.io())
                 .debounce(250, TimeUnit.MILLISECONDS)
                 .flatMapSingle { searchViewModel.search(it) }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
                 .subscribe({
                     if (adapter == null)
-                        adapter = RecipesAdapter(it)
+                        adapter = RecipesAdapter(it, true)
                     else
                         adapter!!.submitList(it)
 
-                    resultsList.adapter = adapter
+                    resultsList.recyclerView.adapter = adapter
                 }, ::handleError)
         )
     }
