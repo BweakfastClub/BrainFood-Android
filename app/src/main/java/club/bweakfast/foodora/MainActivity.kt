@@ -19,7 +19,8 @@ class MainActivity : CustomToolbarActivity() {
                 R.id.tab_home -> {
                     showFragment(HomeFragment.newInstance())
                     showSearchBox(false)
-                    message = "Good morning! In the mood for some new breakfast ideas?"
+                    message = getString(R.string.message_home)
+                    title = getString(R.string.app_name)
                 }
                 R.id.tab_search -> {
                     val fragment = SearchFragment.newInstance()
