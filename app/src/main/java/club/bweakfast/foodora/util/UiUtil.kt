@@ -45,7 +45,7 @@ fun EditText.listenForChanges(): Observable<String> {
     }
 }
 
-fun showLightStatusBar(decorView: View, show: Boolean) {
+fun showDarkStatusIcons(decorView: View, show: Boolean) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         if (show) decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         else decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE

@@ -2,7 +2,6 @@ package club.bweakfast.foodora.auth
 
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.FragmentTransaction
@@ -16,7 +15,7 @@ import club.bweakfast.foodora.user.UserViewModel
 import club.bweakfast.foodora.util.onError
 import club.bweakfast.foodora.util.parseError
 import club.bweakfast.foodora.util.showFragment
-import club.bweakfast.foodora.util.showLightStatusBar
+import club.bweakfast.foodora.util.showDarkStatusIcons
 import club.bweakfast.foodora.util.showProgress
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -54,7 +53,7 @@ class AuthenticationActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = Color.TRANSPARENT
         }
-        showLightStatusBar(window.decorView, true)
+        showDarkStatusIcons(window.decorView, true)
 
         if (authService.isLoggedIn) {
             onLoginSuccess()
