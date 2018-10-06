@@ -13,7 +13,7 @@ import android.view.MenuItem
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.custom.TwoLineText
+import club.bweakfast.foodora.custom.NutritionInfoLayout
 import club.bweakfast.foodora.recipe.ingredient.IngredientAdapter
 import club.bweakfast.foodora.util.log
 import club.bweakfast.foodora.util.onError
@@ -24,9 +24,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_recipe.*
 import kotlinx.android.synthetic.main.content_recipe.*
-import kotlinx.android.synthetic.main.layout_two_line.view.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
+import kotlin.reflect.KMutableProperty1
 
 class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener {
     private val subscriptions = CompositeDisposable()
@@ -120,20 +120,19 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
 
     private fun init(recipe: Recipe) {
         val nutritionKeys = listOf(
-            NutritionView("calories", R.id.calories, false),
-            NutritionView("protein", R.id.protein),
-            NutritionView("fat", R.id.fat),
-            NutritionView("carbohydrates", R.id.carbs)
+            NutritionView("calories", NutritionInfoLayout::nutritionInfo1, useUnit = false),
+            NutritionView("protein", NutritionInfoLayout::nutritionInfo2),
+            NutritionView("fat", NutritionInfoLayout::nutritionInfo3, "Total Fat"),
+            NutritionView("carbohydrates", NutritionInfoLayout::nutritionInfo4, "Total Carbs")
         )
-        nutritionKeys.forEach { (key, layoutID, useUnit) ->
-            val twoLineText = findViewById<TwoLineText>(layoutID)
-            twoLineText.apply {
+        val nutritionLayout = findViewById<NutritionInfoLayout>(R.id.nutritionInfoLayout)
+        nutritionKeys.forEach { (key, nutritionInfo, title, useUnit) ->
+            nutritionLayout.apply {
                 val nutritionValue = recipe.nutrition[key]!!
                 val unit = if (useUnit) nutritionValue.unit else ""
                 val amount = "${nutritionValue.amount.roundToInt()}$unit"
 
-                text1.text = amount
-                text2.text = key.toUpperCase()
+                nutritionInfo.set(nutritionLayout, amount to title)
             }
         }
 
@@ -150,11 +149,18 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
         menuItem.icon = ContextCompat.getDrawable(this, iconResource)
     }
 
-    private inner class NutritionView(val key: String, val layoutID: Int, val useUnit: Boolean = true) {
+    private inner class NutritionView(
+        val key: String,
+        val layoutID: KMutableProperty1<NutritionInfoLayout, Pair<String, String>?>,
+        val title: String = key.capitalize(),
+        val useUnit: Boolean = true
+    ) {
         operator fun component1() = key
 
         operator fun component2() = layoutID
 
-        operator fun component3() = useUnit
+        operator fun component3() = title
+
+        operator fun component4() = useUnit
     }
 }

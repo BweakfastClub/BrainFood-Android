@@ -16,6 +16,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+        <club.bweakfast.foodora.custom.NutritionInfoLayout
             android:id="@+id/nutritionInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,46 +26,6 @@
             android:baselineAligned="false"
             android:orientation="horizontal">
 
-            <club.bweakfast.foodora.custom.TwoLineText
-                android:id="@+id/calories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text1="234"
-                tools:text2="CALORIES" />
-
-            <club.bweakfast.foodora.custom.TwoLineText
-                android:id="@+id/protein"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text1="40g"
-                tools:text2="PROTEIN" />
-
-            <club.bweakfast.foodora.custom.TwoLineText
-                android:id="@+id/fat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text1="25g"
-                tools:text2="TOTAL FAT" />
-
-            <club.bweakfast.foodora.custom.TwoLineText
-                android:id="@+id/carbs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text1="12g"
-                tools:text2="TOTAL CARBS" />
-
-            <ImageButton
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/more_nutritional_info"
-                app:srcCompat="@drawable/ic_arrow_right" />
-        </LinearLayout>
 
         <View
             android:id="@+id/secondDivider"
