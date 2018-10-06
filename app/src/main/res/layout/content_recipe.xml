@@ -15,7 +15,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            style="@style/RecipeHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/header_nutrition" />
+
         <club.bweakfast.foodora.custom.NutritionInfoLayout
             android:id="@+id/nutritionInfoLayout"
             android:layout_width="match_parent"
@@ -24,17 +32,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:baselineAligned="false"
-            android:orientation="horizontal">
-
-
-        <View
-            android:id="@+id/secondDivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/materialGray" />
+            android:orientation="horizontal" />
 
         <TextView
-            style="@style/Base.TextAppearance.AppCompat.Headline"
+            style="@style/RecipeHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
