@@ -15,6 +15,7 @@ class ProfileActivity : CustomToolbarActivity() {
         super.onCreate(savedInstanceState, R.layout.activity_profile)
 
         message = getString(R.string.message_profile)
+        title = getString(R.string.title_profile)
 
         pinnedMealsList.recyclerView.adapter = RecipesAdapter(getRandomRecipes(3), true)
         pinnedMealsList.recyclerView.layoutManager = LinearLayoutManager(this)

@@ -36,6 +36,6 @@ open class CustomToolbarActivity : AppCompatActivity() {
         showView.visibility = View.VISIBLE
         hideView.visibility = View.INVISIBLE
 
-        title = "Search"
+        title = getString(R.string.title_search)
     }
 }
