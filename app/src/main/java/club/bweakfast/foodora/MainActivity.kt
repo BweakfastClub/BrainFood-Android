@@ -1,9 +1,11 @@
 package club.bweakfast.foodora
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import club.bweakfast.foodora.home.HomeFragment
 import club.bweakfast.foodora.search.SearchFragment
+import club.bweakfast.foodora.user.ProfileActivity
 import club.bweakfast.foodora.util.listenForChanges
 import club.bweakfast.foodora.util.showFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,5 +35,7 @@ class MainActivity : CustomToolbarActivity() {
             true
         }
         bottomBar.selectedItemId = R.id.tab_home
+
+        profileIcon.setOnClickListener { Intent(this, ProfileActivity::class.java).apply { startActivity(this) } }
     }
 }
