@@ -34,13 +34,9 @@ class HomeFragment : Fragment() {
         topRecipesGrid.recyclerView.adapter = RecipesAdapter(getRandomRecipes(20), true)
         topRecipesGrid.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        topBreakfastList.recyclerView.isNestedScrollingEnabled = false
-        topBreakfastList.recyclerView.adapter = RecipesAdapter(getRandomRecipes(categories = listOf(CategoryName.Breakfast)))
-        topBreakfastList.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-        topLunchList.recyclerView.isNestedScrollingEnabled = false
-        topLunchList.recyclerView.adapter = RecipesAdapter(getRandomRecipes(categories = listOf(CategoryName.Lunch)))
-        topLunchList.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        topRecommendations.recyclerView.isNestedScrollingEnabled = false
+        topRecommendations.recyclerView.adapter = RecipesAdapter(getRandomRecipes())
+        topRecommendations.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
     companion object {

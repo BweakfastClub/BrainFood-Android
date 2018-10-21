@@ -57,8 +57,7 @@
     <!-- Strings related to home page -->
     <string name="message_home">Good morning! In the mood for some new breakfast ideas?</string>
     <string name="title_top_picks">Top Picks</string>
-    <string name="title_recommended_breakfast">Recommended Breakfasts</string>
-    <string name="title_recommended_lunches">Recommended Lunches</string>
+    <string name="title_recommended_meals">Recommended Meals</string>
 
     <!-- Strings related to profile -->
     <string name="message_profile">Here are the things we know about you, nothing too creepy.</string>
