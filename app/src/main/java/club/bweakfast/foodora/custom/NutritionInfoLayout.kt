@@ -1,6 +1,8 @@
 package club.bweakfast.foodora.custom
 
 import android.content.Context
+import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,7 @@ import android.widget.LinearLayout
 import androidx.core.content.res.use
 import club.bweakfast.foodora.R
 import kotlinx.android.synthetic.main.layout_two_line.view.*
+import kotlin.reflect.KMutableProperty1
 
 class NutritionInfoLayout(context: Context, attrs: AttributeSet?, defStyle: Int) : LinearLayout(context, attrs, defStyle) {
     var nutritionInfo1: Pair<String, String>? = null
@@ -26,6 +29,17 @@ class NutritionInfoLayout(context: Context, attrs: AttributeSet?, defStyle: Int)
         set(value) {
             setNutritionInfo(3, value)
         }
+    @ColorRes
+    var textColor: Int = R.color.materialGray
+        set(value) {
+            val nutritionLayouts = listOf(R.id.nutritionTxt1, R.id.nutritionTxt2, R.id.nutritionTxt3, R.id.nutritionTxt4)
+            nutritionLayouts.forEach { layout ->
+                val nutritionTxt = findViewById<TwoLineText>(layout)
+                nutritionTxt.text1.setTextColor(value)
+                nutritionTxt.text2.setTextColor(value)
+            }
+        }
+    val infoList = listOf(nutritionInfo1, nutritionInfo2, nutritionInfo3, nutritionInfo4)
 
     init {
         LayoutInflater.from(context).inflate(R.layout.layout_nutrition_info, this, true)
@@ -35,6 +49,7 @@ class NutritionInfoLayout(context: Context, attrs: AttributeSet?, defStyle: Int)
             nutritionInfo2 = it.getString(R.styleable.NutritionInfoLayout_nutrName2) to it.getString(R.styleable.NutritionInfoLayout_nutrValue2)
             nutritionInfo3 = it.getString(R.styleable.NutritionInfoLayout_nutrName3) to it.getString(R.styleable.NutritionInfoLayout_nutrValue3)
             nutritionInfo4 = it.getString(R.styleable.NutritionInfoLayout_nutrName4) to it.getString(R.styleable.NutritionInfoLayout_nutrValue4)
+            textColor = it.getColor(R.styleable.NutritionInfoLayout_textColor, ContextCompat.getColor(context, R.color.materialGray))
         }
 
         orientation = LinearLayout.HORIZONTAL
@@ -50,10 +65,22 @@ class NutritionInfoLayout(context: Context, attrs: AttributeSet?, defStyle: Int)
         val nutritionTxt = findViewById<TwoLineText>(nutritionLayouts[index])
 
         if (info != null) {
-            nutritionTxt.text1.text = info.first
-            nutritionTxt.text2.text = info.second
+            nutritionTxt.text1.text = info.second
+            nutritionTxt.text2.text = info.first
         } else {
             nutritionTxt.visibility = View.GONE
         }
     }
+}
+
+class NutritionView(
+    val layoutID: KMutableProperty1<NutritionInfoLayout, Pair<String, String>?>,
+    val title: String,
+    val useUnit: Boolean = true
+) {
+    operator fun component1() = layoutID
+
+    operator fun component2() = title
+
+    operator fun component3() = useUnit
 }
