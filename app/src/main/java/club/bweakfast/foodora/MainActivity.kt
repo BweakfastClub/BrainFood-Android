@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import club.bweakfast.foodora.home.HomeFragment
+import club.bweakfast.foodora.plan.MealPlanFragment
 import club.bweakfast.foodora.search.SearchFragment
 import club.bweakfast.foodora.user.ProfileActivity
 import club.bweakfast.foodora.util.listenForChanges
@@ -30,6 +31,12 @@ class MainActivity : CustomToolbarActivity() {
                     searchBox.requestFocus()
                     showFragment(fragment)
                     showSearchBox(true)
+                }
+                R.id.tab_plan -> {
+                    showFragment(MealPlanFragment.newInstance())
+                    showSearchBox(false)
+                    message = getString(R.string.message_meal_plan)
+                    title = getString(R.string.title_meal_plan)
                 }
             }
             true

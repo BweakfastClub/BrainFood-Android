@@ -66,4 +66,10 @@
     <string name="title_progress">Daily Progress</string>
     <string name="subtitle_macros">Macros</string>
     <string name="title_pinned_meals">Pinned Meals</string>
+
+    <!-- Strings related to meal planning -->
+    <string name="title_breakfast">Breakfast</string>
+    <string name="title_lunch">Lunch</string>
+    <string name="message_meal_plan">Here\'s a little meal plan I cooked up today!</string>
+    <string name="title_meal_plan">Meal Plan</string>
 </resources>

@@ -32,7 +32,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:baselineAligned="false"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            app:textColor="@color/black" />
 
         <TextView
             style="@style/RecipeHeader"
