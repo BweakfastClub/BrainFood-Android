@@ -1815,9 +1815,7 @@ private val categoryMapping = mapOf(
 
 fun getRandomRecipes(count: Int = 10, categories: List<CategoryName> = emptyList()) : List<Recipe> {
     val recipeCategories = if (categories.isEmpty()) categoryMapping.keys.toList() else categories
-    val categoryCount = categoryMapping
-        .map { (category, _) -> category to count / recipeCategories.size }
-        .associate { it }
+    val categoryCount = categories.associate { category -> category to count / recipeCategories.size }
     val missingCount = count - categoryCount.asIterable().sumBy { it.value }
 
     return categoryCount
