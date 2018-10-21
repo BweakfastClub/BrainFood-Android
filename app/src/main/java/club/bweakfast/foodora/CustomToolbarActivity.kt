@@ -34,7 +34,7 @@ open class CustomToolbarActivity : AppCompatActivity() {
         val showView = if (show) searchBox else messageTxt
         val hideView = if (show) messageTxt else searchBox
         showView.visibility = View.VISIBLE
-        hideView.visibility = View.INVISIBLE
+        hideView.visibility = View.GONE
 
         title = getString(R.string.title_search)
     }

@@ -53,37 +53,42 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_settings_outline" />
 
-        <TextView
-            android:id="@+id/messageTxt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="8dp"
-            android:gravity="center"
-            android:textColor="@color/materialGray"
-            android:visibility="visible"
-            app:layout_constraintLeft_toRightOf="@id/profileIcon"
-            app:layout_constraintRight_toLeftOf="@id/settingsIcon"
-            app:layout_constraintTop_toBottomOf="@id/profileIcon"
-            tools:text="Good morning Sarah! In the mood for some new breakfast ideas?"
-            tools:visibility="invisible" />
-
-        <EditText
-            android:id="@+id/searchBox"
-            style="@style/EditTextHint"
+        <FrameLayout
+            android:id="@+id/messageSearchLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_search_box"
-            android:hint="@string/prompt_search"
-            android:inputType="textAutoCorrect"
-            android:padding="8dp"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="@id/messageTxt"
-            tools:visibility="visible" />
+            android:layout_marginTop="16dp"
+            app:layout_constraintLeft_toRightOf="@id/profileIcon"
+            app:layout_constraintRight_toLeftOf="@id/settingsIcon"
+            app:layout_constraintTop_toBottomOf="@id/profileIcon">
+
+            <TextView
+                android:id="@+id/messageTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:gravity="center"
+                android:textColor="@color/materialGray"
+                android:visibility="visible"
+                tools:text="Good morning Sarah! In the mood for some new breakfast ideas?"
+                tools:visibility="visible" />
+
+            <EditText
+                android:id="@+id/searchBox"
+                style="@style/EditTextHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/bg_search_box"
+                android:hint="@string/prompt_search"
+                android:inputType="textAutoCorrect"
+                android:padding="8dp"
+                android:visibility="gone"
+                tools:visibility="gone" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/notLoggedInMsg"
@@ -94,7 +99,7 @@
             android:gravity="center"
             android:padding="8dp"
             android:text="@string/message_not_logged_in"
-            app:layout_constraintTop_toBottomOf="@id/messageTxt" />
+            app:layout_constraintTop_toBottomOf="@id/messageSearchLayout" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.Toolbar>
