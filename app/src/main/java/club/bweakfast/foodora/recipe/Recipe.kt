@@ -9,6 +9,8 @@ import club.bweakfast.foodora.favourite.Favourite
 import club.bweakfast.foodora.favourite.FavouriteType
 import club.bweakfast.foodora.recipe.ingredient.Ingredient
 import club.bweakfast.foodora.recipe.nutrition.NutritionValue
+import club.bweakfast.foodora.util.KParcelable
+import club.bweakfast.foodora.util.parcelableCreator
 import club.bweakfast.foodora.util.readBoolean
 import club.bweakfast.foodora.util.writeBoolean
 import com.google.gson.annotations.SerializedName
@@ -23,7 +25,7 @@ data class Recipe(
     val readyMinutes: Int,
     val imageURL: String,
     var isFavourite: Boolean = false
-) : Favourite(id, FavouriteType.RECIPE), Parcelable {
+) : Favourite(id, FavouriteType.RECIPE), KParcelable {
     var nutrition = mutableMapOf<String, NutritionValue>()
 
     private constructor(parcel: Parcel) : this(
@@ -55,14 +57,10 @@ data class Recipe(
         }
     }
 
-    override fun describeContents() = 0
+    companion object {
+        @JvmField val CREATOR = parcelableCreator(::Recipe)
 
-    companion object CREATOR : Parcelable.Creator<Recipe> {
-        override fun createFromParcel(parcel: Parcel) = Recipe(parcel)
-
-        override fun newArray(size: Int) = arrayOfNulls<Recipe>(size)
-
-        fun createFromCursor(cursor: Cursor): Recipe {
+        fun createFromCursor(cursor: Cursor, ingredients: List<Ingredient>): Recipe {
             with(cursor) {
                 return Recipe(
                     getInt(RecipeDaoImpl.COLUMN_ID),

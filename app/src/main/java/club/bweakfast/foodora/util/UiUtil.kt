@@ -1,15 +1,20 @@
 package club.bweakfast.foodora.util
 
 import android.content.Context
+import android.os.Build
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentTransaction
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.TypedValue
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import club.bweakfast.foodora.R
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
 import io.reactivex.Observable
 
 /**
@@ -29,9 +34,9 @@ fun FragmentActivity.showFragment(
     transaction.commit()
 }
 
-fun EditText.listenForChanges(): Observable<String> {
+fun EditText.listenForChanges(): Flowable<String> {
     var currentQuery = ""
-    return Observable.create {
+    return Flowable.create({
         this.addTextChangedListener(object : TextListener() {
             override fun afterTextChanged(s: Editable) {
                 super.afterTextChanged(s)
@@ -42,8 +47,19 @@ fun EditText.listenForChanges(): Observable<String> {
                 }
             }
         })
+    }, BackpressureStrategy.DROP)
+}
+
+fun showDarkStatusIcons(decorView: View, show: Boolean) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (show) decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        else decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
     }
 }
+
+fun Int.toDP(context: Context) = this.toFloat().toDP(context).toInt()
+
+fun Float.toDP(context: Context) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, context.resources.displayMetrics)
 
 fun Context.toast(@StringRes resId: Int) = toast(getString(resId))
 

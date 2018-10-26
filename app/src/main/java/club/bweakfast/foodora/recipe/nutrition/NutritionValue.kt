@@ -35,6 +35,6 @@ data class NutritionValue(
     }
 
     companion object {
-        val CREATOR = parcelableCreator(::NutritionValue)
+        @JvmField val CREATOR = parcelableCreator(::NutritionValue)
     }
 }

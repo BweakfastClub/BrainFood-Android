@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".plan.MealPlanFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <club.bweakfast.foodora.custom.NutritionInfoLayout
+            android:id="@+id/nutritionInfoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:textColor="@color/white" />
+
+        <club.bweakfast.foodora.custom.RecipeListView
+            android:id="@+id/breakfastRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/title_breakfast" />
+
+        <club.bweakfast.foodora.custom.RecipeListView
+            android:id="@+id/lunchRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/title_lunch" />
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

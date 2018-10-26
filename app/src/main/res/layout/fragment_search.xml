@@ -5,22 +5,13 @@
     android:layout_height="match_parent"
     tools:context="club.bweakfast.foodora.search.SearchFragment">
 
-    <EditText
-        android:id="@+id/searchBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="@string/prompt_search"
-        android:inputType="textAutoCorrect" />
-
-    <android.support.v7.widget.RecyclerView
+    <club.bweakfast.foodora.custom.RecipeListView
         android:id="@+id/resultsList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBox" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/title_results" />
 
 </android.support.constraint.ConstraintLayout>

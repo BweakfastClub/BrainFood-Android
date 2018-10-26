@@ -1,4 +1,4 @@
-package club.bweakfast.foodora
+package club.bweakfast.foodora.custom
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.core.content.res.use
+import club.bweakfast.foodora.R
 import kotlinx.android.synthetic.main.layout_two_line.view.*
 
 

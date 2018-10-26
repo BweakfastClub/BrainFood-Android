@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.browse.RecipesAdapter
 import kotlinx.android.synthetic.main.fragment_recipes_list.*
 import kotlin.properties.Delegates
 

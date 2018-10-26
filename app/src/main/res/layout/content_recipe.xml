@@ -5,7 +5,8 @@
     android:id="@+id/nestedScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="32dp"
+    android:clipToPadding="false"
+    android:paddingTop="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_recipe">
 
@@ -14,76 +15,42 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            style="@style/RecipeHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/header_nutrition" />
+
+        <club.bweakfast.foodora.custom.NutritionInfoLayout
             android:id="@+id/nutritionInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             android:baselineAligned="false"
-            android:orientation="horizontal">
-
-            <club.bweakfast.foodora.TwoLineText
-                android:id="@+id/calories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text1="234"
-                tools:text2="CALORIES" />
-
-            <club.bweakfast.foodora.TwoLineText
-                android:id="@+id/protein"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text1="40g"
-                tools:text2="PROTEIN" />
-
-            <club.bweakfast.foodora.TwoLineText
-                android:id="@+id/fat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text1="25g"
-                tools:text2="TOTAL FAT" />
-
-            <club.bweakfast.foodora.TwoLineText
-                android:id="@+id/carbs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text1="12g"
-                tools:text2="TOTAL CARBS" />
-
-            <ImageButton
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/more_nutritional_info"
-                app:srcCompat="@drawable/ic_arrow_right" />
-        </LinearLayout>
-
-        <View
-            android:id="@+id/secondDivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/materialGray" />
+            android:orientation="horizontal"
+            app:textColor="@color/black" />
 
         <TextView
-            style="@style/Base.TextAppearance.AppCompat.Headline"
+            style="@style/RecipeHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/header_ingredients" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/ingredientList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:clipToPadding="false"
+            android:paddingBottom="64dp"
+            tools:listitem="@layout/item_ingredient" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
