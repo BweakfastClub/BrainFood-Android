@@ -17,7 +17,7 @@ class RecipeViewModel @Inject constructor(
             listOf(
                 recipeDao.addRecipe(recipe),
                 favouriteDao.addFavourite(recipe),
-                recipeService.likeRecipe(recipe.id).mapResponse()
+                recipeService.likeRecipe(recipe.id)
             )
         )
     }
@@ -27,7 +27,7 @@ class RecipeViewModel @Inject constructor(
             listOf(
                 recipeDao.removeRecipe(recipe),
                 favouriteDao.removeFavourite(recipe),
-                recipeService.unlikeRecipe(recipe.id).mapResponse()
+                recipeService.unlikeRecipe(recipe.id)
             )
         )
     }
