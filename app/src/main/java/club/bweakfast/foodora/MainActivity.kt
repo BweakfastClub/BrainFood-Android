@@ -3,6 +3,7 @@ package club.bweakfast.foodora
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import club.bweakfast.foodora.auth.AuthenticationActivity
 import club.bweakfast.foodora.home.HomeFragment
 import club.bweakfast.foodora.plan.MealPlanFragment
 import club.bweakfast.foodora.search.SearchFragment
@@ -43,6 +44,9 @@ class MainActivity : CustomToolbarActivity() {
         }
         bottomBar.selectedItemId = R.id.tab_home
 
-        profileIcon.setOnClickListener { Intent(this, ProfileActivity::class.java).apply { startActivity(this) } }
+        leftIcon.setOnClickListener {
+            val nextScreen = if (userViewModel.isLoggedIn) ProfileActivity::class.java else AuthenticationActivity::class.java
+            Intent(this, nextScreen).apply { startActivity(this) }
+        }
     }
 }

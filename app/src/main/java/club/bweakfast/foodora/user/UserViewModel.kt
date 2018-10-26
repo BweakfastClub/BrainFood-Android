@@ -14,6 +14,8 @@ class UserViewModel @Inject constructor(
     private val authService: AuthenticationService,
     private val storageService: StorageService
 ) {
+    val isLoggedIn = authService.isLoggedIn
+
     fun login(email: String, password: String): Completable {
         return authService.login(email, password).mapResponse()
             .flatMapCompletable { (token) ->
