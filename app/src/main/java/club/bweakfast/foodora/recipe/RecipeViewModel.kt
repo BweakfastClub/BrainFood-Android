@@ -32,5 +32,13 @@ class RecipeViewModel @Inject constructor(
         )
     }
 
+    fun addRecipeToMealPlan(recipe: Recipe): Completable {
+        return recipeService.addRecipeToMealPlan(recipe.id)
+    }
+
+    fun removeRecipeFromMealPlan(recipe: Recipe): Completable {
+        return recipeService.removeRecipeFromMealPlan(recipe.id)
+    }
+
     fun getFavouriteRecipes(): Single<List<Recipe>> = favouriteDao.getFavourites(FavouriteType.RECIPE).flatMap(recipeDao::getRecipes)
 }

@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
@@ -55,71 +56,8 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
 
         init(recipe)
         showView(fab, userViewModel.isLoggedIn)
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_recipe, menu)
-        return userViewModel.isLoggedIn
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_like -> {
-                clickOnLikeItem(recipe, item)
-                true
-            }
-            else -> false
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        appBar.addOnOffsetChangedListener(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        appBar.removeOnOffsetChangedListener(this)
-    }
-
-    override fun onDestroy() {
-        subscriptions.clear()
-        super.onDestroy()
-    }
-
-    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
-        log("Vertical offset: $verticalOffset")
-
-        val isCollapsed = verticalOffset < -119
-        showDarkStatusIcons(window.decorView, isCollapsed)
-
-        val iconColor = ContextCompat.getColor(
-            this,
-            if (isCollapsed) R.color.materialGray else R.color.white
-        )
-        toolbar.navigationIcon!!.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP)
-        toolbar.menu.findItem(R.id.menu_like)?.icon?.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP)
-    }
-
-    private fun clickOnLikeItem(recipe: Recipe, menuItem: MenuItem) {
-        with(recipe) {
-            val completable = if (isFavourite) {
-                recipeViewModel.unlikeRecipe(this)
-            } else {
-                recipeViewModel.likeRecipe(this)
-            }
-            setLikeIcon(isFavourite, menuItem)
-            subscriptions.add(
-                completable
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe({
-                        val snackbarText = if (isFavourite) "Removed from favourites" else "Added to favourites"
-                        Snackbar.make(rootLayout, snackbarText, Snackbar.LENGTH_LONG).show()
-                        isFavourite = !isFavourite
-                    }, { onError(it, this@RecipeActivity) })
-            )
-        }
+        fab.setOnClickListener(::clickOnMealPlanBtn)
     }
 
     private fun init(recipe: Recipe) {
@@ -150,8 +88,106 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
         showDarkStatusIcons(window.decorView, false)
     }
 
-    private fun setLikeIcon(isFavourite: Boolean, menuItem: MenuItem) {
+    private fun clickOnMealPlanBtn(view: View) {
+        val fab = view as Button
+        val isAdding = fab.text == getString(R.string.action_cook)
+        val completable = if (isAdding) recipeViewModel::addRecipeToMealPlan else recipeViewModel::removeRecipeFromMealPlan
+        updateMealPlanBtn(isAdding)
+
+        subscriptions.add(
+            completable(recipe)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    val snackbarText = if (isAdding) "Added recipe to meal plan" else "Removed recipe from meal plan"
+                    Snackbar.make(rootLayout, snackbarText, Snackbar.LENGTH_LONG).show()
+                }, {
+                    updateMealPlanBtn(!isAdding)
+                    onError(it, this@RecipeActivity)
+                })
+        )
+    }
+
+    private fun updateMealPlanBtn(isAdding: Boolean) {
+        fab.text = if (isAdding) getString(R.string.action_remove_meal_plan) else getString(R.string.action_cook)
+        fab.setCompoundDrawablesWithIntrinsicBounds(
+            if (isAdding) 0 else R.drawable.ic_pot_mix,
+            0,
+            0,
+            0
+        )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_recipe, menu)
+        return userViewModel.isLoggedIn
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_like -> {
+                clickOnLikeItem(recipe, item)
+                true
+            }
+            else -> false
+        }
+    }
+
+    private fun clickOnLikeItem(recipe: Recipe, menuItem: MenuItem) {
+        with(recipe) {
+            val completable = if (isFavourite) {
+                recipeViewModel.unlikeRecipe(this)
+            } else {
+                recipeViewModel.likeRecipe(this)
+            }
+            updateLikeIcon(isFavourite, menuItem)
+            subscriptions.add(
+                completable
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({
+                        val snackbarText = if (isFavourite) "Removed from favourites" else "Added to favourites"
+                        Snackbar.make(rootLayout, snackbarText, Snackbar.LENGTH_LONG).show()
+                        isFavourite = !isFavourite
+                    }, {
+                        updateLikeIcon(!isFavourite, menuItem)
+                        onError(it, this@RecipeActivity)
+                    })
+            )
+        }
+    }
+
+    private fun updateLikeIcon(isFavourite: Boolean, menuItem: MenuItem) {
         val iconResource = if (isFavourite) R.drawable.ic_heart_outline else R.drawable.ic_heart
         menuItem.icon = ContextCompat.getDrawable(this, iconResource)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        appBar.addOnOffsetChangedListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        appBar.removeOnOffsetChangedListener(this)
+    }
+
+    override fun onDestroy() {
+        subscriptions.clear()
+        super.onDestroy()
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        log("Vertical offset: $verticalOffset")
+
+        val isCollapsed = verticalOffset < -119
+        showDarkStatusIcons(window.decorView, isCollapsed)
+
+        val iconColor = ContextCompat.getColor(
+            this,
+            if (isCollapsed) R.color.materialGray else R.color.white
+        )
+        toolbar.navigationIcon!!.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP)
+        toolbar.menu.findItem(R.id.menu_like)?.icon?.setColorFilter(iconColor, PorterDuff.Mode.SRC_ATOP)
     }
 }
