@@ -57,6 +57,10 @@ fun showDarkStatusIcons(decorView: View, show: Boolean) {
     }
 }
 
+fun showView(view: View, show: Boolean) {
+    view.visibility = if (show) View.VISIBLE else View.GONE
+}
+
 fun Int.toDP(context: Context) = this.toFloat().toDP(context).toInt()
 
 fun Float.toDP(context: Context) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, context.resources.displayMetrics)

@@ -10,15 +10,18 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.custom.NutritionInfoLayout
 import club.bweakfast.foodora.custom.NutritionView
 import club.bweakfast.foodora.recipe.ingredient.IngredientAdapter
+import club.bweakfast.foodora.user.UserViewModel
 import club.bweakfast.foodora.util.log
 import club.bweakfast.foodora.util.onError
 import club.bweakfast.foodora.util.showDarkStatusIcons
+import club.bweakfast.foodora.util.showView
 import club.bweakfast.foodora.util.toDP
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -34,6 +37,8 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
 
     @Inject
     lateinit var recipeViewModel: RecipeViewModel
+    @Inject
+    lateinit var userViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +54,12 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
         recipe = intent.getParcelableExtra(Intents.INTENT_RECIPE_ACTIVITY)
 
         init(recipe)
+        showView(fab, userViewModel.isLoggedIn)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_recipe, menu)
-        return true
+        return userViewModel.isLoggedIn
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -111,9 +117,7 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                         val snackbarText = if (isFavourite) "Removed from favourites" else "Added to favourites"
                         Snackbar.make(rootLayout, snackbarText, Snackbar.LENGTH_LONG).show()
                         isFavourite = !isFavourite
-                    }, {
-                        onError(it, this@RecipeActivity)
-                    })
+                    }, { onError(it, this@RecipeActivity) })
             )
         }
     }
@@ -143,11 +147,11 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
         ingredientList.layoutManager = LinearLayoutManager(this)
         ingredientList.isFocusable = false
         nestedScrollView.requestFocus()
+        showDarkStatusIcons(window.decorView, false)
     }
 
     private fun setLikeIcon(isFavourite: Boolean, menuItem: MenuItem) {
         val iconResource = if (isFavourite) R.drawable.ic_heart_outline else R.drawable.ic_heart
         menuItem.icon = ContextCompat.getDrawable(this, iconResource)
     }
-
 }

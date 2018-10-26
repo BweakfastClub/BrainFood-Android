@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
 import club.bweakfast.foodora.user.UserViewModel
+import club.bweakfast.foodora.util.showView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import javax.inject.Inject
@@ -53,10 +54,6 @@ open class CustomToolbarActivity : AppCompatActivity() {
 
     protected fun showRightIcon(show: Boolean) {
         showView(rightIcon, show)
-    }
-
-    private fun showView(view: View, show: Boolean) {
-        view.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun onResume() {
