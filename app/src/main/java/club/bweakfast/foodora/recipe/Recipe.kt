@@ -16,14 +16,14 @@ import club.bweakfast.foodora.util.writeBoolean
 import com.google.gson.annotations.SerializedName
 
 data class Recipe(
-    @SerializedName("_id") override val id: Int,
+    @SerializedName("id") override val id: Int,
     val ingredients: List<Ingredient>,
     val title: String,
     val servings: Int,
     val prepMinutes: Int,
     val cookMinutes: Int,
     val readyMinutes: Int,
-    val imageURL: String,
+    @SerializedName("imageUrl") val imageURL: String,
     var isFavourite: Boolean = false
 ) : Favourite(id, FavouriteType.RECIPE), KParcelable {
     var nutrition = mutableMapOf<String, NutritionValue>()

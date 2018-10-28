@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Ingredient(
     @SerializedName("_id") val id: Int,
-    val name: String,
+    @SerializedName("displayValue") val name: String,
     val grams: Float,
     val displayType: String
 ) : KParcelable {
