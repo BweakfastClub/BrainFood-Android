@@ -8,6 +8,5 @@
 /captures
 .externalNativeBuild
 secret.properties
-app/real
-app/mock
 .idea/caches/build_file_checksums.ser
+/app/google-services.json
