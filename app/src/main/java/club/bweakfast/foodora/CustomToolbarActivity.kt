@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.View
 import club.bweakfast.foodora.user.UserViewModel
 import club.bweakfast.foodora.util.showView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,16 +13,18 @@ import javax.inject.Inject
 
 @SuppressLint("Registered")
 open class CustomToolbarActivity : AppCompatActivity() {
-    protected var message: String = ""
+    private lateinit var toolbarDelegate: ToolbarDelegate
+
+    protected var message: String
+        get() = toolbarDelegate.message
         set(value) {
-            field = value
-            messageTxt.text = value
-            showView(messageTxt, value.isNotBlank())
+            toolbarDelegate.message = value
         }
-    protected var title = "BrainFood"
+
+    protected var title: String
+        get() = toolbarDelegate.title
         set(value) {
-            field = value
-            titleTxt.text = value
+            toolbarDelegate.title = value
         }
 
     @Inject
@@ -35,30 +36,27 @@ open class CustomToolbarActivity : AppCompatActivity() {
 
         FoodoraApp.daggerComponent.inject(this)
 
+        toolbarDelegate = ToolbarDelegate(toolbar as Toolbar)
+
         setSupportActionBar(toolbar as Toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
     }
 
     protected fun showSearchBox(show: Boolean) {
-        val showView = if (show) searchBox else messageTxt
-        val hideView = if (show) messageTxt else searchBox
-        showView(showView, true)
-        showView(hideView, false)
-
-        title = getString(R.string.title_search)
+        toolbarDelegate.isSearchBoxVisible = show
     }
 
     protected fun showLeftIcon(show: Boolean) {
-        showView(leftIcon, show)
+        toolbarDelegate.isLeftIconVisible = show
     }
 
     protected fun showRightIcon(show: Boolean) {
-        showView(rightIcon, show)
+        toolbarDelegate.isRightIconVisible = show
     }
 
     override fun onResume() {
         super.onResume()
 
-        showView(notLoggedInMsg, !userViewModel.isLoggedIn)
+        toolbarDelegate.isNotLoggedInMsgVisible = !userViewModel.isLoggedIn
     }
 }

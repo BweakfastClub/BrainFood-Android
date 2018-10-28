@@ -17,7 +17,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/profileIcon"
+            android:id="@+id/leftIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -42,7 +42,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/settingsIcon"
+            android:id="@+id/rightIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -58,9 +58,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintLeft_toRightOf="@id/profileIcon"
-            app:layout_constraintRight_toLeftOf="@id/settingsIcon"
-            app:layout_constraintTop_toBottomOf="@id/profileIcon">
+            android:paddingBottom="16dp"
+            app:layout_constraintLeft_toRightOf="@id/leftIcon"
+            app:layout_constraintRight_toLeftOf="@id/rightIcon"
+            app:layout_constraintTop_toBottomOf="@id/titleTxt">
 
             <TextView
                 android:id="@+id/messageTxt"
@@ -70,7 +71,7 @@
                 android:layout_marginRight="8dp"
                 android:gravity="center"
                 android:textColor="@color/materialGray"
-                android:visibility="visible"
+                android:visibility="gone"
                 tools:text="Good morning Sarah! In the mood for some new breakfast ideas?"
                 tools:visibility="visible" />
 
@@ -95,7 +96,6 @@
             style="@style/ColoredElement"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:gravity="center"
             android:padding="8dp"
             android:text="@string/message_not_logged_in"
