@@ -4,8 +4,7 @@ Native Android application for BrainFood
 
 ## Home Screen
 
-<img src="https://i.imgur.com/BEogKpk.jpg" width="250" />
-<img src="https://i.imgur.com/60llwBT.jpg" width="250" />
+<img src="https://i.imgur.com/BEogKpk.jpg" width="250" /> <img src="https://i.imgur.com/60llwBT.jpg" width="250" />
 
 ## Search Screen
 
@@ -29,7 +28,7 @@ Native Android application for BrainFood
 
 ## Recipe View
 
-<img src="https://i.imgur.com/tpxqGpZ.jpg" width="250" />
+<img src="https://i.imgur.com/6OvOWbq.jpg" width="250" /> <img src="https://i.imgur.com/rYm6u8j.png" width="250" />
 
 ## Wireframe
 
