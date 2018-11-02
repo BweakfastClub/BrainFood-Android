@@ -2,6 +2,9 @@ package club.bweakfast.foodora.util
 
 import android.content.Context
 import android.os.Build
+import android.preference.PreferenceActivity
+import android.preference.PreferenceFragment
+import android.support.annotation.IdRes
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
@@ -15,21 +18,35 @@ import android.widget.Toast
 import club.bweakfast.foodora.R
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
-import io.reactivex.Observable
 
 /**
  * Created by silve on 3/2/2018.
  */
 
+private val emptyAnimationHandler: (FragmentTransaction) -> Unit = {}
+
 fun FragmentActivity.showFragment(
     fragment: Fragment,
+    @IdRes containerID: Int = R.id.container,
     name: String? = null,
-    setAnimations: (FragmentTransaction) -> Unit = {}
+    setAnimations: (FragmentTransaction) -> Unit = emptyAnimationHandler
 ) {
     val transaction = supportFragmentManager.beginTransaction()
 
     setAnimations(transaction)
-    transaction.replace(R.id.container, fragment)
+    transaction.replace(containerID, fragment)
+    name?.let { transaction.addToBackStack(it) }
+    transaction.commit()
+}
+
+fun PreferenceActivity.showFragment(
+    fragment: PreferenceFragment,
+    @IdRes containerID: Int = R.id.container,
+    name: String? = null
+) {
+    val transaction = fragmentManager.beginTransaction()
+
+    transaction.replace(containerID, fragment)
     name?.let { transaction.addToBackStack(it) }
     transaction.commit()
 }
