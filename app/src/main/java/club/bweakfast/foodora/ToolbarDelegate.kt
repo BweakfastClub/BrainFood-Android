@@ -1,6 +1,7 @@
 package club.bweakfast.foodora
 
 import android.support.v7.widget.Toolbar
+import android.widget.ImageView
 import club.bweakfast.foodora.util.showView
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import kotlinx.android.synthetic.main.layout_toolbar.view.*
@@ -28,6 +29,10 @@ class ToolbarDelegate(private val toolbar: Toolbar) {
 
             if (show) title = toolbar.context.getString(R.string.title_search)
         }
+
+    var leftIcon: ImageView = toolbar.leftIcon
+
+    var rightIcon: ImageView = toolbar.rightIcon
 
     var isLeftIconVisible: Boolean = true
         set(show) {

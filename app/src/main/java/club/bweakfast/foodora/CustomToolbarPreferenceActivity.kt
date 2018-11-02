@@ -8,12 +8,12 @@ import android.support.annotation.LayoutRes
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatDelegate
 import android.support.v7.widget.Toolbar
+import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.LinearLayout
-
 
 
 /**
@@ -34,6 +34,10 @@ abstract class CustomToolbarPreferenceActivity : PreferenceActivity() {
         set(value) {
             toolbarDelegate.title = value
         }
+
+    protected val leftIcon: ImageView = toolbarDelegate.leftIcon
+
+    protected val rightIcon: ImageView = toolbarDelegate.rightIcon
 
     override fun onCreate(savedInstanceState: Bundle?) {
         delegate.installViewFactory()
