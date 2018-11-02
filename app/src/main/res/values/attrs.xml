@@ -20,4 +20,9 @@
         <attr name="nutrName4" format="string" />
         <attr name="nutrValue4" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="SetupInputPreference">
+        <attr name="android:inputType" />
+        <attr name="inputWidth" format="dimension" />
+    </declare-styleable>
 </resources>
