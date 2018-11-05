@@ -11,6 +11,7 @@ import club.bweakfast.foodora.R
 class SetupInfoFragment : PreferenceFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         addPreferencesFromResource(R.xml.pref_setup_info)
         setHasOptionsMenu(false)
     }

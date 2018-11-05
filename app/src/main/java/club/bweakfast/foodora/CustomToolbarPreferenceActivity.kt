@@ -8,10 +8,12 @@ import android.support.annotation.LayoutRes
 import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatDelegate
 import android.support.v7.widget.Toolbar
+import android.support.v7.widget.ViewStubCompat
 import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewStub
 import android.widget.ImageView
 import android.widget.LinearLayout
 
@@ -35,9 +37,11 @@ abstract class CustomToolbarPreferenceActivity : PreferenceActivity() {
             toolbarDelegate.title = value
         }
 
-    protected val leftIcon: ImageView = toolbarDelegate.leftIcon
+    protected val leftIcon: ImageView
+        get() = toolbarDelegate.leftIcon
 
-    protected val rightIcon: ImageView = toolbarDelegate.rightIcon
+    protected val rightIcon: ImageView
+        get() = toolbarDelegate.rightIcon
 
     override fun onCreate(savedInstanceState: Bundle?) {
         delegate.installViewFactory()
@@ -49,19 +53,17 @@ abstract class CustomToolbarPreferenceActivity : PreferenceActivity() {
         super.onPostCreate(savedInstanceState)
         delegate.onPostCreate(savedInstanceState)
 
-        val root = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            findViewById<View>(android.R.id.list_container).parent as LinearLayout
-        } else {
-            findViewById<View>(android.R.id.list).parent.parent.parent as LinearLayout
-        }
-        val toolbar = LayoutInflater.from(this).inflate(R.layout.layout_toolbar, root, false)
-        root.addView(toolbar, 0) // insert at top
-
-        toolbarDelegate = ToolbarDelegate(toolbar as Toolbar)
         initToolbar()
     }
 
     private fun initToolbar() {
+        findViewById<ViewStubCompat>(R.id.action_mode_bar_stub).apply {
+            layoutResource = R.layout.layout_toolbar
+            inflate()
+        }
+        val toolbar = findViewById<Toolbar>(R.id.action_mode_bar)
+
+        toolbarDelegate = ToolbarDelegate(toolbar)
         toolbarDelegate.isLeftIconVisible = false
         toolbarDelegate.isRightIconVisible = false
         toolbarDelegate.isSearchBoxVisible = false
