@@ -27,8 +27,8 @@ private val emptyAnimationHandler: (FragmentTransaction) -> Unit = {}
 
 fun FragmentActivity.showFragment(
     fragment: Fragment,
-    @IdRes containerID: Int = R.id.container,
     name: String? = null,
+    @IdRes containerID: Int = R.id.container,
     setAnimations: (FragmentTransaction) -> Unit = emptyAnimationHandler
 ) {
     val transaction = supportFragmentManager.beginTransaction()
@@ -41,8 +41,8 @@ fun FragmentActivity.showFragment(
 
 fun PreferenceActivity.showFragment(
     fragment: PreferenceFragment,
-    @IdRes containerID: Int = R.id.container,
-    name: String? = null
+    name: String? = null,
+    @IdRes containerID: Int = R.id.container
 ) {
     val transaction = fragmentManager.beginTransaction()
 
