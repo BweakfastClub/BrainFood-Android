@@ -84,4 +84,6 @@
     <string name="pref_vegetarian">Vegetarian</string>
     <string name="pref_allergy_peanut">Peanut Allergy</string>
     <string name="action_next_step">Next Step</string>
+    <string name="message_setup_2">To start, select at least 3 of the meals that you think you\'d enjoy eating!</string>
+    <string name="header_random_meals">Random Meals</string>
 </resources>

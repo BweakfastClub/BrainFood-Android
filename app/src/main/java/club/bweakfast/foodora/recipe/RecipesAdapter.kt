@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_recipe.*
  * Created by silve on 3/20/2018.
  */
 
-open class RecipesAdapter(recipes: List<Recipe>, protected val itemHasMatchParent: Boolean = false) :
+open class RecipesAdapter(recipes: List<Recipe>, private val itemHasMatchParent: Boolean = false) :
     ListAdapter<Recipe, RecipeViewHolder>(diffCallback) {
     init {
         submitList(recipes)

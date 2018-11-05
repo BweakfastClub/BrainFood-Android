@@ -1,13 +1,14 @@
 package club.bweakfast.foodora.setup
 
+import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
-import android.view.Menu
-import android.view.MenuItem
 import club.bweakfast.foodora.CustomToolbarPreferenceActivity
+import club.bweakfast.foodora.MainActivity
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.util.showFragment
+import club.bweakfast.foodora.util.showView
 
 /**
  * A [PreferenceActivity] that presents a set of application settings. On
@@ -23,26 +24,45 @@ class SetupInfoActivity : CustomToolbarPreferenceActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        showFragment(SetupInfoFragment(), android.R.id.content)
+        showFragment(SetupInfoFragment(), containerID = android.R.id.content)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
 
-        message = getString(R.string.message_setup_1)
-        rightIcon.setImageResource(R.drawable.ic_arrow_right)
-        rightIcon.setOnClickListener {
-            showFragment(SetupMealsFragment(), android.R.id.content, "setupMeals")
-        }
+        showView(rightIcon, true)
+
+        fragmentManager.addOnBackStackChangedListener(::updateFragmentLook)
+        rightIcon.setOnClickListener { showFragment(SetupMealsFragment(), "setupMeals", android.R.id.content) }
+        updateFragmentLook()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
-            R.id.menu_next -> {
-                true
+    override fun onDestroy() {
+        super.onDestroy()
+        fragmentManager.removeOnBackStackChangedListener(::updateFragmentLook)
+    }
+
+    private fun updateFragmentLook() {
+        when (fragmentManager.backStackEntryCount) {
+            0 -> {
+                message = getString(R.string.message_setup_1)
+                rightIcon.setImageResource(R.drawable.ic_arrow_right)
             }
-            else -> super.onOptionsItemSelected(item)
+            1 -> {
+                message = getString(R.string.message_setup_2)
+                rightIcon.setImageResource(R.drawable.ic_check_circle_outline)
+                leftIcon.setImageResource(R.drawable.ic_arrow_left)
+                leftIcon.setOnClickListener { onBackPressed() }
+                rightIcon.setOnClickListener {
+                    Intent(this, MainActivity::class.java).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(this)
+                        finish()
+                    }
+                }
+            }
         }
+        showView(leftIcon, fragmentManager.backStackEntryCount > 0)
     }
 
     /**
