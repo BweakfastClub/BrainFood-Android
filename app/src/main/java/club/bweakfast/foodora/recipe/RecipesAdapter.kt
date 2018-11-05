@@ -3,22 +3,19 @@ package club.bweakfast.foodora.recipe
 import android.content.Intent
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.TextView
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
-import com.facebook.drawee.view.SimpleDraweeView
+import kotlinx.android.synthetic.main.item_recipe.*
 
 /**
  * Created by silve on 3/20/2018.
  */
 
-class RecipesAdapter(recipes: List<Recipe>, private val itemHasMatchParent: Boolean = false) :
-    ListAdapter<Recipe, RecipesAdapter.RecipeViewHolder>(diffCallback) {
+open class RecipesAdapter(recipes: List<Recipe>, protected val itemHasMatchParent: Boolean = false) :
+    ListAdapter<Recipe, RecipeViewHolder>(diffCallback) {
     init {
         submitList(recipes)
     }
@@ -41,11 +38,6 @@ class RecipesAdapter(recipes: List<Recipe>, private val itemHasMatchParent: Bool
                 it.context.startActivity(intent)
             }
         }
-    }
-
-    inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val name: TextView by lazy { itemView.findViewById<TextView>(R.id.name) }
-        val image: SimpleDraweeView by lazy { itemView.findViewById<SimpleDraweeView>(R.id.image) }
     }
 
     companion object {

@@ -77,5 +77,9 @@ dependencies {
     mockImplementation 'com.github.salomonbrys.kotson:kotson:2.5.0'
 }
 
+androidExtensions {
+    experimental = true
+}
+
 apply plugin: 'com.google.gms.google-services'
 ext.enableCrashlytics = true
