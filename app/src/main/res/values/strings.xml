@@ -86,4 +86,10 @@
     <string name="action_next_step">Next Step</string>
     <string name="message_setup_2">To start, select at least 3 of the meals that you think you\'d enjoy eating!</string>
     <string name="header_random_meals">Random Meals</string>
+    <string name="pref_key_name">name</string>
+    <string name="pref_key_has_peanut_allergy">has_peanut_allergy</string>
+    <string name="pref_key_is_vegetarian">is_vegetarian</string>
+    <string name="pref_key_is_vegan">is_vegan</string>
+    <string name="error_setup_name">Name cannot be empty!</string>
+    <string name="error_setup_3_recipes">You must select 3 recipes to continue!</string>
 </resources>

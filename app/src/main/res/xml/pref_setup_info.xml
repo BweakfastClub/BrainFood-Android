@@ -3,7 +3,7 @@
 
     <club.bweakfast.foodora.setup.SetupInputPreference
         android:inputType="textPersonName"
-        android:key="name"
+        android:key="@string/pref_key_name"
         android:title="@string/prompt_name"
         app:inputWidth="128dp" />
 
@@ -11,20 +11,20 @@
 
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="is_vegan"
+            android:key="@string/pref_key_is_vegan"
             android:layout="@layout/pref_setup_checkbox"
             android:paddingTop="8dp"
             android:title="@string/pref_vegan" />
 
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="is_vegetarian"
+            android:key="@string/pref_key_is_vegetarian"
             android:layout="@layout/pref_setup_checkbox"
             android:title="@string/pref_vegetarian" />
 
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="has_peanut_allergy"
+            android:key="@string/pref_key_has_peanut_allergy"
             android:layout="@layout/pref_setup_checkbox"
             android:title="@string/pref_allergy_peanut" />
 
