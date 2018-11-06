@@ -2,6 +2,7 @@ package club.bweakfast.foodora
 
 import android.support.annotation.IdRes
 import android.support.design.widget.TextInputLayout
+import android.widget.EditText
 
 /**
  * Created by Rushil on 8/24/2017.
@@ -27,12 +28,12 @@ class Validators {
     }
 }
 
-fun TextInputLayout.addValidation(validate: (String) -> Boolean, errorMessage: String) {
+fun EditText.addValidation(validate: (String) -> Boolean, errorMessage: String) {
     Validators.addValidation(this.id, Validator(validate, errorMessage))
 }
 
-fun TextInputLayout.validate(): Boolean {
-    val error = Validators.validate(this.id, this.editText?.text.toString())
+fun EditText.validate(): Boolean {
+    val error = Validators.validate(this.id, this.text.toString())
     this.error = error
     return error == null
 }

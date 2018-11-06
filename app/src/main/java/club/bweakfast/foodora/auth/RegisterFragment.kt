@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.TextView
 import club.bweakfast.foodora.ErrorDisplay
 import club.bweakfast.foodora.Irrelevant
@@ -25,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_register.*
  * Created by Rushil on 8/21/2017.
  */
 class RegisterFragment : Fragment(), ErrorDisplay {
-    private lateinit var inputValidators: Map<TextInputLayout, List<Validator>>
+    private lateinit var inputValidators: Map<EditText, List<Validator>>
 
     val loadLoginPage = PublishSubject.create<Irrelevant>()
     val register = PublishSubject.create<Triple<String, String, String>>()
@@ -42,12 +43,12 @@ class RegisterFragment : Fragment(), ErrorDisplay {
         super.onViewCreated(view, savedInstanceState)
 
         inputValidators = mapOf(
-            nameInputLayout to listOf(Validator.empty()),
-            emailInputLayout to listOf(
+            name to listOf(Validator.empty()),
+            email to listOf(
                 Validator.empty(),
                 Validator.emailValid()
             ),
-            passwordInputLayout to listOf(
+            password to listOf(
                 Validator.empty(),
                 Validator.passwordValid()
             )
@@ -100,8 +101,8 @@ class RegisterFragment : Fragment(), ErrorDisplay {
         }
     }
 
-    private fun validate(): TextInputLayout? {
-        var focusView: TextInputLayout? = null
+    private fun validate(): EditText? {
+        var focusView: EditText? = null
         inputValidators.keys.forEach { textInputLayout ->
             focusView = if (!textInputLayout.validate()) {
                 focusView ?: textInputLayout

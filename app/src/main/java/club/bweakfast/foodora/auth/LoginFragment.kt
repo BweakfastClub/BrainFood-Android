@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import club.bweakfast.foodora.ErrorDisplay
 import club.bweakfast.foodora.Irrelevant
 import club.bweakfast.foodora.R
@@ -25,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
  */
 
 class LoginFragment : Fragment(), ErrorDisplay {
-    private lateinit var inputValidators: Map<TextInputLayout, List<Validator>>
+    private lateinit var inputValidators: Map<EditText, List<Validator>>
 
     val login: PublishSubject<Pair<String, String>> = PublishSubject.create()
     val loadRegisterPage: PublishSubject<Irrelevant> = PublishSubject.create()
@@ -42,8 +43,8 @@ class LoginFragment : Fragment(), ErrorDisplay {
         super.onViewCreated(view, savedInstanceState)
 
         inputValidators = mapOf(
-            emailInputLayout to listOf(Validator.empty()),
-            passwordInputLayout to listOf(Validator.empty(), Validator.passwordValid())
+            email to listOf(Validator.empty()),
+            password to listOf(Validator.empty(), Validator.passwordValid())
         )
 
         passwordInputLayout.editText?.setOnEditorActionListener { _, id, _ ->
@@ -95,11 +96,11 @@ class LoginFragment : Fragment(), ErrorDisplay {
         }
     }
 
-    private fun validate(): TextInputLayout? {
-        var focusView: TextInputLayout? = null
-        inputValidators.keys.forEach { textInputLayout ->
-            focusView = if (!textInputLayout.validate()) {
-                focusView ?: textInputLayout
+    private fun validate(): EditText? {
+        var focusView: EditText? = null
+        inputValidators.keys.forEach { input ->
+            focusView = if (!input.validate()) {
+                focusView ?: input
             } else {
                 focusView
             }
