@@ -3,6 +3,7 @@
 
     <club.bweakfast.foodora.setup.SetupInputPreference
         android:inputType="textPersonName"
+        android:enabled="false"
         android:key="@string/pref_key_name"
         android:title="@string/prompt_name"
         app:inputWidth="128dp" />

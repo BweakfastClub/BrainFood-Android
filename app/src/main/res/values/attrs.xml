@@ -23,6 +23,7 @@
 
     <declare-styleable name="SetupInputPreference">
         <attr name="android:inputType" />
+        <attr name="android:enabled" />
         <attr name="inputWidth" format="dimension" />
     </declare-styleable>
 </resources>
