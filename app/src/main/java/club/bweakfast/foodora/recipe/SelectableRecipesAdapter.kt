@@ -5,7 +5,8 @@ import android.support.v4.content.ContextCompat
 import club.bweakfast.foodora.R
 import kotlinx.android.synthetic.main.item_recipe.*
 
-class SelectableRecipesAdapter(recipes: List<Recipe>, itemHasMatchParent: Boolean) : RecipesAdapter(recipes, itemHasMatchParent) {
+class SelectableRecipesAdapter(recipes: List<Recipe>, itemHasMatchParent: Boolean, private val recipeSelectedListener: (Int) -> Unit) :
+    RecipesAdapter(recipes, itemHasMatchParent) {
     private val selectedRecipes = mutableSetOf<Int>()
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
@@ -16,6 +17,7 @@ class SelectableRecipesAdapter(recipes: List<Recipe>, itemHasMatchParent: Boolea
             itemView.setOnClickListener {
                 val action = if (selectedRecipes.contains(recipe.id)) selectedRecipes::remove else selectedRecipes::add
                 action.invoke(recipe.id)
+                recipeSelectedListener.invoke(selectedRecipes.size)
 
                 val textColor: Int
                 if (selectedRecipes.contains(recipe.id)) {

@@ -7,6 +7,8 @@ import club.bweakfast.foodora.favourite.FavouritesFragment
 import club.bweakfast.foodora.home.HomeFragment
 import club.bweakfast.foodora.recipe.RecipeActivity
 import club.bweakfast.foodora.search.SearchFragment
+import club.bweakfast.foodora.setup.SetupInfoActivity
+import club.bweakfast.foodora.setup.SetupMealsFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -23,4 +25,6 @@ interface FoodoraComponent {
     fun inject(fragment: FavouritesFragment)
     fun inject(fragment: HomeFragment)
     fun inject(activity: CustomToolbarActivity)
+    fun inject(activity: SetupInfoActivity)
+    fun inject(fragment: SetupMealsFragment)
 }
