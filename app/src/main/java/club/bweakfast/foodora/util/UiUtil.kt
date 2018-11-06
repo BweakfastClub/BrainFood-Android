@@ -34,7 +34,7 @@ fun FragmentActivity.showFragment(
     val transaction = supportFragmentManager.beginTransaction()
 
     setAnimations(transaction)
-    transaction.replace(containerID, fragment)
+    transaction.replace(containerID, fragment, name ?: fragment::class.java.simpleName)
     name?.let { transaction.addToBackStack(it) }
     transaction.commit()
 }
@@ -46,7 +46,7 @@ fun PreferenceActivity.showFragment(
 ) {
     val transaction = fragmentManager.beginTransaction()
 
-    transaction.replace(containerID, fragment)
+    transaction.replace(containerID, fragment, name ?: fragment::class.java.simpleName)
     name?.let { transaction.addToBackStack(it) }
     transaction.commit()
 }
