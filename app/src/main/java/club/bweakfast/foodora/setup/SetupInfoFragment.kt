@@ -3,22 +3,23 @@ package club.bweakfast.foodora.setup
 import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
-import android.preference.PreferenceFragment
-import android.widget.ListView
+import android.support.v14.preference.PreferenceFragment
+import android.support.v7.widget.RecyclerView
+import android.view.View
 import club.bweakfast.foodora.R
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 class SetupInfoFragment : PreferenceFragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_setup_info)
         setHasOptionsMenu(false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<ListView>(android.R.id.list).divider = null
+        val list = view?.findViewById<RecyclerView>(R.id.list)
+        val divider = list?.getItemDecorationAt(0)
+        list?.removeItemDecoration(divider)
     }
 }

@@ -3,9 +3,9 @@ package club.bweakfast.foodora.util
 import android.content.Context
 import android.os.Build
 import android.preference.PreferenceActivity
-import android.preference.PreferenceFragment
 import android.support.annotation.IdRes
 import android.support.annotation.StringRes
+import android.support.v14.preference.PreferenceFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentTransaction

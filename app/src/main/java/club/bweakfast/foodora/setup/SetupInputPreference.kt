@@ -1,7 +1,8 @@
 package club.bweakfast.foodora.setup
 
 import android.content.Context
-import android.preference.Preference
+import android.support.v7.preference.Preference
+import android.support.v7.preference.PreferenceViewHolder
 import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.text.TextWatcher
@@ -38,9 +39,9 @@ class SetupInputPreference(context: Context, attrs: AttributeSet?, defStyleAttr:
         }
     }
 
-    override fun onBindView(view: View?) {
-        super.onBindView(view)
-        view?.findViewById<EditText>(R.id.input)?.apply {
+    override fun onBindViewHolder(holder: PreferenceViewHolder?) {
+        super.onBindViewHolder(holder)
+        holder?.itemView?.findViewById<EditText>(R.id.input)?.apply {
             layoutParams?.width = inputWidth.toInt()
             this.inputType = this@SetupInputPreference.inputType
             this.text = SpannableStringBuilder(getPersistedString(""))

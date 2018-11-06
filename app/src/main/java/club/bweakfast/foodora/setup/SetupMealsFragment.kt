@@ -2,7 +2,7 @@ package club.bweakfast.foodora.setup
 
 import android.os.Build
 import android.os.Bundle
-import android.preference.PreferenceFragment
+import android.support.v14.preference.PreferenceFragment
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +18,7 @@ class SetupMealsFragment : PreferenceFragment() {
     @Inject
     lateinit var setupViewModel: SetupViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         FoodoraApp.daggerComponent.inject(this)
     }
 
