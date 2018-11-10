@@ -14,14 +14,32 @@ class StorageService @Inject constructor(private val context: Context) {
     val isLoggedIn: Boolean
         get() = hasToken()
 
+    var isSetupComplete: Boolean
+        get() = preferences.getBoolean(setupCompleteKey, true)
+        set(value) {
+            preferences.edit().putBoolean(setupCompleteKey, value).apply()
+        }
+
     var name: String?
         get() = preferences.getString(nameKey, null)
         set(value) {
             saveName(value!!)
         }
 
+    val isVegan: Boolean
+        get() = preferences.getBoolean(veganKey, false)
+
+    val isVegetarian: Boolean
+        get() = preferences.getBoolean(vegetarianKey, false)
+
+    val hasPeanutAllergy: Boolean
+        get() = preferences.getBoolean(peanutAllergyKey, false)
+
     init {
         nameKey = context.getString(R.string.pref_key_name)
+        veganKey = context.getString(R.string.pref_key_is_vegan)
+        vegetarianKey = context.getString(R.string.pref_key_is_vegetarian)
+        peanutAllergyKey = context.getString(R.string.pref_key_has_peanut_allergy)
     }
 
     fun logout() {
@@ -44,6 +62,10 @@ class StorageService @Inject constructor(private val context: Context) {
 
     companion object {
         private const val tokenKey = "auth"
+        private const val setupCompleteKey = "setup_complete"
         private lateinit var nameKey: String
+        private lateinit var veganKey: String
+        private lateinit var vegetarianKey: String
+        private lateinit var peanutAllergyKey: String
     }
 }

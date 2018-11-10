@@ -92,4 +92,5 @@
     <string name="pref_key_is_vegan">is_vegan</string>
     <string name="error_setup_name">Name cannot be empty!</string>
     <string name="error_setup_3_recipes">You must select 3 recipes to continue!</string>
+    <string name="loading_message_1">Tossing some salads…</string>
 </resources>

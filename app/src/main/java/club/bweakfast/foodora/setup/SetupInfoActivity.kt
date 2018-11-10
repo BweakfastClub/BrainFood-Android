@@ -9,11 +9,18 @@ import androidx.core.view.get
 import club.bweakfast.foodora.CustomToolbarPreferenceActivity
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.MainActivity
+import club.bweakfast.foodora.ProcessingFragment
 import club.bweakfast.foodora.R
+import club.bweakfast.foodora.util.onError
 import club.bweakfast.foodora.util.showFragment
 import club.bweakfast.foodora.util.showView
 import club.bweakfast.foodora.util.toast
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.pref_setup_input.view.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -30,11 +37,15 @@ class SetupInfoActivity : CustomToolbarPreferenceActivity() {
     @Inject
     lateinit var setupViewModel: SetupViewModel
 
+    private val subscriptions = CompositeDisposable()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         FoodoraApp.daggerComponent.inject(this)
         showFragment(SetupInfoFragment(), containerID = android.R.id.content)
+
+        setupViewModel.isSetupComplete = false
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -49,6 +60,7 @@ class SetupInfoActivity : CustomToolbarPreferenceActivity() {
     override fun onDestroy() {
         super.onDestroy()
         fragmentManager.removeOnBackStackChangedListener(::updateFragmentLook)
+        subscriptions.dispose()
     }
 
     private fun updateFragmentLook() {
@@ -72,11 +84,25 @@ class SetupInfoActivity : CustomToolbarPreferenceActivity() {
                 leftIcon.setOnClickListener { onBackPressed() }
                 rightIcon.setOnClickListener {
                     if (setupViewModel.isStep2Valid) {
-                        Intent(this, MainActivity::class.java).apply {
-                            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                            startActivity(this)
-                            finish()
-                        }
+                        loadProcessingFragment()
+                        subscriptions.add(
+                            Completable.timer(2, TimeUnit.SECONDS)
+                                .andThen(Completable.merge(listOf(setupViewModel.addAllergies())))
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribeOn(Schedulers.io())
+                                .subscribe({
+                                    setupViewModel.isSetupComplete = true
+                                    Intent(this, MainActivity::class.java).apply {
+                                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                        startActivity(this)
+                                        finish()
+                                    }
+                                }, {
+                                    onError(it, this)
+                                    onBackPressed()
+                                    showToolbar(true)
+                                })
+                        )
                     } else {
                         toast(getString(R.string.error_setup_3_recipes))
                     }
@@ -84,6 +110,16 @@ class SetupInfoActivity : CustomToolbarPreferenceActivity() {
             }
         }
         showView(leftIcon, fragmentManager.backStackEntryCount > 0)
+    }
+
+    private fun loadProcessingFragment() {
+        showToolbar(false)
+        fragmentManager.beginTransaction().apply {
+            val tag = "ProcessingFragment"
+            replace(android.R.id.content, ProcessingFragment.newInstance(getString(R.string.loading_message_1)), tag)
+            addToBackStack(tag)
+            commit()
+        }
     }
 
     /**
