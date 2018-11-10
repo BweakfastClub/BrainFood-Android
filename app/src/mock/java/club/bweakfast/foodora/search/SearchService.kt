@@ -3,12 +3,10 @@ package club.bweakfast.foodora.search
 import club.bweakfast.foodora.breakfastRecipes
 import club.bweakfast.foodora.dinnerRecipes
 import club.bweakfast.foodora.lunchRecipes
-import club.bweakfast.foodora.network.ServerResponse
 import club.bweakfast.foodora.recipe.Recipe
 import club.bweakfast.foodora.snacks
 import io.reactivex.Single
 import retrofit2.Response
-import retrofit2.Retrofit
 import javax.inject.Inject
 import javax.inject.Singleton
 

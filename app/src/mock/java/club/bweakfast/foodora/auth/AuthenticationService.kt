@@ -1,5 +1,6 @@
 package club.bweakfast.foodora.auth
 
+import club.bweakfast.foodora.util.mapResponse
 import io.reactivex.Single
 import okhttp3.MediaType
 import okhttp3.ResponseBody
@@ -15,10 +16,10 @@ class AuthenticationService @Inject constructor() {
     var token: String? = "keyboardcat"
     val isLoggedIn = false
 
-    fun login(email: String, password: String): Single<Response<LoginResponse>> {
+    fun login(email: String, password: String): Single<TokenResponse> {
         return if ((email == "banana" || email == "banana@apple.ca") && password == "banana") {
             Single
-                .just(Response.success(LoginResponse(token!!)))
+                .just(Response.success(TokenResponse(token!!)))
                 .delay(2, TimeUnit.SECONDS)
         } else {
             Single.just(
@@ -31,7 +32,10 @@ class AuthenticationService @Inject constructor() {
                 )
             )
         }
+            .mapResponse()
     }
 
-    fun register(name: String, email: String, password: String): Single<Response<Void>> = Single.just(Response.success<Void>(null))
+    fun register(name: String, email: String, password: String): Single<TokenResponse> {
+        return Single.just(Response.success(TokenResponse(token!!))).mapResponse()
+    }
 }
