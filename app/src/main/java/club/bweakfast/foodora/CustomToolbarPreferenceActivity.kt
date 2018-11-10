@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.ImageView
 import android.widget.LinearLayout
+import club.bweakfast.foodora.util.showView
 
 
 /**
@@ -68,6 +69,11 @@ abstract class CustomToolbarPreferenceActivity : PreferenceActivity() {
         toolbarDelegate.isRightIconVisible = false
         toolbarDelegate.isSearchBoxVisible = false
         toolbarDelegate.isNotLoggedInMsgVisible = false
+    }
+
+    protected fun showToolbar(show: Boolean) {
+        val toolbar = findViewById<Toolbar>(R.id.action_mode_bar)
+        showView(toolbar, show)
     }
 
     val supportActionBar: ActionBar?

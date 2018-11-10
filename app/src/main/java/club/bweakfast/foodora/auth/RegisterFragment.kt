@@ -1,7 +1,6 @@
 package club.bweakfast.foodora.auth
 
 import android.os.Bundle
-import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.text.SpannableString
@@ -14,13 +13,22 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.TextView
 import club.bweakfast.foodora.ErrorDisplay
+import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.Irrelevant
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.Validator
 import club.bweakfast.foodora.addValidation
+import club.bweakfast.foodora.setup.SetupViewModel
+import club.bweakfast.foodora.util.listenForChanges
+import club.bweakfast.foodora.util.logError
 import club.bweakfast.foodora.validate
+import com.crashlytics.android.Crashlytics
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_register.*
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 /**
  * Created by Rushil on 8/21/2017.
@@ -30,6 +38,15 @@ class RegisterFragment : Fragment(), ErrorDisplay {
 
     val loadLoginPage = PublishSubject.create<Irrelevant>()
     val register = PublishSubject.create<Triple<String, String, String>>()
+
+    @Inject
+    lateinit var setupViewModel: SetupViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        FoodoraApp.daggerComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,6 +96,15 @@ class RegisterFragment : Fragment(), ErrorDisplay {
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         loginButton.text = colorSpan
+
+        name.listenForChanges()
+            .subscribeOn(Schedulers.trampoline())
+            .debounce(250, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ setupViewModel.name = it }, {
+                logError(it)
+                Crashlytics.logException(it)
+            })
     }
 
     override fun showError(error: String?) {

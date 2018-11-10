@@ -7,6 +7,7 @@ import club.bweakfast.foodora.auth.AuthenticationActivity
 import club.bweakfast.foodora.home.HomeFragment
 import club.bweakfast.foodora.plan.MealPlanFragment
 import club.bweakfast.foodora.search.SearchFragment
+import club.bweakfast.foodora.setup.SetupInfoActivity
 import club.bweakfast.foodora.user.ProfileActivity
 import club.bweakfast.foodora.util.listenForChanges
 import club.bweakfast.foodora.util.showFragment
@@ -17,6 +18,15 @@ class MainActivity : CustomToolbarActivity() {
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState, R.layout.activity_main)
+
+        if (!setupViewModel.isSetupComplete) {
+            Intent(this, SetupInfoActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(this)
+                finish()
+            }
+            return
+        }
 
         bottomBar.setOnNavigationItemSelectedListener {
             when (it.itemId) {

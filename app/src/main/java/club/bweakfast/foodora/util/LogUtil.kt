@@ -33,3 +33,7 @@ fun Any.onError(
     context.toast(message)
     Log.e(this::class.java.simpleName, message, throwable)
 }
+
+fun logError(throwable: Throwable) {
+    throwable.printStackTrace()
+}

@@ -17,7 +17,7 @@ class UserViewModel @Inject constructor(
     val isLoggedIn = authService.isLoggedIn
 
     fun login(email: String, password: String): Completable {
-        return authService.login(email, password).mapResponse()
+        return authService.login(email, password)
             .flatMapCompletable { (token) ->
                 storageService.token = token
                 Completable.complete()
@@ -25,6 +25,10 @@ class UserViewModel @Inject constructor(
     }
 
     fun register(name: String, email: String, password: String): Completable {
-        return authService.register(name, email, password).mapResponse()
+        return authService.register(name, email, password)
+            .flatMapCompletable { (token) ->
+                storageService.token = token
+                Completable.complete()
+            }
     }
 }

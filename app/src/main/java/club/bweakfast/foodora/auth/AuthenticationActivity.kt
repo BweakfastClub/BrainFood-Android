@@ -11,11 +11,12 @@ import android.widget.Toast
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.MainActivity
 import club.bweakfast.foodora.R
+import club.bweakfast.foodora.setup.SetupInfoActivity
 import club.bweakfast.foodora.user.UserViewModel
 import club.bweakfast.foodora.util.onError
 import club.bweakfast.foodora.util.parseError
-import club.bweakfast.foodora.util.showFragment
 import club.bweakfast.foodora.util.showDarkStatusIcons
+import club.bweakfast.foodora.util.showFragment
 import club.bweakfast.foodora.util.showProgress
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -68,12 +69,10 @@ class AuthenticationActivity : AppCompatActivity() {
             userViewModel.login(email, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(
-                    {
-                        onLoginSuccess()
-                        loading = false
-                    }
-                ) {
+                .subscribe({
+                    onLoginSuccess()
+                    loading = false
+                }) {
                     handleError(it)
                     loading = false
                 }
@@ -81,9 +80,19 @@ class AuthenticationActivity : AppCompatActivity() {
     }
 
     private fun onLoginSuccess() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+        Intent(this, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(this)
+            finish()
+        }
+    }
+
+    private fun onRegisterSuccess() {
+        Intent(this, SetupInfoActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(this)
+            finish()
+        }
     }
 
     private fun register(name: String, email: String, password: String) {
@@ -92,21 +101,14 @@ class AuthenticationActivity : AppCompatActivity() {
             userViewModel.register(name, email, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(
-                    {
-                        Toast.makeText(
-                            applicationContext,
-                            getString(R.string.success_register),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        loadLoginPage()
-                        loading = false
-                    },
-                    {
-                        handleError(it)
-                        loading = false
-                    }
-                )
+                .subscribe({
+                    Toast.makeText(applicationContext, getString(R.string.success_register), Toast.LENGTH_SHORT).show()
+                    onRegisterSuccess()
+                    loading = false
+                }, {
+                    handleError(it)
+                    loading = false
+                })
         )
     }
 

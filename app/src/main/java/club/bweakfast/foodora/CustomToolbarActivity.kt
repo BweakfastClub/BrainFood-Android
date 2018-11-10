@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import club.bweakfast.foodora.setup.SetupViewModel
 import club.bweakfast.foodora.user.UserViewModel
 import club.bweakfast.foodora.util.showView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,6 +30,9 @@ open class CustomToolbarActivity : AppCompatActivity() {
 
     @Inject
     lateinit var userViewModel: UserViewModel
+
+    @Inject
+    lateinit var setupViewModel: SetupViewModel
 
     protected fun onCreate(savedInstanceState: Bundle?, @LayoutRes layoutID: Int) {
         super.onCreate(savedInstanceState)
