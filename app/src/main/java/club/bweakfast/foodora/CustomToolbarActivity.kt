@@ -31,9 +31,6 @@ open class CustomToolbarActivity : AppCompatActivity() {
     @Inject
     lateinit var userViewModel: UserViewModel
 
-    @Inject
-    lateinit var setupViewModel: SetupViewModel
-
     protected fun onCreate(savedInstanceState: Bundle?, @LayoutRes layoutID: Int) {
         super.onCreate(savedInstanceState)
         setContentView(layoutID)

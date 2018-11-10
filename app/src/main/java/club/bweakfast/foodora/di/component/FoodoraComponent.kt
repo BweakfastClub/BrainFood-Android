@@ -1,6 +1,7 @@
 package club.bweakfast.foodora.di.component
 
 import club.bweakfast.foodora.CustomToolbarActivity
+import club.bweakfast.foodora.SplashScreenActivity
 import club.bweakfast.foodora.auth.AuthenticationActivity
 import club.bweakfast.foodora.auth.RegisterFragment
 import club.bweakfast.foodora.di.module.FoodoraModule
@@ -29,4 +30,5 @@ interface FoodoraComponent {
     fun inject(activity: SetupInfoActivity)
     fun inject(fragment: SetupMealsFragment)
     fun inject(fragment: RegisterFragment)
+    fun inject(activity: SplashScreenActivity)
 }

@@ -19,15 +19,6 @@ class MainActivity : CustomToolbarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState, R.layout.activity_main)
 
-        if (!setupViewModel.isSetupComplete) {
-            Intent(this, SetupInfoActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(this)
-                finish()
-            }
-            return
-        }
-
         bottomBar.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.tab_home -> {
