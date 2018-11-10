@@ -1,11 +1,12 @@
 package club.bweakfast.foodora
 
 import android.content.Context
-import android.preference.PreferenceManager
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class StorageService @Inject constructor(context: Context) {
-    var token: String? = "keyboardcat"
+    var token: String? = null
     val isLoggedIn: Boolean
         get() = hasToken()
 

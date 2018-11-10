@@ -1,5 +1,6 @@
 package club.bweakfast.foodora.auth
 
+import club.bweakfast.foodora.StorageService
 import club.bweakfast.foodora.util.mapResponse
 import io.reactivex.Single
 import okhttp3.MediaType
@@ -12,15 +13,23 @@ import javax.inject.Inject
  * Created by silve on 3/4/2018.
  */
 
-class AuthenticationService @Inject constructor() {
-    var token: String? = "keyboardcat"
-    val isLoggedIn = false
+class AuthenticationService @Inject constructor(private val storageService: StorageService) {
+    var token: String?
+        get() = storageService.token
+        set(value) {
+            storageService.token = value
+        }
+
+    val isLoggedIn
+        get() = storageService.isLoggedIn
 
     fun login(email: String, password: String): Single<TokenResponse> {
-        return if ((email == "banana" || email == "banana@apple.ca") && password == "banana") {
+        return if (email == "banana@apple.ca" && password == "banana") {
+            storageService.token = "keyboardcat"
             Single
                 .just(Response.success(TokenResponse(token!!)))
                 .delay(2, TimeUnit.SECONDS)
+
         } else {
             Single.just(
                 Response.error(
