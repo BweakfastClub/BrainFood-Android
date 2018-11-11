@@ -1,6 +1,6 @@
 package club.bweakfast.foodora.di.component
 
-import club.bweakfast.foodora.CustomToolbarActivity
+import club.bweakfast.foodora.custom.CustomToolbarActivity
 import club.bweakfast.foodora.SplashScreenActivity
 import club.bweakfast.foodora.auth.AuthenticationActivity
 import club.bweakfast.foodora.auth.RegisterFragment

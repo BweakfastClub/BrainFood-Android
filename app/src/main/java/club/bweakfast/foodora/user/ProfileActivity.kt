@@ -3,7 +3,7 @@ package club.bweakfast.foodora.user
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import club.bweakfast.foodora.CustomToolbarActivity
+import club.bweakfast.foodora.custom.CustomToolbarActivity
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.getRandomRecipes
 import club.bweakfast.foodora.recipe.RecipesAdapter

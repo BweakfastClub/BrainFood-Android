@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import club.bweakfast.foodora.auth.AuthenticationActivity
+import club.bweakfast.foodora.custom.CustomToolbarActivity
 import club.bweakfast.foodora.home.HomeFragment
 import club.bweakfast.foodora.plan.MealPlanFragment
 import club.bweakfast.foodora.search.SearchFragment
-import club.bweakfast.foodora.setup.SetupInfoActivity
 import club.bweakfast.foodora.user.ProfileActivity
 import club.bweakfast.foodora.util.listenForChanges
 import club.bweakfast.foodora.util.showFragment

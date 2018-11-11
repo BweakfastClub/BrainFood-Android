@@ -1,7 +1,7 @@
-package club.bweakfast.foodora
+package club.bweakfast.foodora.custom
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceActivity
 import android.support.annotation.LayoutRes
@@ -9,15 +9,13 @@ import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatDelegate
 import android.support.v7.widget.Toolbar
 import android.support.v7.widget.ViewStubCompat
-import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewStub
 import android.widget.ImageView
-import android.widget.LinearLayout
+import club.bweakfast.foodora.R
+import club.bweakfast.foodora.ToolbarDelegate
 import club.bweakfast.foodora.util.showView
-
 
 /**
  * A [android.preference.PreferenceActivity] which implements and proxies the necessary calls
@@ -57,6 +55,7 @@ abstract class CustomToolbarPreferenceActivity : PreferenceActivity() {
         initToolbar()
     }
 
+    @SuppressLint("RestrictedApi")
     private fun initToolbar() {
         findViewById<ViewStubCompat>(R.id.action_mode_bar_stub).apply {
             layoutResource = R.layout.layout_toolbar

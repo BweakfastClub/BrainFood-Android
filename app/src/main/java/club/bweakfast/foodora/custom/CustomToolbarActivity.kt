@@ -1,15 +1,14 @@
-package club.bweakfast.foodora
+package club.bweakfast.foodora.custom
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import club.bweakfast.foodora.setup.SetupViewModel
+import club.bweakfast.foodora.FoodoraApp
+import club.bweakfast.foodora.ToolbarDelegate
 import club.bweakfast.foodora.user.UserViewModel
-import club.bweakfast.foodora.util.showView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_toolbar.*
 import javax.inject.Inject
 
 @SuppressLint("Registered")

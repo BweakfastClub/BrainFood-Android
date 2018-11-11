@@ -6,7 +6,7 @@ import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.widget.ListView
 import androidx.core.view.get
-import club.bweakfast.foodora.CustomToolbarPreferenceActivity
+import club.bweakfast.foodora.custom.CustomToolbarPreferenceActivity
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.MainActivity
 import club.bweakfast.foodora.ProcessingFragment
