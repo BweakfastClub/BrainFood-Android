@@ -6,11 +6,11 @@ import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.widget.ListView
 import androidx.core.view.get
-import club.bweakfast.foodora.custom.CustomToolbarPreferenceActivity
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.MainActivity
 import club.bweakfast.foodora.ProcessingFragment
 import club.bweakfast.foodora.R
+import club.bweakfast.foodora.custom.CustomToolbarPreferenceActivity
 import club.bweakfast.foodora.util.onError
 import club.bweakfast.foodora.util.showFragment
 import club.bweakfast.foodora.util.showView
@@ -127,6 +127,7 @@ class SetupInfoActivity : CustomToolbarPreferenceActivity() {
      * Make sure to deny any unknown fragments here.
      */
     override fun isValidFragment(fragmentName: String): Boolean {
-        return PreferenceFragment::class.java.name == fragmentName || SetupInfoFragment::class.java.name == fragmentName
+        return PreferenceFragment::class.java.name == fragmentName || SetupInfoFragment::class.java.name == fragmentName ||
+                SetupMealsFragment::class.java.name == fragmentName || ProcessingFragment::class.java.name == fragmentName
     }
 }
