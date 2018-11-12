@@ -26,6 +26,18 @@ class StorageService @Inject constructor(private val context: Context) {
             saveName(value!!)
         }
 
+    var currentPassword: String?
+        get() = preferences.getString(currentPasswordKey, null)
+        set(value) {
+            preferences.edit().putString(currentPasswordKey, value).apply()
+        }
+
+    var newPassword: String?
+        get() = preferences.getString(newPasswordKey, null)
+        set(value) {
+            preferences.edit().putString(newPasswordKey, value).apply()
+        }
+
     val isVegan: Boolean
         get() = preferences.getBoolean(veganKey, false)
 
@@ -40,6 +52,22 @@ class StorageService @Inject constructor(private val context: Context) {
         veganKey = context.getString(R.string.pref_key_is_vegan)
         vegetarianKey = context.getString(R.string.pref_key_is_vegetarian)
         peanutAllergyKey = context.getString(R.string.pref_key_has_peanut_allergy)
+        currentPasswordKey = context.getString(R.string.pref_key_password_current)
+        newPasswordKey = context.getString(R.string.pref_key_password_new)
+    }
+
+    operator fun <V> set(key: String, value: V) {
+        val editor = preferences.edit()
+        when (key) {
+            nameKey, currentPasswordKey, newPasswordKey -> editor.putString(key, value as String).apply()
+            vegetarianKey, veganKey, peanutAllergyKey -> {
+                if (value is String) {
+                    editor.putBoolean(key, value.toBoolean())
+                } else if (value is Boolean) {
+                    editor.putBoolean(key, value)
+                }
+            }
+        }
     }
 
     fun logout() {
@@ -67,5 +95,7 @@ class StorageService @Inject constructor(private val context: Context) {
         private lateinit var veganKey: String
         private lateinit var vegetarianKey: String
         private lateinit var peanutAllergyKey: String
+        private lateinit var currentPasswordKey: String
+        private lateinit var newPasswordKey: String
     }
 }

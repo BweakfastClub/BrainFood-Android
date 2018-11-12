@@ -74,8 +74,6 @@
     <string name="action_remove_meal_plan">Remove From Meal Plan</string>
 
     <!-- Strings related to setup -->
-    <string name="title_activity_setup">SetupActivity</string>
-    <string name="action_settings">Settings</string>
     <string name="message_setup_1">Fill in the following information, it\'ll help us figure out how to feed you!</string>
     <string name="prompt_age">Age</string>
     <string name="subheading_dietary_restrictions">Dietary Restrictions</string>
@@ -93,4 +91,19 @@
     <string name="error_setup_name">Name cannot be empty!</string>
     <string name="error_setup_3_recipes">You must select 3 recipes to continue!</string>
     <string name="loading_message_1">Tossing some salads…</string>
+
+    <!-- Strings related to settings -->
+    <string name="pref_password_current">Current Password</string>
+    <string name="pref_password_new">New Password</string>
+    <string name="pref_key_password_current">current_password</string>
+    <string name="pref_key_password_new">new_password</string>
+    <string name="message_unsaved_changes">If you leave now, your changes will not be saved. Do you still want to leave?</string>
+    <string name="title_unsaved_changes">Unsaved Changes</string>
+    <string name="action_dialog_leave">Leave anyways</string>
+    <string name="action_dialog_stay">Stay</string>
+    <string name="title_settings">Settings</string>
+    <string name="msg_saved_changes">Saved changes successfully!</string>
+    <string name="action_logout">Logout</string>
+    <string name="msg_submitting_changes">Submitting changes…</string>
+
 </resources>

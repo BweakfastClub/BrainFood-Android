@@ -1,11 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <club.bweakfast.foodora.setup.SetupInputPreference
-        android:enabled="false"
         android:inputType="textPersonName"
         android:key="@string/pref_key_name"
         android:title="@string/prompt_name"
+        app:inputWidth="128dp" />
+
+    <club.bweakfast.foodora.setup.SetupInputPreference
+        android:inputType="textPassword"
+        android:key="@string/pref_key_password_current"
+        android:title="@string/pref_password_current"
+        app:inputWidth="128dp" />
+
+    <club.bweakfast.foodora.setup.SetupInputPreference
+        android:inputType="textPassword"
+        android:key="@string/pref_key_password_new"
+        android:title="@string/pref_password_new"
         app:inputWidth="128dp" />
 
     <PreferenceCategory android:title="@string/subheading_dietary_restrictions">
@@ -30,4 +42,8 @@
             android:title="@string/pref_allergy_peanut" />
 
     </PreferenceCategory>
+
+    <Preference
+        android:layout="@layout/layout_preference"
+        android:title="@string/action_logout" />
 </PreferenceScreen>

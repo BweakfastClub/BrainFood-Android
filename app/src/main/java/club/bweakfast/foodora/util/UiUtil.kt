@@ -9,6 +9,7 @@ import android.support.v14.preference.PreferenceFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentTransaction
+import android.support.v7.app.AlertDialog
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.TypedValue
@@ -16,6 +17,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import club.bweakfast.foodora.R
+import com.github.javiersantos.bottomdialogs.BottomDialog
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 
@@ -89,6 +91,16 @@ fun Context.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_
 fun Context.longToast(@StringRes resId: Int) = longToast(getString(resId))
 
 fun Context.longToast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+
+fun Context.buildBottomSheet(message: String, title: String? = null, buildSheet: BottomDialog.Builder.() -> Unit): BottomDialog {
+    val sheetBuilder = BottomDialog.Builder(this)
+        .setContent(message)
+
+    title?.let { sheetBuilder.setTitle(title) }
+    sheetBuilder.buildSheet()
+
+    return sheetBuilder.show()
+}
 
 open class TextListener : TextWatcher {
     override fun afterTextChanged(s: Editable) {}

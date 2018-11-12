@@ -9,6 +9,8 @@ import club.bweakfast.foodora.favourite.FavouritesFragment
 import club.bweakfast.foodora.home.HomeFragment
 import club.bweakfast.foodora.recipe.RecipeActivity
 import club.bweakfast.foodora.search.SearchFragment
+import club.bweakfast.foodora.settings.SettingsActivity
+import club.bweakfast.foodora.settings.SettingsFragment
 import club.bweakfast.foodora.setup.SetupInfoActivity
 import club.bweakfast.foodora.setup.SetupMealsFragment
 import dagger.Component
@@ -31,4 +33,6 @@ interface FoodoraComponent {
     fun inject(fragment: SetupMealsFragment)
     fun inject(fragment: RegisterFragment)
     fun inject(activity: SplashScreenActivity)
+    fun inject(activity: SettingsActivity)
+    fun inject(fragment: SettingsFragment)
 }

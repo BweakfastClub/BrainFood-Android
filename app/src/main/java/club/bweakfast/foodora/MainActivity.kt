@@ -8,9 +8,11 @@ import club.bweakfast.foodora.custom.CustomToolbarActivity
 import club.bweakfast.foodora.home.HomeFragment
 import club.bweakfast.foodora.plan.MealPlanFragment
 import club.bweakfast.foodora.search.SearchFragment
+import club.bweakfast.foodora.settings.SettingsActivity
 import club.bweakfast.foodora.user.ProfileActivity
 import club.bweakfast.foodora.util.listenForChanges
 import club.bweakfast.foodora.util.showFragment
+import club.bweakfast.foodora.util.showView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
@@ -48,6 +50,13 @@ class MainActivity : CustomToolbarActivity() {
         leftIcon.setOnClickListener {
             val nextScreen = if (userViewModel.isLoggedIn) ProfileActivity::class.java else AuthenticationActivity::class.java
             Intent(this, nextScreen).apply { startActivity(this) }
+        }
+
+        showView(rightIcon, userViewModel.isLoggedIn)
+        if (userViewModel.isLoggedIn) {
+            rightIcon.setOnClickListener {
+                Intent(this, SettingsActivity::class.java).apply { startActivity(this) }
+            }
         }
     }
 }

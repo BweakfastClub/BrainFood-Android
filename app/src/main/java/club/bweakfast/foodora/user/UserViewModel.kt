@@ -2,7 +2,6 @@ package club.bweakfast.foodora.user
 
 import club.bweakfast.foodora.StorageService
 import club.bweakfast.foodora.auth.AuthenticationService
-import club.bweakfast.foodora.util.mapResponse
 import io.reactivex.Completable
 import javax.inject.Inject
 
@@ -12,6 +11,7 @@ import javax.inject.Inject
 
 class UserViewModel @Inject constructor(
     private val authService: AuthenticationService,
+    private val userService: UserService,
     private val storageService: StorageService
 ) {
     val isLoggedIn = authService.isLoggedIn
@@ -31,4 +31,8 @@ class UserViewModel @Inject constructor(
                 Completable.complete()
             }
     }
+
+    fun getUserInfo() = userService.getUserInfo()
+
+    fun updateUserInfo(userInfoJSON: Map<String, String>) = userService.updateUserInfo(userInfoJSON)
 }
