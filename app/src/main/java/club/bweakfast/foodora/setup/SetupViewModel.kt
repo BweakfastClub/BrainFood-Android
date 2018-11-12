@@ -2,12 +2,13 @@ package club.bweakfast.foodora.setup
 
 import club.bweakfast.foodora.StorageService
 import club.bweakfast.foodora.recipe.RecipeService
+import club.bweakfast.foodora.user.UserService
 import io.reactivex.Completable
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SetupViewModel @Inject constructor(private val storageService: StorageService, private val recipeService: RecipeService) {
+class SetupViewModel @Inject constructor(private val storageService: StorageService, private val userService: UserService) {
     var isSetupComplete: Boolean
         get() = storageService.isSetupComplete
         set(value) {
@@ -41,7 +42,7 @@ class SetupViewModel @Inject constructor(private val storageService: StorageServ
         if (isVegetarian) allergies.add("Vegetarian")
         if (hasPeanutAllergy) allergies.add("Peanuts")
 
-        return recipeService.addAllergies(allergies)
+        return userService.addAllergies(allergies)
     }
 
     private fun validateStep1(): Boolean {

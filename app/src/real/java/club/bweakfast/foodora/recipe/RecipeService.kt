@@ -20,8 +20,6 @@ class RecipeService @Inject constructor(retrofit: Retrofit) {
 
     fun removeRecipeFromMealPlan(recipeID: Int) = api.removeRecipeFromMealPlan(mapOf("recipeIds" to listOf(recipeID))).mapResponse()
 
-    fun addAllergies(allergies: List<String>) = api.addAllergies(mapOf("allergies" to allergies)).mapResponse()
-
     interface RecipeAPI {
         @POST("/users/liked_recipes")
         fun likeRecipe(@Body recipeIDJSON: Map<String, @JvmSuppressWildcards List<Int>>): Single<Response<Void>>
@@ -34,8 +32,5 @@ class RecipeService @Inject constructor(retrofit: Retrofit) {
 
         @HTTP(method = "DELETE", path = "/users/meal_plan", hasBody = true)
         fun removeRecipeFromMealPlan(@Body recipeIDJSON: Map<String, @JvmSuppressWildcards List<Int>>): Single<Response<Void>>
-
-        @POST("/users/allergies")
-        fun addAllergies(@Body allergiesJSON: Map<String, @JvmSuppressWildcards List<String>>): Single<Response<Void>>
     }
 }
