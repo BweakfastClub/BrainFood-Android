@@ -32,7 +32,7 @@ class SetupInputPreference(context: Context, attrs: AttributeSet?, defStyleAttr:
         context.theme?.obtainStyledAttributes(attrs, R.styleable.SetupInputPreference, defStyleAttr, 0)?.use {
             inputWidth = it.getDimension(R.styleable.SetupInputPreference_inputWidth, 0f)
             inputType = it.getInt(R.styleable.SetupInputPreference_android_inputType, EditorInfo.TYPE_NULL)
-            inputDisabled = it.getBoolean(R.styleable.SetupInputPreference_android_enabled, false).not()
+            inputDisabled = it.getBoolean(R.styleable.SetupInputPreference_android_enabled, true).not()
         }
 
         textWatcher = object : TextWatcher {
