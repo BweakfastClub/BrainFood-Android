@@ -9,6 +9,8 @@ android:
   - sys-img-x86-android-27
   - sys-img-x86-android-19
 before_install:
-- openssl aes-256-cbc -K $encrypted_89893b5696d4_key -iv $encrypted_89893b5696d4_iv
-  -in secrets.tar.enc -out secrets.tar -d
+- openssl aes-256-cbc -K $secret_key -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
+env:
+  global:
+    secure: VUeE5msQ2Suf5e36XHrC1fnjpd/Ya0ScSybdeQS1Y/XnUR4EkZTwJSSwNIfBxxQn0l5OCWSn4ZEmKbyDAVBMHI2GyhSRMy+6ZsEQ1ThmwO3XpbwCJURwde6TxuIcQ3PuME8k/3TNTCylX2Lx0u6M7P6iV8NNAJBR6RYmJvgeT/LnZVkG2+a2i/x2HF0aPDAph3/YafPU9gUBolJtmvaPSbUPXdCEzDIHW4zttWfZqGBpTLl6ASoJNEykPMHMcAFS4VBQ1uhWqy1+tjtCtFiizBta+MndaEzEH9YZ+6wM53/PjJpboqurG3GFdrZ65I1ptGeBrNZ+MWSSrK1UwNlINNz2nXsKKMJVNB+Rx8fgeXAWz/nLKfs65cxIcy7497OYI3P4zTvetvVSXuYX06aj3zLCbwWWq6XHpfiU1jgZ3DCJB5xCfDhzlxIn3Yk7v2HmdRb1W1WeT3b0RmK0wTq6fTK7bevWxvQWMkZ3AaJfND5ffVqTfI4blB5x4l4VU3kr0mmDnyyPjrOg9UWx18dkZyV0pohNKEShznURHVgnM+xQmHgrpd0StmuFzIQhpj9V9kD0U4r/64RQDRiMdhVCFVYPJncUdtq7EIWO2mwjRBRpCy22gN7P4ukLdPhi12I1K4nCZ7Vc1OQQ5LMCi1GCLosnHdzdaE/JVoJeTbLzD98=
