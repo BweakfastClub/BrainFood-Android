@@ -32,4 +32,6 @@ Native Android application for BrainFood
 
 ## Wireframe
 
+Designed by [Ali Sanaknaki](https://github.com/Sanaknaki)
+
 <img src="https://cdn.discordapp.com/attachments/425037362150506519/494223887178137600/Rectangle_2.png" />
