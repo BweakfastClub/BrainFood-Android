@@ -9,7 +9,7 @@ android:
   - sys-img-x86-android-27
   - sys-img-x86-android-19
 before_install:
-- openssl aes-256-cbc -k "$secret_key" -in secrets.tar.enc -out secrets.tar -d
+- openssl aes-256-cbc -K "$secret_key" -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
 env:
   global:
