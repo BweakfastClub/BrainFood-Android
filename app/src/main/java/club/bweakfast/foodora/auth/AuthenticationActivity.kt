@@ -39,8 +39,6 @@ class AuthenticationActivity : AppCompatActivity() {
         }
 
     @Inject
-    lateinit var authService: AuthenticationService
-    @Inject
     lateinit var userViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +54,7 @@ class AuthenticationActivity : AppCompatActivity() {
         }
         showDarkStatusIcons(window.decorView, true)
 
-        if (authService.isLoggedIn) {
+        if (userViewModel.isLoggedIn) {
             onLoginSuccess()
         } else {
             loadLoginPage()
