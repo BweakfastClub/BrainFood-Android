@@ -5,11 +5,12 @@ import android.os.Build
 import android.preference.PreferenceActivity
 import android.support.annotation.IdRes
 import android.support.annotation.StringRes
+import android.support.annotation.VisibleForTesting
+import android.support.test.espresso.idling.CountingIdlingResource
 import android.support.v14.preference.PreferenceFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AlertDialog
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.TypedValue
@@ -26,6 +27,25 @@ import io.reactivex.Flowable
  */
 
 private val emptyAnimationHandler: (FragmentTransaction) -> Unit = {}
+
+@VisibleForTesting
+val toastIdlingResource = CountingIdlingResource("toast", true)
+@VisibleForTesting var isToastDisplayed = false
+    set(value) {
+        if (!value && !toastIdlingResource.isIdleNow) {
+            toastIdlingResource.decrement()
+        }
+        field = value
+    }
+private val toastListener = object : View.OnAttachStateChangeListener {
+    override fun onViewDetachedFromWindow(v: View?) {
+        isToastDisplayed = false
+    }
+
+    override fun onViewAttachedToWindow(v: View?) {
+        isToastDisplayed = true
+    }
+}
 
 fun FragmentActivity.showFragment(
     fragment: Fragment,
@@ -86,11 +106,18 @@ fun Float.toDP(context: Context) = TypedValue.applyDimension(TypedValue.COMPLEX_
 
 fun Context.toast(@StringRes resId: Int) = toast(getString(resId))
 
-fun Context.toast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+fun Context.toast(text: CharSequence) = toast(this, text, Toast.LENGTH_SHORT)
 
 fun Context.longToast(@StringRes resId: Int) = longToast(getString(resId))
 
-fun Context.longToast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+fun Context.longToast(text: CharSequence) = toast(this, text, Toast.LENGTH_LONG)
+
+private fun toast(context: Context, text: CharSequence, duration: Int) {
+    Toast.makeText(context, text, duration).apply {
+        view.addOnAttachStateChangeListener(toastListener)
+        show()
+    }
+}
 
 fun Context.buildBottomSheet(message: String, title: String? = null, buildSheet: BottomDialog.Builder.() -> Unit): BottomDialog {
     val sheetBuilder = BottomDialog.Builder(this)

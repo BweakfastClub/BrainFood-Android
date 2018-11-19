@@ -1,11 +1,11 @@
 package club.bweakfast.foodora
 
 import android.content.Context
-import android.preference.PreferenceManager
+import android.content.SharedPreferences
+import android.support.annotation.VisibleForTesting
 import javax.inject.Inject
 
-class StorageService @Inject constructor(private val context: Context) {
-    private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+open class StorageService @Inject constructor(@VisibleForTesting open val preferences: SharedPreferences, context: Context) {
     var token: String?
         get() = preferences.getString(tokenKey, null)
         set(value) {
@@ -91,11 +91,11 @@ class StorageService @Inject constructor(private val context: Context) {
     companion object {
         private const val tokenKey = "auth"
         private const val setupCompleteKey = "setup_complete"
-        private lateinit var nameKey: String
-        private lateinit var veganKey: String
-        private lateinit var vegetarianKey: String
-        private lateinit var peanutAllergyKey: String
-        private lateinit var currentPasswordKey: String
-        private lateinit var newPasswordKey: String
+        @VisibleForTesting lateinit var nameKey: String
+        @VisibleForTesting lateinit var veganKey: String
+        @VisibleForTesting lateinit var vegetarianKey: String
+        @VisibleForTesting lateinit var peanutAllergyKey: String
+        @VisibleForTesting lateinit var currentPasswordKey: String
+        @VisibleForTesting lateinit var newPasswordKey: String
     }
 }

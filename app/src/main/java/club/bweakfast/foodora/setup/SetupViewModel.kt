@@ -8,17 +8,17 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SetupViewModel @Inject constructor(private val storageService: StorageService, private val userService: UserService) {
+open class SetupViewModel @Inject constructor(@VisibleForTesting open val storageService: StorageService, private val userService: UserService) {
     var isSetupComplete: Boolean
         get() = storageService.isSetupComplete
         set(value) {
             storageService.isSetupComplete = value
         }
 
-    val isStep1Valid: Boolean
+    open val isStep1Valid: Boolean
         get() = validateStep1()
 
-    var isStep2Valid: Boolean = false
+    open var isStep2Valid: Boolean = false
 
     var name: String?
         get() = storageService.name
@@ -46,6 +46,6 @@ class SetupViewModel @Inject constructor(private val storageService: StorageServ
     }
 
     private fun validateStep1(): Boolean {
-        return !name.isNullOrBlank()
+        return (isVegan && isVegetarian).not()
     }
 }
