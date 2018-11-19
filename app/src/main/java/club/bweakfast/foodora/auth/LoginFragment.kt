@@ -43,7 +43,7 @@ class LoginFragment : Fragment(), ErrorDisplay {
         super.onViewCreated(view, savedInstanceState)
 
         inputValidators = mapOf(
-            email to listOf(Validator.empty()),
+            email to listOf(Validator.empty(), Validator.emailValid()),
             password to listOf(Validator.empty(), Validator.passwordValid())
         )
 

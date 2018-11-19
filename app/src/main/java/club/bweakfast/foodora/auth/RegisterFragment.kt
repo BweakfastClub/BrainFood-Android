@@ -22,7 +22,6 @@ import club.bweakfast.foodora.setup.SetupViewModel
 import club.bweakfast.foodora.util.listenForChanges
 import club.bweakfast.foodora.util.logError
 import club.bweakfast.foodora.validate
-import com.crashlytics.android.Crashlytics
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
@@ -103,7 +102,6 @@ class RegisterFragment : Fragment(), ErrorDisplay {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ setupViewModel.name = it }, {
                 logError(it)
-                Crashlytics.logException(it)
             })
     }
 
