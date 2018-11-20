@@ -3,6 +3,7 @@ package club.bweakfast.foodora.util
 import android.content.Context
 import android.util.Log
 import club.bweakfast.foodora.R
+import com.crashlytics.android.Crashlytics
 
 /**
  * Created by silve on 3/26/2018.
@@ -35,5 +36,6 @@ fun Any.onError(
 }
 
 fun logError(throwable: Throwable) {
+    Crashlytics.logException(throwable)
     throwable.printStackTrace()
 }
