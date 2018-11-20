@@ -2,9 +2,15 @@ package club.bweakfast.foodora.recipe
 
 import android.database.Cursor
 import android.os.Parcel
-import android.os.Parcelable
 import androidx.core.database.getInt
 import androidx.core.database.getString
+import club.bweakfast.foodora.db.COLUMN_RECIPE_COOK_MINS
+import club.bweakfast.foodora.db.COLUMN_RECIPE_ID
+import club.bweakfast.foodora.db.COLUMN_RECIPE_IMG_URL
+import club.bweakfast.foodora.db.COLUMN_RECIPE_PREP_MINS
+import club.bweakfast.foodora.db.COLUMN_RECIPE_READY_MINS
+import club.bweakfast.foodora.db.COLUMN_RECIPE_SERVINGS
+import club.bweakfast.foodora.db.COLUMN_RECIPE_TITLE
 import club.bweakfast.foodora.favourite.Favourite
 import club.bweakfast.foodora.favourite.FavouriteType
 import club.bweakfast.foodora.recipe.ingredient.Ingredient
@@ -63,14 +69,14 @@ data class Recipe(
         fun createFromCursor(cursor: Cursor, ingredients: List<Ingredient>): Recipe {
             with(cursor) {
                 return Recipe(
-                    getInt(RecipeDaoImpl.COLUMN_ID),
+                    getInt(COLUMN_RECIPE_ID),
                     emptyList(),
-                    getString(RecipeDaoImpl.COLUMN_TITLE),
-                    getInt(RecipeDaoImpl.COLUMN_SERVINGS),
-                    getInt(RecipeDaoImpl.COLUMN_PREP_MINS),
-                    getInt(RecipeDaoImpl.COLUMN_COOK_MINS),
-                    getInt(RecipeDaoImpl.COLUMN_READY_MINS),
-                    getString(RecipeDaoImpl.COLUMN_IMG_URL)
+                    getString(COLUMN_RECIPE_TITLE),
+                    getInt(COLUMN_RECIPE_SERVINGS),
+                    getInt(COLUMN_RECIPE_PREP_MINS),
+                    getInt(COLUMN_RECIPE_COOK_MINS),
+                    getInt(COLUMN_RECIPE_READY_MINS),
+                    getString(COLUMN_RECIPE_IMG_URL)
                 )
             }
         }

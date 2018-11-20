@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.preference.PreferenceManager
 import club.bweakfast.foodora.BuildConfig
-import club.bweakfast.foodora.FoodoraDB
+import club.bweakfast.foodora.db.FoodoraDB
 import club.bweakfast.foodora.StorageService
 import club.bweakfast.foodora.favourite.FavouriteDao
 import club.bweakfast.foodora.favourite.FavouriteDaoImpl

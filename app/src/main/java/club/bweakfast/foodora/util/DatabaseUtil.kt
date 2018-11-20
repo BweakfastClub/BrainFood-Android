@@ -32,3 +32,5 @@ inline fun <R> Cursor.map(transform: (Cursor) -> R): List<R> {
 
     return list
 }
+
+fun Boolean.toInt() = if (this) 1 else 0

@@ -1,7 +1,15 @@
 package club.bweakfast.foodora.recipe
 
 import androidx.core.content.contentValuesOf
-import club.bweakfast.foodora.FoodoraDB
+import club.bweakfast.foodora.db.COLUMN_RECIPE_COOK_MINS
+import club.bweakfast.foodora.db.COLUMN_RECIPE_ID
+import club.bweakfast.foodora.db.COLUMN_RECIPE_IMG_URL
+import club.bweakfast.foodora.db.COLUMN_RECIPE_PREP_MINS
+import club.bweakfast.foodora.db.COLUMN_RECIPE_READY_MINS
+import club.bweakfast.foodora.db.COLUMN_RECIPE_SERVINGS
+import club.bweakfast.foodora.db.COLUMN_RECIPE_TITLE
+import club.bweakfast.foodora.db.FoodoraDB
+import club.bweakfast.foodora.db.TABLE_RECIPE_NAME
 import club.bweakfast.foodora.util.insert
 import club.bweakfast.foodora.util.map
 import club.bweakfast.foodora.util.query
@@ -14,16 +22,16 @@ class RecipeDaoImpl @Inject constructor(private val foodoraDB: FoodoraDB) : Reci
         return Single.create {
             val db = foodoraDB.readableDatabase
             val cursor = if (recipeIDs == null) {
-                db.query(TABLE_NAME)
+                db.query(TABLE_RECIPE_NAME)
             } else {
                 db.query(
-                    table = TABLE_NAME,
-                    selection = "$COLUMN_ID IN (${recipeIDs.joinToString(", ") { "?" }})",
+                    table = TABLE_RECIPE_NAME,
+                    selection = "$COLUMN_RECIPE_ID IN (${recipeIDs.joinToString(", ") { "?" }})",
                     selectionArgs = recipeIDs.map { it.toString() }.toTypedArray()
                 )
             }
 
-            it.onSuccess(cursor.map { Recipe.createFromCursor(it) })
+            it.onSuccess(cursor.map { Recipe.createFromCursor(it, emptyList()) })
         }
     }
 
@@ -32,15 +40,15 @@ class RecipeDaoImpl @Inject constructor(private val foodoraDB: FoodoraDB) : Reci
             val db = foodoraDB.writableDatabase
             with(recipe) {
                 db.insert(
-                    TABLE_NAME,
+                    TABLE_RECIPE_NAME,
                     contentValuesOf(
-                        COLUMN_ID to id,
-                        COLUMN_TITLE to title,
-                        COLUMN_SERVINGS to servings,
-                        COLUMN_PREP_MINS to prepMinutes,
-                        COLUMN_COOK_MINS to cookMinutes,
-                        COLUMN_READY_MINS to readyMinutes,
-                        COLUMN_IMG_URL to imageURL
+                        COLUMN_RECIPE_ID to id,
+                        COLUMN_RECIPE_TITLE to title,
+                        COLUMN_RECIPE_SERVINGS to servings,
+                        COLUMN_RECIPE_PREP_MINS to prepMinutes,
+                        COLUMN_RECIPE_COOK_MINS to cookMinutes,
+                        COLUMN_RECIPE_READY_MINS to readyMinutes,
+                        COLUMN_RECIPE_IMG_URL to imageURL
                     )
                 )
                 it.onComplete()
@@ -51,19 +59,8 @@ class RecipeDaoImpl @Inject constructor(private val foodoraDB: FoodoraDB) : Reci
     override fun removeRecipe(recipe: Recipe): Completable {
         return Completable.create {
             val db = foodoraDB.writableDatabase
-            db.delete(TABLE_NAME, "$COLUMN_ID = ?", arrayOf(recipe.id.toString()))
+            db.delete(TABLE_RECIPE_NAME, "$COLUMN_RECIPE_ID = ?", arrayOf(recipe.id.toString()))
             it.onComplete()
         }
-    }
-
-    companion object {
-        const val COLUMN_ID = "id"
-        const val COLUMN_TITLE = "title"
-        const val COLUMN_SERVINGS = "servings"
-        const val COLUMN_PREP_MINS = "prep_minutes"
-        const val COLUMN_COOK_MINS = "cook_minutes"
-        const val COLUMN_READY_MINS = "ready_minutes"
-        const val COLUMN_IMG_URL = "image_url"
-        const val TABLE_NAME = "recipes"
     }
 }
