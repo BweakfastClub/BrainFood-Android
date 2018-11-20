@@ -53,13 +53,11 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="24dp"
         android:background="@drawable/bg_extended_fab"
-        android:drawableStart="@drawable/ic_pot_mix"
-        android:drawablePadding="12dp"
         android:drawableTint="@color/white"
         android:minWidth="128dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:text="@string/action_cook"
+        android:text="@string/action_add_meal_plan"
         android:textColor="@color/white"
         android:textSize="14sp" />
 

@@ -90,7 +90,7 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
 
     private fun clickOnMealPlanBtn(view: View) {
         val fab = view as Button
-        val isAdding = fab.text == getString(R.string.action_cook)
+        val isAdding = fab.text == getString(R.string.action_add_meal_plan)
         val completable = if (isAdding) recipeViewModel::addRecipeToMealPlan else recipeViewModel::removeRecipeFromMealPlan
         updateMealPlanBtn(isAdding)
 
@@ -109,13 +109,7 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
     }
 
     private fun updateMealPlanBtn(isAdding: Boolean) {
-        fab.text = if (isAdding) getString(R.string.action_remove_meal_plan) else getString(R.string.action_cook)
-        fab.setCompoundDrawablesWithIntrinsicBounds(
-            if (isAdding) 0 else R.drawable.ic_pot_mix,
-            0,
-            0,
-            0
-        )
+        fab.text = if (isAdding) getString(R.string.action_remove_meal_plan) else getString(R.string.action_add_meal_plan)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -127,6 +121,10 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
         return when (item.itemId) {
             R.id.menu_like -> {
                 clickOnLikeItem(recipe, item)
+                true
+            }
+            android.R.id.home -> {
+                onBackPressed()
                 true
             }
             else -> false

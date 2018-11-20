@@ -47,7 +47,7 @@
     <string name="header_ingredients">Ingredients</string>
     <string name="header_nutrition">Nutritional Facts</string>
     <string name="action_like">Like</string>
-    <string name="action_cook">Cook</string>
+    <string name="action_add_meal_plan">Add To Meal Plan</string>
 
     <!-- Strings related to search -->
     <string name="prompt_search">Search for recipes…</string>
