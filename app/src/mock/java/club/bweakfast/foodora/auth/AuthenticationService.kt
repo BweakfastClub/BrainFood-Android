@@ -13,7 +13,7 @@ import javax.inject.Inject
  * Created by silve on 3/4/2018.
  */
 
-class AuthenticationService @Inject constructor(private val storageService: StorageService) {
+open class AuthenticationService @Inject constructor(private val storageService: StorageService) {
     var token: String?
         get() = storageService.token
         set(value) {

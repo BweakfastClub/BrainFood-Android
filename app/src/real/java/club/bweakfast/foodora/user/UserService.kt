@@ -10,7 +10,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import javax.inject.Inject
 
-class UserService @Inject constructor(retrofit: Retrofit) {
+open class UserService @Inject constructor(retrofit: Retrofit) {
     private val api = retrofit.create(UserAPI::class.java)
 
     fun addAllergies(allergies: List<String>) = api.addAllergies(mapOf("allergies" to allergies)).mapResponse()
