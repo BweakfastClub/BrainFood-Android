@@ -1,6 +1,8 @@
 package club.bweakfast.foodora.di.module
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.support.v7.preference.PreferenceManager
 import club.bweakfast.foodora.BuildConfig
 import club.bweakfast.foodora.FoodoraDB
 import club.bweakfast.foodora.StorageService
@@ -57,4 +59,7 @@ class FoodoraModule(private val context: Context) {
 
     @Provides
     fun provideRecipeDao(db: FoodoraDB): RecipeDao = RecipeDaoImpl(db)
+
+    @Provides
+    fun provideSharedPreferences(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 }
