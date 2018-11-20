@@ -27,20 +27,22 @@ class FoodoraModule(private val context: Context) {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BuildConfig.BASE_URL)
-        if (storageService.hasToken()) {
-            val clientBuilder = OkHttpClient.Builder()
-            clientBuilder.addInterceptor {
-                val originalRequest = it.request()
+        val clientBuilder = OkHttpClient.Builder()
+        clientBuilder.addInterceptor {
+            val originalRequest = it.request()
+            if (storageService.hasToken()) {
                 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
                 val requestBuilder = originalRequest
                     .newBuilder()
                     .addHeader("token", storageService.token)
                 val request = requestBuilder.build()
                 it.proceed(request)
+            } else {
+                it.proceed(originalRequest)
             }
-            val client = clientBuilder.build()
-            retrofit.client(client)
         }
+        val client = clientBuilder.build()
+        retrofit.client(client)
         return retrofit.build()
     }
 
