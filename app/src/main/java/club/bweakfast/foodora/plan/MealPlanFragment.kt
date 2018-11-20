@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.browse.category.CategoryName
+import club.bweakfast.foodora.category.CategoryName
 import club.bweakfast.foodora.custom.NutritionInfoLayout
 import club.bweakfast.foodora.custom.NutritionView
 import club.bweakfast.foodora.getRandomRecipes

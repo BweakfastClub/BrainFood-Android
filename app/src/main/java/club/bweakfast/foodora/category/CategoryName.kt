@@ -1,4 +1,4 @@
-package club.bweakfast.foodora.browse.category
+package club.bweakfast.foodora.category
 
 /**
  * Created by silve on 3/24/2018.

@@ -1,6 +1,6 @@
 package club.bweakfast.foodora
 
-import club.bweakfast.foodora.browse.category.CategoryName
+import club.bweakfast.foodora.category.CategoryName
 import club.bweakfast.foodora.recipe.Recipe
 import club.bweakfast.foodora.recipe.ingredient.Ingredient
 import club.bweakfast.foodora.recipe.nutrition.NutritionValue
