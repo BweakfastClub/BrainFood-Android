@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
-import android.widget.ListView
-import androidx.core.view.get
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.MainActivity
 import club.bweakfast.foodora.ProcessingFragment
@@ -19,7 +17,6 @@ import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.pref_setup_input.view.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -71,9 +68,7 @@ class SetupInfoActivity : CustomToolbarPreferenceActivity() {
                 rightIcon.setOnClickListener {
                     if (setupViewModel.isStep1Valid) showFragment(SetupMealsFragment(), "setupMeals", android.R.id.content)
                     else {
-                        toast(R.string.error_setup_name)
-                        val fragment = fragmentManager.findFragmentByTag("SetupInfoFragment") as SetupInfoFragment
-                        (fragment.view.findViewById<ListView>(android.R.id.list)[0]).input.error = getString(R.string.error_field_required)
+                        toast(R.string.error_vegan_or_vegetarian)
                     }
                 }
             }

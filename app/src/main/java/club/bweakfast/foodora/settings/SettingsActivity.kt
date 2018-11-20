@@ -72,12 +72,13 @@ class SettingsActivity : CustomToolbarPreferenceActivity() {
                     })
             } else {
                 val fragment = fragmentManager.findFragmentByTag("SettingsFragment")
-                val recyclerView = fragment.view.findViewById<RecyclerView>(android.R.id.list)
+                val recyclerView = fragment.view.findViewById<RecyclerView>(R.id.list)
                 val nameInput = recyclerView[0].input
                 val currentPasswordInput = recyclerView[1].input
 
                 if (nameInput.text.isBlank()) nameInput.error = getString(R.string.error_field_required)
                 if (currentPasswordInput.text.isBlank()) currentPasswordInput.error = getString(R.string.error_field_required)
+                if (settingsViewModel.isVegan && settingsViewModel.isVegetarian) toast(R.string.error_vegan_or_vegetarian)
             }
         }
     }

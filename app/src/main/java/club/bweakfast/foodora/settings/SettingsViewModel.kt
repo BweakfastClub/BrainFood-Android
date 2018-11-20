@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import club.bweakfast.foodora.StorageService
 import club.bweakfast.foodora.auth.AuthenticationService
 import club.bweakfast.foodora.user.UserService
+import club.bweakfast.foodora.util.log
 import io.reactivex.Completable
 import javax.inject.Inject
 
@@ -15,7 +16,7 @@ class SettingsViewModel @Inject constructor(
         get() = isValid()
 
     private fun isValid(): Boolean {
-        return name.isNullOrBlank().not() && currentPassword.isNullOrBlank().not()
+        return name.isNullOrBlank().not() && currentPassword.isNullOrBlank().not() && (isVegan && isVegetarian).not()
     }
 
     val name: String?
@@ -33,10 +34,10 @@ class SettingsViewModel @Inject constructor(
             storageService.newPassword = value
         }
 
-    private val isVegan: Boolean
+    val isVegan: Boolean
         get() = storageService.isVegan
 
-    private val isVegetarian: Boolean
+    val isVegetarian: Boolean
         get() = storageService.isVegetarian
 
     private val hasPeanutAllergy: Boolean
@@ -46,23 +47,26 @@ class SettingsViewModel @Inject constructor(
         "name" to name,
         "current_password" to currentPassword,
         "new_password" to newPassword,
-        "is_vegan" to isVegan.toString(),
-        "is_vegetarian" to isVegetarian.toString(),
-        "has_peanut_allergy" to hasPeanutAllergy.toString()
+        "is_vegan" to isVegan,
+        "is_vegetarian" to isVegetarian,
+        "has_peanut_allergy" to hasPeanutAllergy
     )
 
-    val newValuesMap = mutableMapOf<String, String?>()
+    val newValuesMap = mutableMapOf<String, Any?>()
 
     val preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
-        newValuesMap[key] = when (key) {
-            "name", "current_password", "new_password" -> prefs.getString(key, null)
-            else -> prefs.getBoolean(key, false).toString()
+        when (key) {
+            "name", "current_password", "new_password" -> newValuesMap[key] = prefs.getString(key, null)
+            "is_vegan", "is_vegetarian", "has_peanut_allergy" -> newValuesMap[key] = prefs.getBoolean(key, false)
         }
     }
 
     fun revertChanges() {
-        newValuesMap.keys.forEach {
-            storageService[it] = oldValuesMap[it]
+        newValuesMap.keys.forEach { key ->
+            when (key) {
+                "name", "current_password", "new_password" -> storageService[key] = oldValuesMap[key]
+                "is_vegan", "is_vegetarian", "has_peanut_allergy" -> storageService[key] = oldValuesMap[key]
+            }
         }
     }
 
@@ -75,9 +79,9 @@ class SettingsViewModel @Inject constructor(
                 "is_vegan" -> allergies.add("Vegan")
                 "is_vegetarian" -> allergies.add("Vegetarian")
                 "has_peanut_allergy" -> allergies.add("Peanuts")
-                "name" -> userInfo[it] = newValuesMap[it]!!
-                "current_password" -> userInfo["password"] = newValuesMap[it]!!
-                "new_password" -> userInfo["newPassword"] = newValuesMap[it]!!
+                "name" -> userInfo[it] = newValuesMap[it]!! as String
+                "current_password" -> userInfo["password"] = newValuesMap[it]!! as String
+                "new_password" -> userInfo["newPassword"] = newValuesMap[it]!! as String
             }
         }
 

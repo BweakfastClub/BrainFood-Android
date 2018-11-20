@@ -1,7 +1,7 @@
 package club.bweakfast.foodora.setup
 
+import android.support.annotation.VisibleForTesting
 import club.bweakfast.foodora.StorageService
-import club.bweakfast.foodora.recipe.RecipeService
 import club.bweakfast.foodora.user.UserService
 import io.reactivex.Completable
 import javax.inject.Inject
