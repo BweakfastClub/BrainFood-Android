@@ -18,7 +18,7 @@ open class SectionTitleLayout(context: Context, attrs: AttributeSet?, defStyle: 
 
     init {
         val sectionTitleLayout = LayoutInflater.from(context).inflate(R.layout.view_section_title, this, false)
-        titleTxt = sectionTitleLayout.titleTxt
+        titleTxt = sectionTitleLayout.sectionTitleTxt
 
         // Load attributes
         context.obtainStyledAttributes(attrs, R.styleable.SectionTitleLayout, defStyle, 0).use {

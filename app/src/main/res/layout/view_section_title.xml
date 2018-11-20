@@ -1,8 +1,8 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/titleTxt"
+    android:id="@+id/sectionTitleTxt"
     style="@style/SectionTitle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:text="@string/title_recommended_lunches" />
+    tools:text="@string/title_recommended_meals" />
 
