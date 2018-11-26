@@ -1,14 +1,12 @@
 package club.bweakfast.foodora.settings
 
 import android.app.ProgressDialog
-import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceFragment
 import android.support.v7.preference.PreferenceManager
 import android.support.v7.widget.RecyclerView
 import androidx.core.view.get
 import club.bweakfast.foodora.FoodoraApp
-import club.bweakfast.foodora.MainActivity
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.custom.CustomToolbarPreferenceActivity
 import club.bweakfast.foodora.util.buildBottomSheet

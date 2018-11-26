@@ -1,22 +1,15 @@
 package club.bweakfast.foodora.recipe
 
-import club.bweakfast.foodora.favourite.FavouriteDao
-import club.bweakfast.foodora.favourite.FavouriteType
-import club.bweakfast.foodora.util.mapResponse
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
-class RecipeViewModel @Inject constructor(
-    private val recipeService: RecipeService,
-    private val recipeDao: RecipeDao,
-    private val favouriteDao: FavouriteDao
-) {
+class RecipeViewModel @Inject constructor(private val recipeService: RecipeService, private val recipeDao: RecipeDao) {
     fun likeRecipe(recipe: Recipe): Completable {
         return Completable.merge(
             listOf(
                 recipeDao.addRecipe(recipe),
-                favouriteDao.addFavourite(recipe),
+                recipeDao.addLikedRecipe(recipe.id),
                 recipeService.likeRecipe(recipe.id)
             )
         )
@@ -25,20 +18,40 @@ class RecipeViewModel @Inject constructor(
     fun unlikeRecipe(recipe: Recipe): Completable {
         return Completable.merge(
             listOf(
-                recipeDao.removeRecipe(recipe),
-                favouriteDao.removeFavourite(recipe),
+                recipeDao.removeLikedRecipe(recipe.id),
                 recipeService.unlikeRecipe(recipe.id)
             )
         )
     }
 
-    fun addRecipeToMealPlan(recipe: Recipe): Completable {
-        return recipeService.addRecipeToMealPlan(recipe.id)
+    fun isLikedRecipe(recipe: Recipe) = recipeDao.isLikedRecipe(recipe.id)
+
+    fun getFavouriteRecipes(): Single<List<Recipe>> = recipeDao.getLikedRecipes()
+
+    fun getMealPlan() = recipeDao.getRecipesInMealPlan()
+
+    fun isRecipeInMealPlan(recipe: Recipe) = recipeDao.isRecipeInMealPlan(recipe.id)
+
+    fun addRecipeToMealPlan(recipe: Recipe, categoryNames: List<String>): Completable {
+        return Completable.merge(
+            listOf(
+                recipeDao.addRecipe(recipe),
+                recipeDao.addRecipeToMealPlan(recipe.id, categoryNames),
+                recipeService.addRecipeToMealPlan(recipe.id, categoryNames)
+            )
+        )
     }
 
-    fun removeRecipeFromMealPlan(recipe: Recipe): Completable {
-        return recipeService.removeRecipeFromMealPlan(recipe.id)
+    fun removeRecipeFromMealPlan(recipe: Recipe, categoryName: String): Completable {
+        return Completable.merge(
+            listOf(
+                recipeDao.removeRecipeFromMealPlan(recipe.id, categoryName),
+                recipeService.removeRecipeFromMealPlan(recipe.id, categoryName)
+            )
+        )
     }
 
-    fun getFavouriteRecipes(): Single<List<Recipe>> = favouriteDao.getFavourites(FavouriteType.RECIPE).flatMap(recipeDao::getRecipes)
+    fun getTopRecipes() = recipeService.getTopRecipes()
+
+    fun getRecommendedRecipes() = recipeService.getRecommendedRecipes()
 }
