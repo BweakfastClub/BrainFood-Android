@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.support.v7.preference.PreferenceManager
 import club.bweakfast.foodora.BuildConfig
-import club.bweakfast.foodora.db.FoodoraDB
 import club.bweakfast.foodora.StorageService
-import club.bweakfast.foodora.favourite.FavouriteDao
-import club.bweakfast.foodora.favourite.FavouriteDaoImpl
+import club.bweakfast.foodora.db.FoodoraDB
 import club.bweakfast.foodora.recipe.RecipeDao
 import club.bweakfast.foodora.recipe.RecipeDaoImpl
+import club.bweakfast.foodora.recipe.ingredient.IngredientDao
+import club.bweakfast.foodora.recipe.ingredient.IngredientDaoImpl
+import club.bweakfast.foodora.recipe.nutrition.NutritionDao
+import club.bweakfast.foodora.recipe.nutrition.NutritionDaoImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -55,10 +57,15 @@ class FoodoraModule(private val context: Context) {
     fun provideDB(context: Context) = FoodoraDB(context)
 
     @Provides
-    fun provideFavouriteDao(db: FoodoraDB): FavouriteDao = FavouriteDaoImpl(db)
+    fun provideIngredientDao(db: FoodoraDB): IngredientDao = IngredientDaoImpl(db)
 
     @Provides
-    fun provideRecipeDao(db: FoodoraDB): RecipeDao = RecipeDaoImpl(db)
+    fun provideNutritionDao(db: FoodoraDB): NutritionDao = NutritionDaoImpl(db)
+
+    @Provides
+    fun provideRecipeDao(db: FoodoraDB, ingredientDao: IngredientDao, nutritionDao: NutritionDao): RecipeDao {
+        return RecipeDaoImpl(db, ingredientDao, nutritionDao)
+    }
 
     @Provides
     fun provideSharedPreferences(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
