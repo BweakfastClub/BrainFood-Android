@@ -10,7 +10,7 @@ import club.bweakfast.foodora.R
 import kotlinx.android.synthetic.main.view_section_title.view.*
 
 open class SectionTitleLayout(context: Context, attrs: AttributeSet?, defStyle: Int) : LinearLayout(context, attrs, defStyle) {
-    var titleTxt: TextView
+    private var titleTxt: TextView
     var title: String = ""
         set(value) {
             titleTxt.text = value
@@ -22,7 +22,7 @@ open class SectionTitleLayout(context: Context, attrs: AttributeSet?, defStyle: 
 
         // Load attributes
         context.obtainStyledAttributes(attrs, R.styleable.SectionTitleLayout, defStyle, 0).use {
-            title = it.getString(R.styleable.SectionTitleLayout_title)
+            if (it.hasValue(R.styleable.SectionTitleLayout_title)) title = it.getString(R.styleable.SectionTitleLayout_title)
         }
 
         orientation = LinearLayout.VERTICAL

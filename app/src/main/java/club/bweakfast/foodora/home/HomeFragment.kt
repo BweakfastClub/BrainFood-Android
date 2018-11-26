@@ -10,9 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.getRandomRecipes
+import club.bweakfast.foodora.recipe.RecipeViewModel
 import club.bweakfast.foodora.recipe.RecipesAdapter
 import club.bweakfast.foodora.user.UserViewModel
+import club.bweakfast.foodora.util.onError
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
@@ -25,6 +29,10 @@ import javax.inject.Inject
 class HomeFragment : Fragment() {
     @Inject
     lateinit var userViewModel: UserViewModel
+    @Inject
+    lateinit var recipeViewModel: RecipeViewModel
+
+    private val subscriptions = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,15 +48,38 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        topRecipesGrid.recyclerView.isNestedScrollingEnabled = false
-        topRecipesGrid.recyclerView.adapter = RecipesAdapter(getRandomRecipes(20), true)
-        topRecipesGrid.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        subscriptions.add(
+            recipeViewModel.getTopRecipes()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe { recipes, err ->
+                    if (err != null) {
+                        onError(err, requireContext()) { _, _ -> getString(R.string.error_fail_top_recipes) }
+                    } else {
+                        topRecipesGrid.recyclerView.isNestedScrollingEnabled = false
+                        topRecipesGrid.recyclerView.adapter = RecipesAdapter(recipes, true)
+                        topRecipesGrid.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                    }
+                }
+        )
 
         if (userViewModel.isLoggedIn) {
-            topRecommendations.visibility = View.VISIBLE
-            topRecommendations.recyclerView.isNestedScrollingEnabled = false
-            topRecommendations.recyclerView.adapter = RecipesAdapter(getRandomRecipes())
-            topRecommendations.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            subscriptions.add(
+                recipeViewModel.getRecommendedRecipes()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe { recipes, err ->
+                        if (err != null) {
+                            onError(err, requireContext()) { _, _ -> getString(R.string.error_fail_recommended_recipes) }
+                        } else {
+                            topRecommendations.visibility = View.VISIBLE
+                            topRecommendations.recyclerView.isNestedScrollingEnabled = false
+                            topRecommendations.recyclerView.adapter = RecipesAdapter(recipes)
+                            topRecommendations.recyclerView.layoutManager =
+                                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                        }
+                    }
+            )
         } else {
             topRecommendations.visibility = View.GONE
         }

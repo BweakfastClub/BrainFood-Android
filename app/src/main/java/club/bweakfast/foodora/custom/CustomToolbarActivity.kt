@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.ToolbarDelegate
+import club.bweakfast.foodora.recipe.RecipeViewModel
 import club.bweakfast.foodora.user.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -29,6 +30,8 @@ open class CustomToolbarActivity : AppCompatActivity() {
 
     @Inject
     lateinit var userViewModel: UserViewModel
+    @Inject
+    lateinit var recipeViewModel: RecipeViewModel
 
     protected fun onCreate(savedInstanceState: Bundle?, @LayoutRes layoutID: Int) {
         super.onCreate(savedInstanceState)
