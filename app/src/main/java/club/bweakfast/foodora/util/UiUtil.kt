@@ -92,10 +92,10 @@ fun Context.longToast(@StringRes resId: Int) = longToast(getString(resId))
 
 fun Context.longToast(text: CharSequence) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 
-fun Context.buildBottomSheet(message: String, title: String? = null, buildSheet: BottomDialog.Builder.() -> Unit): BottomDialog {
+fun Context.buildBottomSheet(message: String? = null, title: String? = null, buildSheet: BottomDialog.Builder.() -> Unit): BottomDialog {
     val sheetBuilder = BottomDialog.Builder(this)
-        .setContent(message)
 
+    message?.let { sheetBuilder.setContent(message) }
     title?.let { sheetBuilder.setTitle(title) }
     sheetBuilder.buildSheet()
 
