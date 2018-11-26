@@ -65,13 +65,15 @@ class AuthenticationActivity : AppCompatActivity() {
         loading = true
         subscriptions.add(
             userViewModel.login(email, password)
+                .andThen(userViewModel.getUserInfo())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({
-                    onLoginSuccess()
-                    loading = false
-                }) {
-                    handleError(it)
+                .subscribe { _, err ->
+                    if (err != null) {
+                        handleError(err)
+                    } else {
+                        onLoginSuccess()
+                    }
                     loading = false
                 }
         )
