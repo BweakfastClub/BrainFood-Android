@@ -57,6 +57,8 @@ class MainActivity : CustomToolbarActivity() {
             rightIcon.setOnClickListener {
                 Intent(this, SettingsActivity::class.java).apply { startActivity(this) }
             }
+        } else {
+            bottomBar.menu.removeItem(R.id.tab_plan)
         }
     }
 }
