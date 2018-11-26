@@ -75,21 +75,33 @@ class RecipeDaoImpl @Inject constructor(
         return Completable.create {
             val db = foodoraDB.writableDatabase
             with(recipe) {
-                db.insert(
-                    TABLE_RECIPE_NAME,
-                    contentValuesOf(
-                        COLUMN_RECIPE_ID to id,
-                        COLUMN_RECIPE_TITLE to title,
-                        COLUMN_RECIPE_SERVINGS to servings,
-                        COLUMN_RECIPE_PREP_MINS to prepMinutes,
-                        COLUMN_RECIPE_COOK_MINS to cookMinutes,
-                        COLUMN_RECIPE_READY_MINS to readyMinutes,
-                        COLUMN_RECIPE_IMG_URL to imageURL
+                try {
+                    db.insertOrThrow(
+                        TABLE_RECIPE_NAME,
+                        contentValuesOf(
+                            COLUMN_RECIPE_ID to id,
+                            COLUMN_RECIPE_TITLE to title,
+                            COLUMN_RECIPE_SERVINGS to servings,
+                            COLUMN_RECIPE_PREP_MINS to prepMinutes,
+                            COLUMN_RECIPE_COOK_MINS to cookMinutes,
+                            COLUMN_RECIPE_READY_MINS to readyMinutes,
+                            COLUMN_RECIPE_IMG_URL to imageURL
+                        )
                     )
-                )
+                } catch (e: SQLiteConstraintException) {
+                    e.message?.let { if (!it.startsWith("UNIQUE constraint failed: recipes.id")) throw e } ?: throw e
+                }
                 it.onComplete()
             }
         }
+            .andThen(
+                Completable.merge(
+                    listOf(
+                        ingredientDao.saveIngredients(recipe.ingredients, recipe.id),
+                        nutritionDao.saveNutrition(recipe.nutrition.values.toList(), recipe.id)
+                    )
+                )
+            )
     }
 
     override fun removeRecipe(recipe: Recipe): Completable {
