@@ -5,5 +5,5 @@ package club.bweakfast.foodora.category
  */
 
 enum class CategoryName {
-    Breakfast, Lunch, Dinner, Snacks
+    Breakfast, Lunch, Dinner
 }
