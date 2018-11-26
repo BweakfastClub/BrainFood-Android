@@ -1,5 +1,6 @@
 package club.bweakfast.foodora.recipe
 
+import android.annotation.SuppressLint
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
@@ -8,27 +9,33 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import androidx.core.view.get
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
+import club.bweakfast.foodora.category.CategoryAdapter
 import club.bweakfast.foodora.custom.NutritionInfoLayout
 import club.bweakfast.foodora.custom.NutritionView
 import club.bweakfast.foodora.recipe.ingredient.IngredientAdapter
 import club.bweakfast.foodora.user.UserViewModel
+import club.bweakfast.foodora.util.buildBottomSheet
 import club.bweakfast.foodora.util.log
 import club.bweakfast.foodora.util.onError
 import club.bweakfast.foodora.util.showDarkStatusIcons
 import club.bweakfast.foodora.util.showView
 import club.bweakfast.foodora.util.toDP
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_recipe.*
 import kotlinx.android.synthetic.main.content_recipe.*
+import kotlinx.android.synthetic.main.fragment_list.view.*
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -40,6 +47,12 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
     lateinit var recipeViewModel: RecipeViewModel
     @Inject
     lateinit var userViewModel: UserViewModel
+
+    private var isLiked: Boolean = false
+        set(value) {
+            field = value
+            invalidateOptionsMenu()
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +71,29 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
         showView(fab, userViewModel.isLoggedIn)
 
         fab.setOnClickListener(::clickOnMealPlanBtn)
+
+        subscriptions.addAll(
+            recipeViewModel.isRecipeInMealPlan(recipe)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe { isInMealPlan, err ->
+                    if (err != null) {
+                        onError(err, this)
+                    } else {
+                        fab.text = if (isInMealPlan) getString(R.string.action_remove_meal_plan) else getString(R.string.action_add_meal_plan)
+                    }
+                },
+            recipeViewModel.isLikedRecipe(recipe)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe { isLikedRecipe, err ->
+                    if (err != null) {
+                        onError(err, this)
+                    } else {
+                        isLiked = isLikedRecipe
+                    }
+                }
+        )
     }
 
     private fun init(recipe: Recipe) {
@@ -88,24 +124,47 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
         showDarkStatusIcons(window.decorView, false)
     }
 
+    @SuppressLint("RxLeakedSubscription")
     private fun clickOnMealPlanBtn(view: View) {
         val fab = view as Button
         val isAdding = fab.text == getString(R.string.action_add_meal_plan)
-        val completable = if (isAdding) recipeViewModel::addRecipeToMealPlan else recipeViewModel::removeRecipeFromMealPlan
-        updateMealPlanBtn(isAdding)
 
-        subscriptions.add(
-            completable(recipe)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({
-                    val snackbarText = if (isAdding) "Added recipe to meal plan" else "Removed recipe from meal plan"
-                    Snackbar.make(rootLayout, snackbarText, Snackbar.LENGTH_LONG).show()
-                }, {
-                    updateMealPlanBtn(!isAdding)
-                    onError(it, this@RecipeActivity)
-                })
-        )
+        buildBottomSheet(title = getString(R.string.title_add_meal_plan_question)) {
+            val categories = mutableListOf<String>()
+
+            val customView = LayoutInflater.from(this@RecipeActivity).inflate(R.layout.fragment_list, null)
+            setCustomView(customView)
+            customView.rv.adapter = CategoryAdapter { categoryName, add ->
+                val listAction = if (add) categories::add else categories::remove
+                listAction(categoryName)
+            }
+            customView.rv.layoutManager = LinearLayoutManager(customView.context)
+
+            setNegativeText(R.string.action_cancel)
+            setPositiveText(R.string.action_ok)
+            setPositiveTextColor(R.color.black)
+            onPositive {
+                updateMealPlanBtn(isAdding)
+
+                val completable = if (isAdding) {
+                    recipeViewModel.addRecipeToMealPlan(recipe, categories)
+                } else {
+                    Completable.merge(categories.map { recipeViewModel.removeRecipeFromMealPlan(recipe, it) })
+                }
+                subscriptions.addAll(
+                    completable
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe({
+                            val snackbarText = if (isAdding) "Added recipe to meal plan" else "Removed recipe from meal plan"
+                            Snackbar.make(rootLayout, snackbarText, Snackbar.LENGTH_LONG).show()
+                        }, {
+                            updateMealPlanBtn(!isAdding)
+                            onError(it, this@RecipeActivity)
+                        })
+                )
+            }
+        }
     }
 
     private fun updateMealPlanBtn(isAdding: Boolean) {
@@ -114,6 +173,7 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_recipe, menu)
+        updateLikeIcon(isLiked, menu[0])
         return userViewModel.isLoggedIn
     }
 
@@ -138,25 +198,26 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
             } else {
                 recipeViewModel.likeRecipe(this)
             }
+            isFavourite = !isFavourite
             updateLikeIcon(isFavourite, menuItem)
             subscriptions.add(
                 completable
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe({
-                        val snackbarText = if (isFavourite) "Removed from favourites" else "Added to favourites"
+                        val snackbarText = if (isFavourite) "Added to favourites" else "Removed from favourites"
                         Snackbar.make(rootLayout, snackbarText, Snackbar.LENGTH_LONG).show()
-                        isFavourite = !isFavourite
                     }, {
                         updateLikeIcon(!isFavourite, menuItem)
                         onError(it, this@RecipeActivity)
+                        isFavourite = !isFavourite
                     })
             )
         }
     }
 
     private fun updateLikeIcon(isFavourite: Boolean, menuItem: MenuItem) {
-        val iconResource = if (isFavourite) R.drawable.ic_heart_outline else R.drawable.ic_heart
+        val iconResource = if (isFavourite) R.drawable.ic_heart else R.drawable.ic_heart_outline
         menuItem.icon = ContextCompat.getDrawable(this, iconResource)
     }
 
