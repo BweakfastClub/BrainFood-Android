@@ -92,7 +92,11 @@ class NutritionDaoImpl @Inject constructor(private val foodoraDB: FoodoraDB) : N
                             )
                         )
                     } catch (e: SQLiteConstraintException) {
-                        e.message?.let { if (!it.contains(Regex("UNIQUE constraint failed: (recipe_)?nutrition"))) throw e } ?: throw e
+                        e.message?.let {
+                            if (!it.contains(Regex("UNIQUE constraint failed: (recipe_)?nutrition")) && !it.startsWith("PRIMARY KEY must be unique")) {
+                                throw e
+                            }
+                        } ?: throw e
                     }
                 }
             }

@@ -58,7 +58,12 @@ class IngredientDaoImpl @Inject constructor(private val foodoraDB: FoodoraDB) : 
                             )
                         )
                     } catch (e: SQLiteConstraintException) {
-                        e.message?.let { if (!it.startsWith("UNIQUE constraint failed: ingredients.id")) throw e } ?: throw e
+                        e.message?.let {
+                            if (!it.startsWith("UNIQUE constraint failed: ingredients.id") && !it.startsWith("PRIMARY KEY must be unique")) {
+                                throw e
+                            }
+                        }
+                            ?: throw e
                     }
                 }
             }
