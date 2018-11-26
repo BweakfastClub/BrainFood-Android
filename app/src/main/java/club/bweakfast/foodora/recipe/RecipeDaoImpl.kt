@@ -111,4 +111,106 @@ class RecipeDaoImpl @Inject constructor(
             it.onComplete()
         }
     }
+
+    override fun getLikedRecipes(): Single<List<Recipe>> {
+        return Single.create {
+            val db = foodoraDB.readableDatabase
+            val likedRecipeIDs = db.query(TABLE_LIKED_RECIPES_NAME).use { cursor -> cursor.map { getInt(COLUMN_REL_RECIPE_ID) } }
+
+            it.onSuccess(getRecipesList(likedRecipeIDs))
+        }
+    }
+
+    override fun isLikedRecipe(recipeID: Int): Single<Boolean> {
+        return Single.create {
+            val db = foodoraDB.readableDatabase
+
+            db.query(TABLE_LIKED_RECIPES_NAME, selection = "$COLUMN_REL_RECIPE_ID = ?", selectionArgs = arrayOf(recipeID.toString()))
+                .use { cursor ->
+                    it.onSuccess(cursor.count > 0)
+                }
+        }
+    }
+
+    override fun addLikedRecipe(recipeID: Int): Completable {
+        return Completable.create {
+            val db = foodoraDB.writableDatabase
+
+            try {
+                db.insertOrThrow(TABLE_LIKED_RECIPES_NAME, contentValuesOf(COLUMN_REL_RECIPE_ID to recipeID))
+            } catch (e: SQLiteConstraintException) {
+                e.message?.let { if (!it.startsWith("UNIQUE constraint failed: liked_recipes")) throw e } ?: throw e
+            }
+            it.onComplete()
+        }
+    }
+
+    override fun removeLikedRecipe(recipeID: Int): Completable {
+        return Completable.create {
+            val db = foodoraDB.writableDatabase
+
+            db.delete(TABLE_LIKED_RECIPES_NAME, "$COLUMN_REL_RECIPE_ID = ?", arrayOf(recipeID.toString()))
+            it.onComplete()
+        }
+    }
+
+    override fun getRecipesInMealPlan(): Single<Map<String, List<Recipe>>> {
+        return Single.create {
+            val db = foodoraDB.readableDatabase
+            val mealPlanRecipeIDs = db.query(TABLE_MEAL_PLAN_NAME, orderBy = COLUMN_CATEGORY_NAME)
+                .use { cursor ->
+                    cursor.map { getString(COLUMN_CATEGORY_NAME) to getInt(COLUMN_REL_RECIPE_ID) }
+                        .fold(mutableMapOf<String, MutableList<Int>>()) { map, (category, recipeID) ->
+                            val list = map.getOrPut(category) { mutableListOf() }
+                            list.add(recipeID)
+                            map
+                        }
+                }
+
+            it.onSuccess(mealPlanRecipeIDs.mapValues { (_, recipeIDs) -> getRecipesList(recipeIDs) })
+        }
+    }
+
+    override fun isRecipeInMealPlan(recipeID: Int): Single<Boolean> {
+        return Single.create {
+            val db = foodoraDB.readableDatabase
+
+            db.query(TABLE_MEAL_PLAN_NAME, selection = "$COLUMN_REL_RECIPE_ID = ?", selectionArgs = arrayOf(recipeID.toString()))
+                .use { cursor ->
+                    it.onSuccess(cursor.count > 0)
+                }
+        }
+    }
+
+    override fun addRecipeToMealPlan(recipeID: Int, categoryNames: List<String>): Completable {
+        return Completable.create {
+            val db = foodoraDB.writableDatabase
+
+            db.transaction {
+                categoryNames.forEach { categoryName ->
+                    try {
+                        db.insertOrThrow(
+                            TABLE_MEAL_PLAN_NAME,
+                            contentValuesOf(
+                                COLUMN_REL_RECIPE_ID to recipeID,
+                                COLUMN_CATEGORY_NAME to categoryName
+                            )
+                        )
+                    } catch (e: SQLiteConstraintException) {
+                        e.message?.let { if (!it.startsWith("UNIQUE constraint failed: meal_plan")) throw e } ?: throw e
+                    }
+                }
+            }
+            it.onComplete()
+        }
+    }
+
+    override fun removeRecipeFromMealPlan(recipeID: Int, categoryName: String): Completable {
+        return Completable.create {
+            val db = foodoraDB.writableDatabase
+
+            db.delete(TABLE_MEAL_PLAN_NAME, "$COLUMN_REL_RECIPE_ID = ? AND $COLUMN_CATEGORY_NAME = ?", arrayOf(recipeID.toString(), categoryName))
+            it.onComplete()
+        }
+    }
 }
