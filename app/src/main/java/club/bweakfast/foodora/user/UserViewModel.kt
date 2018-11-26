@@ -1,5 +1,6 @@
 package club.bweakfast.foodora.user
 
+import android.support.annotation.VisibleForTesting
 import club.bweakfast.foodora.StorageService
 import club.bweakfast.foodora.auth.AuthenticationService
 import club.bweakfast.foodora.recipe.RecipeDao
@@ -11,11 +12,11 @@ import javax.inject.Inject
  * Created by silve on 3/2/2018.
  */
 
-class UserViewModel @Inject constructor(
+open class UserViewModel @Inject constructor(
     private val authService: AuthenticationService,
-    private val userService: UserService,
+    @VisibleForTesting var userService: UserService,
     private val storageService: StorageService,
-    private val recipeDao: RecipeDao
+    @VisibleForTesting var recipeDao: RecipeDao
 ) {
     val isLoggedIn = authService.isLoggedIn
 
@@ -39,6 +40,7 @@ class UserViewModel @Inject constructor(
         return userService.getUserInfo().flatMap { user ->
             val dbOperations = mutableListOf<Completable>()
 
+            storageService.name = user.name
             user.likedRecipes?.let { dbOperations.addAll(it.map { recipeDao.addRecipe(it).andThen(recipeDao.addLikedRecipe(it.id)) }) }
             user.mealPlan?.let {
                 dbOperations.addAll(it.flatMap { (categoryName, recipes) ->
