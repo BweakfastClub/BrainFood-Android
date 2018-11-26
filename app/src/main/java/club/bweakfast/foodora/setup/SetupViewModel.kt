@@ -1,14 +1,20 @@
 package club.bweakfast.foodora.setup
 
-import android.support.annotation.VisibleForTesting
 import club.bweakfast.foodora.StorageService
+import club.bweakfast.foodora.recipe.Recipe
+import club.bweakfast.foodora.recipe.RecipeService
 import club.bweakfast.foodora.user.UserService
 import io.reactivex.Completable
+import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SetupViewModel @Inject constructor(private val storageService: StorageService, private val userService: UserService) {
+class SetupViewModel @Inject constructor(
+    private val storageService: StorageService,
+    private val userService: UserService,
+    private val recipeService: RecipeService
+) {
     var isSetupComplete: Boolean
         get() = storageService.isSetupComplete
         set(value) {
@@ -44,6 +50,8 @@ class SetupViewModel @Inject constructor(private val storageService: StorageServ
 
         return userService.addAllergies(allergies)
     }
+
+    fun getRandomRecipes(numRecipes: Int = 8) = recipeService.getRandomRecipes(numRecipes)
 
     private fun validateStep1(): Boolean {
         return !name.isNullOrBlank()

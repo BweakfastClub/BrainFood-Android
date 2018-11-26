@@ -1,6 +1,5 @@
 package club.bweakfast.foodora.setup
 
-import android.os.Build
 import android.os.Bundle
 import android.support.v14.preference.PreferenceFragment
 import android.support.v7.widget.GridLayoutManager
@@ -11,12 +10,18 @@ import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.getRandomRecipes
 import club.bweakfast.foodora.recipe.SelectableRecipesAdapter
+import club.bweakfast.foodora.util.onError
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.pref_fragment_setup_meals.*
 import javax.inject.Inject
 
 class SetupMealsFragment : PreferenceFragment() {
     @Inject
     lateinit var setupViewModel: SetupViewModel
+
+    private lateinit var disposable: Disposable
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         FoodoraApp.daggerComponent.inject(this)
@@ -29,12 +34,23 @@ class SetupMealsFragment : PreferenceFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recipes = getRandomRecipes(8)
-        mealsGrid.recyclerView.adapter = SelectableRecipesAdapter(recipes, true) { recipeCount ->
-            setupViewModel.isStep2Valid = recipeCount >= 3
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mealsGrid.recyclerView.layoutManager = GridLayoutManager(context, 2)
-        }
+        disposable = setupViewModel.getRandomRecipes()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe { recipes, err ->
+                if (err != null) {
+                    onError(err, activity)
+                } else {
+                    mealsGrid.recyclerView.adapter = SelectableRecipesAdapter(recipes, true) { recipeCount ->
+                        setupViewModel.isStep2Valid = recipeCount >= 3
+                    }
+                    mealsGrid.recyclerView.layoutManager = GridLayoutManager(activity, 2)
+                }
+            }
+    }
+
+    override fun onDestroyView() {
+        disposable.dispose()
+        super.onDestroyView()
     }
 }
