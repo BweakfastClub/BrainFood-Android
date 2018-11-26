@@ -6,7 +6,7 @@ import club.bweakfast.foodora.util.parcelableCreator
 import com.google.gson.annotations.SerializedName
 
 data class Ingredient(
-    @SerializedName("_id") val id: Int,
+    @SerializedName("ingredientID") val id: Int,
     @SerializedName("displayValue") val name: String,
     val grams: Float,
     val displayType: String
