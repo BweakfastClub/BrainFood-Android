@@ -1,5 +1,8 @@
 package club.bweakfast.foodora.category
 
+import android.os.Build
+import android.support.v7.app.AppCompatDelegate
+import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -24,9 +27,9 @@ class CategoryAdapter(private val categoryListener: (String, Boolean) -> Unit = 
                 val checkbox = (it as TextView)
                 val rightDrawable = checkbox.compoundDrawables[2]
                 val isChecked = rightDrawable == null // If right drawable is initially null, then the "checkbox" is being set to true
-                val drawableID = if (rightDrawable == null) R.drawable.ic_check else 0
+                val drawableID = if (rightDrawable == null) AppCompatResources.getDrawable(it.context, R.drawable.ic_check) else null
 
-                checkbox.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawableID, 0)
+                checkbox.setCompoundDrawablesWithIntrinsicBounds(null, null, drawableID, null)
                 categoryListener(categoryName, isChecked)
             }
         }

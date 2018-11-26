@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.Menu
@@ -218,7 +219,7 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
 
     private fun updateLikeIcon(isFavourite: Boolean, menuItem: MenuItem) {
         val iconResource = if (isFavourite) R.drawable.ic_heart else R.drawable.ic_heart_outline
-        menuItem.icon = ContextCompat.getDrawable(this, iconResource)
+        menuItem.icon = AppCompatResources.getDrawable(this, iconResource)
     }
 
     override fun onResume() {
