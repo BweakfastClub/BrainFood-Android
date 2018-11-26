@@ -61,4 +61,12 @@ class MainActivity : CustomToolbarActivity() {
             bottomBar.menu.removeItem(R.id.tab_plan)
         }
     }
+
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+
+        val searchFragmentName = SearchFragment::class.java.simpleName
+        val fragment = supportFragmentManager.findFragmentByTag(searchFragmentName) as? SearchFragment
+        fragment?.searchListener = searchBox.listenForChanges()
+    }
 }
