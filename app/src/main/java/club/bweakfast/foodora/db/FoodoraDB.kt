@@ -38,5 +38,16 @@ class FoodoraDB(context: Context) : SQLiteOpenHelper(context, "foodora-db", null
             dbVersion += 1
         } while (dbVersion <= newVersion)
     }
+
+    fun clearDB() {
+        writableDatabase.transaction {
+            execSQL("DELETE FROM $TABLE_MEAL_PLAN_NAME")
+            execSQL("DELETE FROM $TABLE_LIKED_RECIPES_NAME")
+            execSQL("DELETE FROM $TABLE_RECIPE_INGREDIENT_NAME")
+            execSQL("DELETE FROM $TABLE_RECIPE_NUTRITION_NAME")
+            execSQL("DELETE FROM $TABLE_NUTRITION_NAME")
+            execSQL("DELETE FROM $TABLE_INGREDIENT_NAME")
+            execSQL("DELETE FROM $TABLE_RECIPE_NAME")
+        }
     }
 }

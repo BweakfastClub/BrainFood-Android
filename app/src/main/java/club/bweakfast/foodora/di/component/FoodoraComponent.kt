@@ -1,12 +1,12 @@
 package club.bweakfast.foodora.di.component
 
-import club.bweakfast.foodora.custom.CustomToolbarActivity
 import club.bweakfast.foodora.SplashScreenActivity
 import club.bweakfast.foodora.auth.AuthenticationActivity
 import club.bweakfast.foodora.auth.RegisterFragment
+import club.bweakfast.foodora.custom.CustomToolbarActivity
 import club.bweakfast.foodora.di.module.FoodoraModule
-import club.bweakfast.foodora.favourite.FavouritesFragment
 import club.bweakfast.foodora.home.HomeFragment
+import club.bweakfast.foodora.plan.MealPlanFragment
 import club.bweakfast.foodora.recipe.RecipeActivity
 import club.bweakfast.foodora.search.SearchFragment
 import club.bweakfast.foodora.settings.SettingsActivity
@@ -26,7 +26,6 @@ interface FoodoraComponent {
     fun inject(activity: AuthenticationActivity)
     fun inject(fragment: SearchFragment)
     fun inject(activity: RecipeActivity)
-    fun inject(fragment: FavouritesFragment)
     fun inject(fragment: HomeFragment)
     fun inject(activity: CustomToolbarActivity)
     fun inject(activity: SetupInfoActivity)
@@ -35,4 +34,5 @@ interface FoodoraComponent {
     fun inject(activity: SplashScreenActivity)
     fun inject(activity: SettingsActivity)
     fun inject(fragment: SettingsFragment)
+    fun inject(fragment: MealPlanFragment)
 }
