@@ -1,5 +1,6 @@
 package club.bweakfast.foodora.recipe.nutrition
 
+import android.database.sqlite.SQLiteConstraintException
 import androidx.core.content.contentValuesOf
 import androidx.core.database.getInt
 import androidx.core.database.sqlite.transaction
@@ -46,46 +47,53 @@ class NutritionDaoImpl @Inject constructor(private val foodoraDB: FoodoraDB) : N
             val db = foodoraDB.writableDatabase
             db.transaction {
                 nutrition.forEach {
-                    db.insert(
-                        TABLE_NUTRITION_NAME,
-                        contentValuesOf(
-                            COLUMN_NUTRITION_NAME to it.name,
-                            COLUMN_NUTRITION_AMOUNT to it.amount,
-                            COLUMN_NUTRITION_UNIT to it.unit,
-                            COLUMN_NUTRITION_DISPLAY_VALUE to it.displayValue,
-                            COLUMN_NUTRITION_DAILY_VALUE to it.dailyValue,
-                            COLUMN_NUTRITION_COMPLETE_DATA to it.isCompleteData.toInt()
+                    try {
+                        db.insertOrThrow(
+                            TABLE_NUTRITION_NAME,
+                            contentValuesOf(
+                                COLUMN_NUTRITION_NAME to it.name,
+                                COLUMN_NUTRITION_AMOUNT to it.amount,
+                                COLUMN_NUTRITION_UNIT to it.unit,
+                                COLUMN_NUTRITION_DISPLAY_VALUE to it.displayValue,
+                                COLUMN_NUTRITION_DAILY_VALUE to it.dailyValue,
+                                COLUMN_NUTRITION_COMPLETE_DATA to it.isCompleteData.toInt()
+                            )
                         )
-                    )
 
-                    val getNullableWhere = { column: String, value: String? -> value?.let { "$column = ?" } ?: "$column IS NULL" }
-                    val selection =
-                        "$COLUMN_NUTRITION_NAME = ? AND $COLUMN_NUTRITION_AMOUNT = ? AND ${getNullableWhere(COLUMN_NUTRITION_UNIT, it.unit)} AND ${getNullableWhere(
-                            COLUMN_NUTRITION_DISPLAY_VALUE, it.displayValue
-                        )} AND ${getNullableWhere(
-                            COLUMN_NUTRITION_DAILY_VALUE, it.dailyValue
-                        )} AND $COLUMN_NUTRITION_COMPLETE_DATA = ?"
+                        val getNullableWhere = { column: String, value: String? -> value?.let { "$column = ?" } ?: "$column IS NULL" }
+                        val selection =
+                            "$COLUMN_NUTRITION_NAME = ? AND $COLUMN_NUTRITION_AMOUNT = ? AND ${getNullableWhere(
+                                COLUMN_NUTRITION_UNIT,
+                                it.unit
+                            )} AND ${getNullableWhere(
+                                COLUMN_NUTRITION_DISPLAY_VALUE, it.displayValue
+                            )} AND ${getNullableWhere(
+                                COLUMN_NUTRITION_DAILY_VALUE, it.dailyValue
+                            )} AND $COLUMN_NUTRITION_COMPLETE_DATA = ?"
 
-                    val selectionArgs = mutableListOf(it.name, it.amount.toString())
-                    val nullableArgs = listOf(it.unit, it.displayValue, it.dailyValue)
-                    nullableArgs.forEach { it?.let { selectionArgs.add(it) } }
-                    selectionArgs.add(it.isCompleteData.toInt().toString())
+                        val selectionArgs = mutableListOf(it.name, it.amount.toDouble().toString())
+                        val nullableArgs = listOf(it.unit, it.displayValue, it.dailyValue)
+                        nullableArgs.forEach { it?.let { selectionArgs.add(it) } }
+                        selectionArgs.add(it.isCompleteData.toInt().toString())
 
-                    val cursor = db.query(
-                        TABLE_NUTRITION_NAME,
-                        arrayOf(COLUMN_NUTRITION_ID),
-                        selection,
-                        selectionArgs.toTypedArray()
-                    )
-                    val nutritionID = cursor.use { it.getInt(COLUMN_NUTRITION_ID) }
-
-                    db.insert(
-                        TABLE_RECIPE_NUTRITION_NAME,
-                        contentValuesOf(
-                            COLUMN_REL_RECIPE_ID to recipeID,
-                            COLUMN_REL_NUTRITION_ID to nutritionID
+                        val cursor = db.query(
+                            TABLE_NUTRITION_NAME,
+                            arrayOf(COLUMN_NUTRITION_ID),
+                            selection,
+                            selectionArgs.toTypedArray()
                         )
-                    )
+                        val nutritionID = cursor.useFirst { it.getInt(COLUMN_NUTRITION_ID) }
+
+                        db.insertOrThrow(
+                            TABLE_RECIPE_NUTRITION_NAME,
+                            contentValuesOf(
+                                COLUMN_REL_RECIPE_ID to recipeID,
+                                COLUMN_REL_NUTRITION_ID to nutritionID
+                            )
+                        )
+                    } catch (e: SQLiteConstraintException) {
+                        e.message?.let { if (!it.contains(Regex("UNIQUE constraint failed: (recipe_)?nutrition"))) throw e } ?: throw e
+                    }
                 }
             }
             it.onComplete()
@@ -93,6 +101,6 @@ class NutritionDaoImpl @Inject constructor(private val foodoraDB: FoodoraDB) : N
     }
 
     override fun deleteNutrition(recipeID: Int): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") //To change body of created functions useFirst File | Settings | File Templates.
     }
 }

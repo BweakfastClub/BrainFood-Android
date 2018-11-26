@@ -1,6 +1,6 @@
 package club.bweakfast.foodora.recipe.ingredient
 
-import android.util.Log
+import android.database.sqlite.SQLiteConstraintException
 import androidx.core.content.contentValuesOf
 import androidx.core.database.sqlite.transaction
 import club.bweakfast.foodora.db.COLUMN_INGREDIENT_DISPLAY_TYPE
@@ -40,23 +40,26 @@ class IngredientDaoImpl @Inject constructor(private val foodoraDB: FoodoraDB) : 
             val db = foodoraDB.writableDatabase
             db.transaction {
                 ingredients.forEach {
-                    db.insert(
-                        TABLE_INGREDIENT_NAME,
-                        contentValuesOf(
-                            COLUMN_INGREDIENT_ID to it.id,
-                            COLUMN_INGREDIENT_NAME to it.name,
-                            COLUMN_INGREDIENT_GRAMS to it.grams,
-                            COLUMN_INGREDIENT_DISPLAY_TYPE to it.displayType
+                    try {
+                        db.insertOrThrow(
+                            TABLE_INGREDIENT_NAME,
+                            contentValuesOf(
+                                COLUMN_INGREDIENT_ID to it.id,
+                                COLUMN_INGREDIENT_NAME to it.name,
+                                COLUMN_INGREDIENT_GRAMS to it.grams,
+                                COLUMN_INGREDIENT_DISPLAY_TYPE to it.displayType
+                            )
                         )
-                    )
-                    db.insert(
-                        TABLE_RECIPE_INGREDIENT_NAME,
-                        contentValuesOf(
-                            COLUMN_REL_RECIPE_ID to recipeID,
-                            COLUMN_REL_INGREDIENT_ID to it.id
+                        db.insertOrThrow(
+                            TABLE_RECIPE_INGREDIENT_NAME,
+                            contentValuesOf(
+                                COLUMN_REL_RECIPE_ID to recipeID,
+                                COLUMN_REL_INGREDIENT_ID to it.id
+                            )
                         )
-                    )
-                    log("Adding ingredient ${it.id} to recipe $recipeID", Log.ERROR)
+                    } catch (e: SQLiteConstraintException) {
+                        e.message?.let { if (!it.startsWith("UNIQUE constraint failed: ingredients.id")) throw e } ?: throw e
+                    }
                 }
             }
             it.onComplete()
