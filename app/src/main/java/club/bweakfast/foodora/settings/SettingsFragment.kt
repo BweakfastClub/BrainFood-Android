@@ -38,13 +38,5 @@ class SettingsFragment : PreferenceFragment() {
             }
             true
         }
-        /*list?.get(7)?.setOnClickListener {
-            settingsViewModel.logout()
-            Intent(activity, MainActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(this)
-                activity.finish()
-            }
-        }*/
     }
 }
