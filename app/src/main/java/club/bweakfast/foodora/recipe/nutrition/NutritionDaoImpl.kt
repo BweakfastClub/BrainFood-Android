@@ -15,35 +15,30 @@ import club.bweakfast.foodora.db.COLUMN_REL_RECIPE_ID
 import club.bweakfast.foodora.db.FoodoraDB
 import club.bweakfast.foodora.db.TABLE_NUTRITION_NAME
 import club.bweakfast.foodora.db.TABLE_RECIPE_NUTRITION_NAME
-import club.bweakfast.foodora.recipe.RecipeDaoImpl
-import club.bweakfast.foodora.util.insert
+import club.bweakfast.foodora.db.createNutritionValueFromCursor
+import club.bweakfast.foodora.util.insertOrThrow
 import club.bweakfast.foodora.util.map
 import club.bweakfast.foodora.util.query
 import club.bweakfast.foodora.util.toInt
+import club.bweakfast.foodora.util.useFirst
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
 class NutritionDaoImpl @Inject constructor(private val foodoraDB: FoodoraDB) : NutritionDao {
-    override fun getNutrition(recipeID: Int): Single<List<NutritionValue>> {
-        return Single.create { emitter ->
-            val db = foodoraDB.readableDatabase
-            val cursor = db.rawQuery(
-                """SELECT
-                    |n.$COLUMN_NUTRITION_ID,
-                    |n.$COLUMN_NUTRITION_AMOUNT,
-                    |n.$COLUMN_NUTRITION_UNIT,
-                    |n.$COLUMN_NUTRITION_DISPLAY_VALUE,
-                    |n.$COLUMN_NUTRITION_DAILY_VALUE,
-                    |n.$COLUMN_NUTRITION_COMPLETE_DATA
+    override fun getNutrition(recipeID: Int): Single<List<NutritionValue>> = Single.create { it.onSuccess(getNutritionList(recipeID)) }
+
+    override fun getNutritionList(recipeID: Int): List<NutritionValue> {
+        val db = foodoraDB.readableDatabase
+        val cursor = db.rawQuery(
+            """SELECT n.*
                     |FROM $TABLE_NUTRITION_NAME n
                     |JOIN $TABLE_RECIPE_NUTRITION_NAME rn ON n.$COLUMN_NUTRITION_ID = rn.$COLUMN_REL_NUTRITION_ID
-                    |WHERE n.$COLUMN_NUTRITION_ID = ?;""".trimMargin(),
-                arrayOf(recipeID.toString())
-            )
+                    |WHERE rn.$COLUMN_REL_RECIPE_ID = ?;""".trimMargin(),
+            arrayOf(recipeID.toString())
+        )
 
-//            cursor.use { emitter.onSuccess(it.map { NutritionValue.createFromCursor(it) }) }
-        }
+        return cursor.use { it.map { createNutritionValueFromCursor(this) } }
     }
 
     override fun saveNutrition(nutrition: List<NutritionValue>, recipeID: Int): Completable {

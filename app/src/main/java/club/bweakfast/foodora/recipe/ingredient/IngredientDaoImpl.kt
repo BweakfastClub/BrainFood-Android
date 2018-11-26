@@ -12,27 +12,27 @@ import club.bweakfast.foodora.db.COLUMN_REL_RECIPE_ID
 import club.bweakfast.foodora.db.FoodoraDB
 import club.bweakfast.foodora.db.TABLE_INGREDIENT_NAME
 import club.bweakfast.foodora.db.TABLE_RECIPE_INGREDIENT_NAME
-import club.bweakfast.foodora.util.insert
-import club.bweakfast.foodora.util.log
+import club.bweakfast.foodora.db.createIngredientFromCursor
+import club.bweakfast.foodora.util.insertOrThrow
 import club.bweakfast.foodora.util.map
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
 class IngredientDaoImpl @Inject constructor(private val foodoraDB: FoodoraDB) : IngredientDao {
-    override fun getIngredients(recipeID: Int): Single<List<Ingredient>> {
-        return Single.create { emitter ->
-            val db = foodoraDB.readableDatabase
-            val cursor = db.rawQuery(
-                """SELECT i.*
+    override fun getIngredients(recipeID: Int): Single<List<Ingredient>> = Single.create { it.onSuccess(getIngredientsList(recipeID)) }
+
+    override fun getIngredientsList(recipeID: Int): List<Ingredient> {
+        val db = foodoraDB.readableDatabase
+        val cursor = db.rawQuery(
+            """SELECT i.*
                     |FROM $TABLE_INGREDIENT_NAME i
                     |JOIN $TABLE_RECIPE_INGREDIENT_NAME ri ON i.$COLUMN_INGREDIENT_ID = ri.$COLUMN_REL_INGREDIENT_ID
                     |WHERE ri.$COLUMN_REL_RECIPE_ID = ?;""".trimMargin(),
-                arrayOf(recipeID.toString())
-            )
+            arrayOf(recipeID.toString())
+        )
 
-//            cursor.use { emitter.onSuccess(it.map { Ingredient.createFromCursor(it) }) }
-        }
+        return cursor.use { it.map { createIngredientFromCursor(this) } }
     }
 
     override fun saveIngredients(ingredients: List<Ingredient>, recipeID: Int): Completable {
