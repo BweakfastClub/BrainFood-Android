@@ -48,6 +48,10 @@
     <string name="header_nutrition">Nutritional Facts</string>
     <string name="action_like">Like</string>
     <string name="action_add_meal_plan">Add To Meal Plan</string>
+    <string name="action_remove_meal_plan">Remove From Meal Plan</string>
+    <string name="title_add_meal_plan_question">Which meal(s) would you like to add this recipe to?</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_ok">OK</string>
 
     <!-- Strings related to search -->
     <string name="prompt_search">Search for recipes…</string>
@@ -71,7 +75,6 @@
     <string name="title_lunch">Lunch</string>
     <string name="message_meal_plan">Here\'s a little meal plan I cooked up today!</string>
     <string name="title_meal_plan">Meal Plan</string>
-    <string name="action_remove_meal_plan">Remove From Meal Plan</string>
 
     <!-- Strings related to setup -->
     <string name="message_setup_1">Fill in the following information, it\'ll help us figure out how to feed you!</string>
