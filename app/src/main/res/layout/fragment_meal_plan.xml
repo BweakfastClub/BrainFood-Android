@@ -7,6 +7,7 @@
     tools:context=".plan.MealPlanFragment">
 
     <LinearLayout
+        android:id="@+id/nutritionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -21,18 +22,6 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             app:textColor="@color/white" />
-
-        <club.bweakfast.foodora.custom.RecipeListView
-            android:id="@+id/breakfastRecipes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/title_breakfast" />
-
-        <club.bweakfast.foodora.custom.RecipeListView
-            android:id="@+id/lunchRecipes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/title_lunch" />
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
