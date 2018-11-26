@@ -9,11 +9,14 @@ import club.bweakfast.foodora.MainActivity
 import club.bweakfast.foodora.ProcessingFragment
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.custom.CustomToolbarPreferenceActivity
+import club.bweakfast.foodora.user.User
+import club.bweakfast.foodora.user.UserViewModel
 import club.bweakfast.foodora.util.onError
 import club.bweakfast.foodora.util.showFragment
 import club.bweakfast.foodora.util.showView
 import club.bweakfast.foodora.util.toast
 import io.reactivex.Completable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -33,6 +36,8 @@ import javax.inject.Inject
 class SetupInfoActivity : CustomToolbarPreferenceActivity() {
     @Inject
     lateinit var setupViewModel: SetupViewModel
+    @Inject
+    lateinit var userViewModel: UserViewModel
 
     private val subscriptions = CompositeDisposable()
 
@@ -81,8 +86,12 @@ class SetupInfoActivity : CustomToolbarPreferenceActivity() {
                     if (setupViewModel.isStep2Valid) {
                         loadProcessingFragment()
                         subscriptions.add(
-                            Completable.timer(2, TimeUnit.SECONDS)
-                                .andThen(Completable.merge(listOf(setupViewModel.addAllergies())))
+                            Completable.merge(
+                                listOf(
+                                    Completable.timer(2, TimeUnit.SECONDS),
+                                    setupViewModel.addAllergies()
+                                )
+                            )
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribeOn(Schedulers.io())
                                 .subscribe({
