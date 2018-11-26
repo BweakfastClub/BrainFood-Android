@@ -3,6 +3,7 @@ package club.bweakfast.foodora.settings
 import android.content.SharedPreferences
 import club.bweakfast.foodora.StorageService
 import club.bweakfast.foodora.auth.AuthenticationService
+import club.bweakfast.foodora.db.FoodoraDB
 import club.bweakfast.foodora.user.UserService
 import club.bweakfast.foodora.util.log
 import io.reactivex.Completable
@@ -10,7 +11,8 @@ import javax.inject.Inject
 
 class SettingsViewModel @Inject constructor(
     private val userService: UserService,
-    private val storageService: StorageService
+    private val storageService: StorageService,
+    private val foodoraDB: FoodoraDB
 ) {
     val isSettingsValid: Boolean
         get() = isValid()
@@ -94,5 +96,6 @@ class SettingsViewModel @Inject constructor(
 
     fun logout() {
         storageService.logout()
+        foodoraDB.clearDB()
     }
 }
