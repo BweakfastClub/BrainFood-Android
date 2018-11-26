@@ -34,3 +34,9 @@ const val COLUMN_REL_INGREDIENT_ID = "ingredient_id"
 
 const val TABLE_RECIPE_NUTRITION_NAME = "recipe_nutrition"
 const val TABLE_RECIPE_INGREDIENT_NAME = "recipe_ingredient"
+
+const val TABLE_LIKED_RECIPES_NAME = "liked_recipes"
+
+const val COLUMN_CATEGORY_NAME = "category_name"
+
+const val TABLE_MEAL_PLAN_NAME = "meal_plan"
