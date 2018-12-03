@@ -55,8 +55,9 @@ fun PreferenceActivity.showFragment(
 
 fun EditText.listenForChanges(): Flowable<String> {
     var currentQuery = ""
-    return Flowable.create({
-        this.addTextChangedListener(object : TextListener() {
+    var textWatcher: TextWatcher? = null
+    return Flowable.create<String>({
+        textWatcher = object : TextListener() {
             override fun afterTextChanged(s: Editable) {
                 super.afterTextChanged(s)
                 val query = s.toString()
@@ -65,8 +66,10 @@ fun EditText.listenForChanges(): Flowable<String> {
                     it.onNext(query)
                 }
             }
-        })
+        }
+        this.addTextChangedListener(textWatcher)
     }, BackpressureStrategy.DROP)
+        .doOnTerminate { textWatcher?.let { this.removeTextChangedListener(it) } }
 }
 
 fun showDarkStatusIcons(decorView: View, show: Boolean) {
