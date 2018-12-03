@@ -176,6 +176,16 @@ class RecipeDaoImpl @Inject constructor(
         }
     }
 
+    override fun getCategoryNamesForRecipeInMealPlan(recipeID: Int): Single<List<String>> {
+        return Single.create {
+            val db = foodoraDB.readableDatabase
+            val categoryNames = db.query(TABLE_MEAL_PLAN_NAME, arrayOf(COLUMN_CATEGORY_NAME), "$COLUMN_REL_RECIPE_ID = ?", arrayOf(recipeID.toString()))
+                .use { cursor -> cursor.map { getString(COLUMN_CATEGORY_NAME) } }
+
+            it.onSuccess(categoryNames)
+        }
+    }
+
     override fun isRecipeInMealPlan(recipeID: Int): Single<Boolean> {
         return Single.create {
             val db = foodoraDB.readableDatabase

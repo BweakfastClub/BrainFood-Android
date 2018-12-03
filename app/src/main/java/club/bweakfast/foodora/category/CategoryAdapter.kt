@@ -1,7 +1,5 @@
 package club.bweakfast.foodora.category
 
-import android.os.Build
-import android.support.v7.app.AppCompatDelegate
 import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,9 +8,10 @@ import android.widget.TextView
 import club.bweakfast.foodora.R
 import kotlinx.android.synthetic.main.item_select_category.*
 
-class CategoryAdapter(private val categoryListener: (String, Boolean) -> Unit = { _, _ -> }) : RecyclerView.Adapter<CategoryViewHolder>() {
-    private val categories = CategoryName.values()
-
+class CategoryAdapter(
+    private val categories: Array<CategoryName>,
+    private val categoryListener: (String, Boolean) -> Unit
+) : RecyclerView.Adapter<CategoryViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_select_category, parent, false)
         return CategoryViewHolder(view)

@@ -20,6 +20,7 @@ import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.Intents
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.category.CategoryAdapter
+import club.bweakfast.foodora.category.CategoryName
 import club.bweakfast.foodora.custom.NutritionInfoLayout
 import club.bweakfast.foodora.custom.NutritionView
 import club.bweakfast.foodora.recipe.ingredient.IngredientAdapter
@@ -95,6 +96,22 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
                     }
                 }
         )
+
+        if (userViewModel.isLoggedIn) {
+            subscriptions.add(
+                recipeViewModel.getRecommendedRecipes(recipe)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { recipes, err ->
+                        if (err != null) {
+                            onError(err, this)
+                        } else {
+                            recommendedRecipes.recyclerView.adapter = RecipesAdapter(recipes)
+                            recommendedRecipes.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+                        }
+                    }
+            )
+        }
     }
 
     private fun init(recipe: Recipe) {
@@ -130,12 +147,38 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
         val fab = view as Button
         val isAdding = fab.text == getString(R.string.action_add_meal_plan)
 
-        buildBottomSheet(title = getString(R.string.title_add_meal_plan_question)) {
+        if (isAdding) {
+            showRecipeSelectionDialog(isAdding)
+        } else {
+            subscriptions.add(
+                recipeViewModel.getCategoryNamesForRecipeInMealPlan(recipe)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe { categories, err ->
+                        if (err != null) {
+                            onError(err, this)
+                        } else {
+                            val categoriesToShow = categories.map { CategoryName.valueOf(it.capitalize()) }.toTypedArray()
+                            if (categories.size == 1) {
+                                addOrRemoveRecipesToMealPlan(isAdding, categoriesToShow, categories)
+                            } else {
+                                showRecipeSelectionDialog(isAdding, categoriesToShow)
+                            }
+                        }
+                    }
+            )
+        }
+    }
+
+    private fun showRecipeSelectionDialog(isAdding: Boolean, categoriesToShow: Array<CategoryName> = CategoryName.values()) {
+        val bottomSheetTitle = if (isAdding) getString(R.string.title_add_meal_plan_question) else getString(R.string.title_remove_meal_plan_question)
+
+        buildBottomSheet(title = bottomSheetTitle) {
             val categories = mutableListOf<String>()
 
             val customView = LayoutInflater.from(this@RecipeActivity).inflate(R.layout.fragment_list, null)
             setCustomView(customView)
-            customView.rv.adapter = CategoryAdapter { categoryName, add ->
+            customView.rv.adapter = CategoryAdapter(categoriesToShow) { categoryName, add ->
                 val listAction = if (add) categories::add else categories::remove
                 listAction(categoryName)
             }
@@ -144,28 +187,30 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
             setNegativeText(R.string.action_cancel)
             setPositiveText(R.string.action_ok)
             setPositiveTextColor(R.color.black)
-            onPositive {
-                updateMealPlanBtn(isAdding)
-
-                val completable = if (isAdding) {
-                    recipeViewModel.addRecipeToMealPlan(recipe, categories)
-                } else {
-                    Completable.merge(categories.map { recipeViewModel.removeRecipeFromMealPlan(recipe, it) })
-                }
-                subscriptions.addAll(
-                    completable
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe({
-                            val snackbarText = if (isAdding) "Added recipe to meal plan" else "Removed recipe from meal plan"
-                            Snackbar.make(rootLayout, snackbarText, Snackbar.LENGTH_LONG).show()
-                        }, {
-                            updateMealPlanBtn(!isAdding)
-                            onError(it, this@RecipeActivity)
-                        })
-                )
-            }
+            onPositive { addOrRemoveRecipesToMealPlan(isAdding, categoriesToShow, categories) }
         }
+    }
+
+    private fun addOrRemoveRecipesToMealPlan(isAdding: Boolean, categoriesToShow: Array<CategoryName>, categories: List<String>) {
+        if (isAdding || (!isAdding && categories.size == categoriesToShow.size)) updateMealPlanBtn(isAdding)
+
+        val completable = if (isAdding) {
+            recipeViewModel.addRecipeToMealPlan(recipe, categories)
+        } else {
+            Completable.merge(categories.map { recipeViewModel.removeRecipeFromMealPlan(recipe, it) })
+        }
+        subscriptions.addAll(
+            completable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    val snackbarText = if (isAdding) "Added recipe to meal plan" else "Removed recipe from meal plan"
+                    Snackbar.make(rootLayout, snackbarText, Snackbar.LENGTH_LONG).show()
+                }, {
+                    updateMealPlanBtn(!isAdding)
+                    onError(it, this@RecipeActivity)
+                })
+        )
     }
 
     private fun updateMealPlanBtn(isAdding: Boolean) {

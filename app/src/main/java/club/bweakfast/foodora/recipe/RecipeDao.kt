@@ -15,6 +15,7 @@ interface RecipeDao {
     fun addLikedRecipe(recipeID: Int): Completable
     fun removeLikedRecipe(recipeID: Int): Completable
     fun getRecipesInMealPlan(): Single<Map<String, List<Recipe>>>
+    fun getCategoryNamesForRecipeInMealPlan(recipeID: Int): Single<List<String>>
     fun isRecipeInMealPlan(recipeID: Int): Single<Boolean>
     fun addRecipeToMealPlan(recipeID: Int, categoryNames: List<String>): Completable
     fun removeRecipeFromMealPlan(recipeID: Int, categoryName: String): Completable
