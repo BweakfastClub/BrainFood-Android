@@ -4,13 +4,11 @@ import android.app.Application
 import club.bweakfast.foodora.di.component.DaggerFoodoraComponent
 import club.bweakfast.foodora.di.component.FoodoraComponent
 import club.bweakfast.foodora.di.module.FoodoraModule
+import com.crashlytics.android.Crashlytics
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestLoggingListener
-import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
-
-
 
 /**
  * Created by silve on 3/2/2018.

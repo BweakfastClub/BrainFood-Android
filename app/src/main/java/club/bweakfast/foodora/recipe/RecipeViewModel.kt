@@ -30,6 +30,8 @@ class RecipeViewModel @Inject constructor(private val recipeService: RecipeServi
 
     fun getMealPlan() = recipeDao.getRecipesInMealPlan()
 
+    fun getCategoryNamesForRecipeInMealPlan(recipe: Recipe) = recipeDao.getCategoryNamesForRecipeInMealPlan(recipe.id)
+
     fun isRecipeInMealPlan(recipe: Recipe) = recipeDao.isRecipeInMealPlan(recipe.id)
 
     fun addRecipeToMealPlan(recipe: Recipe, categoryNames: List<String>): Completable {
@@ -53,5 +55,5 @@ class RecipeViewModel @Inject constructor(private val recipeService: RecipeServi
 
     fun getTopRecipes() = recipeService.getTopRecipes()
 
-    fun getRecommendedRecipes() = recipeService.getRecommendedRecipes()
+    fun getRecommendedRecipes(recipe: Recipe? = null) = recipeService.getRecommendedRecipes(recipe?.id)
 }

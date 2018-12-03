@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
+    android:paddingBottom="64dp"
     android:paddingTop="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_recipe">
@@ -49,8 +50,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:clipToPadding="false"
-            android:paddingBottom="64dp"
             tools:listitem="@layout/item_ingredient" />
+
+        <club.bweakfast.foodora.custom.RecipeListView
+            android:id="@+id/recommendedRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="@string/title_recommended_meals" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
