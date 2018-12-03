@@ -3,6 +3,7 @@ package club.bweakfast.foodora.user
 import android.support.annotation.VisibleForTesting
 import club.bweakfast.foodora.StorageService
 import club.bweakfast.foodora.auth.AuthenticationService
+import club.bweakfast.foodora.db.FoodoraDB
 import club.bweakfast.foodora.recipe.RecipeDao
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -16,7 +17,8 @@ open class UserViewModel @Inject constructor(
     private val authService: AuthenticationService,
     @VisibleForTesting var userService: UserService,
     private val storageService: StorageService,
-    @VisibleForTesting var recipeDao: RecipeDao
+    @VisibleForTesting var recipeDao: RecipeDao,
+    private val foodoraDB: FoodoraDB
 ) {
     val isLoggedIn = authService.isLoggedIn
 
@@ -37,6 +39,7 @@ open class UserViewModel @Inject constructor(
     }
 
     fun getUserInfo(): Single<User> {
+        foodoraDB.clearDB()
         return userService.getUserInfo().flatMap { user ->
             val dbOperations = mutableListOf<Completable>()
 
