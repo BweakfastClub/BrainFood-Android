@@ -50,6 +50,7 @@
     <string name="action_add_meal_plan">Add To Meal Plan</string>
     <string name="action_remove_meal_plan">Remove From Meal Plan</string>
     <string name="title_add_meal_plan_question">Which meal(s) would you like to add this recipe to?</string>
+    <string name="title_remove_meal_plan_question">Which meal would you like to remove this recipe from?</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_ok">OK</string>
 
@@ -111,5 +112,8 @@
     <string name="msg_saved_changes">Saved changes successfully!</string>
     <string name="action_logout">Logout</string>
     <string name="msg_submitting_changes">Submitting changes…</string>
+    <string name="msg_empty_search_query">You haven\'t searched for anything</string>
+    <string name="msg_error_no_results">We couldn\'t find anything</string>
+    <string name="msg_empty_meal_plan">You haven\'t added anything to your meal plan yet</string>
 
 </resources>

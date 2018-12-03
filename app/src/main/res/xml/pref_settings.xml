@@ -42,8 +42,4 @@
             android:title="@string/pref_allergy_peanut" />
 
     </PreferenceCategory>
-
-    <Preference
-        android:layout="@layout/layout_preference"
-        android:title="@string/action_logout" />
 </PreferenceScreen>
