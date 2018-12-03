@@ -16,12 +16,14 @@ import club.bweakfast.foodora.custom.SectionTitleLayout
 import club.bweakfast.foodora.recipe.RecipeViewModel
 import club.bweakfast.foodora.recipe.RecipesAdapter
 import club.bweakfast.foodora.util.onError
+import club.bweakfast.foodora.util.showView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_meal_plan.*
 import kotlinx.android.synthetic.main.item_section_title.*
+import kotlinx.android.synthetic.main.layout_empty_view.*
 import javax.inject.Inject
 
 /**
@@ -53,6 +55,17 @@ class MealPlanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        message.text = getString(R.string.msg_empty_meal_plan)
+
+        showView(emptyView, false)
+        showView(nutritionScrollingLayout, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (nutritionLayout.childCount > 1) nutritionLayout.removeViewsInLayout(1, nutritionLayout.childCount - 1)
+
         disposable = recipeViewModel.getMealPlan()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
@@ -72,9 +85,10 @@ class MealPlanFragment : Fragment() {
                         }
                     }
 
-                    if (mealPlan.isEmpty()) {
+                    showView(emptyView, mealPlan.isEmpty())
+                    showView(nutritionScrollingLayout, mealPlan.isNotEmpty())
 
-                    } else {
+                    if (!mealPlan.isEmpty()) {
                         val nutritionKeys = linkedMapOf(
                             "calories" to NutritionView(NutritionInfoLayout::nutritionInfo1, "Calories", false),
                             "protein" to NutritionView(NutritionInfoLayout::nutritionInfo2, "Protein"),
@@ -107,6 +121,11 @@ class MealPlanFragment : Fragment() {
                     }
                 }
             }
+    }
+
+    private fun showEmptyView(show: Boolean) {
+        showView(emptyView, show)
+        showView(nutritionScrollingLayout, !show)
     }
 
     override fun onDestroyView() {

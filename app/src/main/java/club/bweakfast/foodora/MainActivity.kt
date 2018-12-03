@@ -17,33 +17,41 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class MainActivity : CustomToolbarActivity() {
+    private var currentTab: Int? = null
+
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState, R.layout.activity_main)
 
         bottomBar.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.tab_home -> {
-                    showFragment(HomeFragment.newInstance())
-                    showSearchBox(false)
-                    message = getString(R.string.message_home)
-                    title = getString(R.string.app_name)
+            if (currentTab == it.itemId) false
+            else {
+                currentTab = it.itemId
+                when (it.itemId) {
+                    R.id.tab_home -> {
+                        val fragment = HomeFragment.newInstance()
+                        showFragment(fragment)
+                        showSearchBox(false)
+                        message = getString(R.string.message_home)
+                        title = getString(R.string.app_name)
+                    }
+                    R.id.tab_search -> {
+                        searchViewModel.searchListener = searchBox.listenForChanges()
+                        val fragment = SearchFragment.newInstance(searchBox.text.toString())
+                        searchBox.requestFocus()
+                        showFragment(fragment)
+                        showSearchBox(true)
+                    }
+                    R.id.tab_plan -> {
+                        val fragment = MealPlanFragment.newInstance()
+                        showFragment(fragment)
+                        showSearchBox(false)
+                        message = getString(R.string.message_meal_plan)
+                        title = getString(R.string.title_meal_plan)
+                    }
                 }
-                R.id.tab_search -> {
-                    val fragment = SearchFragment.newInstance()
-                    fragment.searchListener = searchBox.listenForChanges()
-                    searchBox.requestFocus()
-                    showFragment(fragment)
-                    showSearchBox(true)
-                }
-                R.id.tab_plan -> {
-                    showFragment(MealPlanFragment.newInstance())
-                    showSearchBox(false)
-                    message = getString(R.string.message_meal_plan)
-                    title = getString(R.string.title_meal_plan)
-                }
+                true
             }
-            true
         }
         bottomBar.selectedItemId = R.id.tab_home
 
@@ -54,19 +62,14 @@ class MainActivity : CustomToolbarActivity() {
 
         showView(rightIcon, userViewModel.isLoggedIn)
         if (userViewModel.isLoggedIn) {
-            rightIcon.setOnClickListener {
-                Intent(this, SettingsActivity::class.java).apply { startActivity(this) }
-            }
+            rightIcon.setOnClickListener { Intent(this, SettingsActivity::class.java).apply { startActivity(this) } }
         } else {
             bottomBar.menu.removeItem(R.id.tab_plan)
         }
     }
 
-    override fun onResumeFragments() {
-        super.onResumeFragments()
-
-        val searchFragmentName = SearchFragment::class.java.simpleName
-        val fragment = supportFragmentManager.findFragmentByTag(searchFragmentName) as? SearchFragment
-        fragment?.searchListener = searchBox.listenForChanges()
+    override fun onDestroy() {
+        if (searchViewModel.isSearchListenerInitialized()) searchViewModel.searchDisposable.dispose()
+        super.onDestroy()
     }
 }
