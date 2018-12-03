@@ -11,8 +11,6 @@ import club.bweakfast.foodora.R
 import club.bweakfast.foodora.custom.NutritionInfoLayout
 import club.bweakfast.foodora.custom.NutritionView
 import club.bweakfast.foodora.custom.RecipeListView
-import club.bweakfast.foodora.custom.SectionTitleAdapter
-import club.bweakfast.foodora.custom.SectionTitleLayout
 import club.bweakfast.foodora.recipe.RecipeViewModel
 import club.bweakfast.foodora.recipe.RecipesAdapter
 import club.bweakfast.foodora.util.onError
@@ -20,9 +18,7 @@ import club.bweakfast.foodora.util.showView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_meal_plan.*
-import kotlinx.android.synthetic.main.item_section_title.*
 import kotlinx.android.synthetic.main.layout_empty_view.*
 import javax.inject.Inject
 
