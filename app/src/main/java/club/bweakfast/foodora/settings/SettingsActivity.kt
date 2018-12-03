@@ -1,12 +1,18 @@
 package club.bweakfast.foodora.settings
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceFragment
 import android.support.v7.preference.PreferenceManager
+import android.support.v7.widget.ContentFrameLayout
 import android.support.v7.widget.RecyclerView
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.widget.FrameLayout
 import androidx.core.view.get
 import club.bweakfast.foodora.FoodoraApp
+import club.bweakfast.foodora.MainActivity
 import club.bweakfast.foodora.R
 import club.bweakfast.foodora.custom.CustomToolbarPreferenceActivity
 import club.bweakfast.foodora.util.buildBottomSheet
@@ -35,6 +41,21 @@ class SettingsActivity : CustomToolbarPreferenceActivity() {
         showFragment(SettingsFragment(), containerID = android.R.id.content)
 
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(settingsViewModel.preferenceChangeListener)
+
+        val parentLayout = findViewById<ContentFrameLayout>(android.R.id.content)
+        val logoutButton = LayoutInflater.from(this).inflate(R.layout.layout_logout_button, null)
+        val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT).apply {
+            gravity = Gravity.BOTTOM
+        }
+        parentLayout.addView(logoutButton, params)
+        logoutButton.setOnClickListener {
+            settingsViewModel.logout()
+            Intent(this, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(this)
+                finish()
+            }
+        }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
