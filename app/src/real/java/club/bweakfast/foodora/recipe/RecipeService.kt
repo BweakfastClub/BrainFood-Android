@@ -9,6 +9,8 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.HTTP
 import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 import javax.inject.Inject
 
 class RecipeService @Inject constructor(retrofit: Retrofit) {
@@ -28,7 +30,11 @@ class RecipeService @Inject constructor(retrofit: Retrofit) {
 
     fun getTopRecipes() = api.getTopRecipes().mapResponse()
 
-    fun getRecommendedRecipes() = api.getRecommendedRecipes().mapResponse()
+    fun getRecommendedRecipes(recipeID: Int? = null): Single<List<Recipe>> {
+        return (recipeID?.let { api.getSimilarRecipes(it) } ?: api.getRecommendedRecipes()).mapResponse()
+    }
+
+    fun getRandomRecipes(numRecipes: Int = 8) = api.getRandomRecipes(numRecipes).mapResponse()
 
     interface RecipeAPI {
         @POST("/users/liked_recipes")
@@ -48,5 +54,11 @@ class RecipeService @Inject constructor(retrofit: Retrofit) {
 
         @GET("/users/recommended_recipes")
         fun getRecommendedRecipes(): Single<Response<List<Recipe>>>
+
+        @GET("/recipes/random")
+        fun getRandomRecipes(@Query("recipes") numRecipes: Int): Single<Response<List<Recipe>>>
+
+        @GET("/recipes/recommend/{recipeID}")
+        fun getSimilarRecipes(@Path("recipeID") recipeID: Int): Single<Response<List<Recipe>>>
     }
 }
