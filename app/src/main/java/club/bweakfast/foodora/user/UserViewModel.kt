@@ -20,6 +20,7 @@ open class UserViewModel @Inject constructor(
     @VisibleForTesting var recipeDao: RecipeDao,
     private val foodoraDB: FoodoraDB
 ) {
+    val name = storageService.name
     val isLoggedIn = authService.isLoggedIn
 
     fun login(email: String, password: String): Completable {

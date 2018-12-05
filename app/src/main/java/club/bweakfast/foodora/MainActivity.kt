@@ -10,14 +10,22 @@ import club.bweakfast.foodora.plan.MealPlanFragment
 import club.bweakfast.foodora.search.SearchFragment
 import club.bweakfast.foodora.settings.SettingsActivity
 import club.bweakfast.foodora.user.ProfileActivity
+import club.bweakfast.foodora.util.evening
 import club.bweakfast.foodora.util.listenForChanges
+import club.bweakfast.foodora.util.midnight
+import club.bweakfast.foodora.util.noon
 import club.bweakfast.foodora.util.showFragment
 import club.bweakfast.foodora.util.showView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
+import java.time.LocalDateTime
 
 class MainActivity : CustomToolbarActivity() {
     private var currentTab: Int? = null
+    private val greeting: String
+        get() = getGreetingStr()
+    private val meal: String
+        get() = getMealStr()
 
     @SuppressLint("MissingSuperCall")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +40,7 @@ class MainActivity : CustomToolbarActivity() {
                         val fragment = HomeFragment.newInstance()
                         showFragment(fragment)
                         showSearchBox(false)
-                        message = getString(R.string.message_home)
+                        message = getString(R.string.message_home, greeting, meal)
                         title = getString(R.string.app_name)
                     }
                     R.id.tab_search -> {
@@ -66,6 +74,29 @@ class MainActivity : CustomToolbarActivity() {
             rightIcon.setOnClickListener { Intent(this, SettingsActivity::class.java).apply { startActivity(this) } }
         } else {
             bottomBar.menu.removeItem(R.id.tab_plan)
+        }
+    }
+
+    private fun getGreetingStr(): String {
+        val currentTime = LocalDateTime.now()
+        val name = userViewModel.name!!
+
+        return when {
+            currentTime.isAfter(midnight) && (currentTime.isBefore(noon) || currentTime == noon) -> getString(R.string.greeting_morning, name)
+            currentTime.isAfter(noon) && (currentTime.isBefore(evening) || currentTime == evening) -> getString(R.string.greeting_afternoon, name)
+            currentTime.isAfter(evening) && (currentTime.isBefore(midnight) || currentTime == midnight) -> getString(R.string.greeting_evening, name)
+            else -> throw UnsupportedOperationException()
+        }
+    }
+
+    private fun getMealStr(): String {
+        val currentTime = LocalDateTime.now()
+
+        return when {
+            currentTime.isAfter(midnight) && (currentTime.isBefore(noon) || currentTime == noon) -> getString(R.string.meal_breakfast)
+            currentTime.isAfter(noon) && (currentTime.isBefore(evening) || currentTime == evening) -> getString(R.string.meal_lunch)
+            currentTime.isAfter(evening) && (currentTime.isBefore(midnight) || currentTime == midnight) -> getString(R.string.meal_dinner)
+            else -> throw UnsupportedOperationException()
         }
     }
 

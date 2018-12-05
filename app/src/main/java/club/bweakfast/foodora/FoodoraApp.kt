@@ -8,6 +8,7 @@ import com.crashlytics.android.Crashlytics
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestLoggingListener
+import com.jakewharton.threetenabp.AndroidThreeTen
 import io.fabric.sdk.android.Fabric
 
 /**
@@ -30,6 +31,7 @@ class FoodoraApp : Application() {
 
         Fresco.initialize(this, frescoConfig)
         Fabric.with(this, Crashlytics())
+        AndroidThreeTen.init(this)
     }
 
     companion object {
