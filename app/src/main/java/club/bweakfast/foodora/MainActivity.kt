@@ -10,15 +10,13 @@ import club.bweakfast.foodora.plan.MealPlanFragment
 import club.bweakfast.foodora.search.SearchFragment
 import club.bweakfast.foodora.settings.SettingsActivity
 import club.bweakfast.foodora.user.ProfileActivity
-import club.bweakfast.foodora.util.evening
+import club.bweakfast.foodora.util.TimeOfDay
 import club.bweakfast.foodora.util.listenForChanges
-import club.bweakfast.foodora.util.midnight
-import club.bweakfast.foodora.util.noon
+import club.bweakfast.foodora.util.getTimeOfDay
 import club.bweakfast.foodora.util.showFragment
 import club.bweakfast.foodora.util.showView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
-import java.time.LocalDateTime
 
 class MainActivity : CustomToolbarActivity() {
     private var currentTab: Int? = null
@@ -78,25 +76,20 @@ class MainActivity : CustomToolbarActivity() {
     }
 
     private fun getGreetingStr(): String {
-        val currentTime = LocalDateTime.now()
         val name = userViewModel.name!!
 
-        return when {
-            currentTime.isAfter(midnight) && (currentTime.isBefore(noon) || currentTime == noon) -> getString(R.string.greeting_morning, name)
-            currentTime.isAfter(noon) && (currentTime.isBefore(evening) || currentTime == evening) -> getString(R.string.greeting_afternoon, name)
-            currentTime.isAfter(evening) && (currentTime.isBefore(midnight) || currentTime == midnight) -> getString(R.string.greeting_evening, name)
-            else -> throw UnsupportedOperationException()
+        return when (getTimeOfDay()) {
+            TimeOfDay.MORNING -> getString(R.string.greeting_morning, name)
+            TimeOfDay.AFTERNOON -> getString(R.string.greeting_afternoon, name)
+            TimeOfDay.EVENING -> getString(R.string.greeting_evening, name)
         }
     }
 
     private fun getMealStr(): String {
-        val currentTime = LocalDateTime.now()
-
-        return when {
-            currentTime.isAfter(midnight) && (currentTime.isBefore(noon) || currentTime == noon) -> getString(R.string.meal_breakfast)
-            currentTime.isAfter(noon) && (currentTime.isBefore(evening) || currentTime == evening) -> getString(R.string.meal_lunch)
-            currentTime.isAfter(evening) && (currentTime.isBefore(midnight) || currentTime == midnight) -> getString(R.string.meal_dinner)
-            else -> throw UnsupportedOperationException()
+        return when (getTimeOfDay()) {
+            TimeOfDay.MORNING -> getString(R.string.meal_breakfast)
+            TimeOfDay.AFTERNOON -> getString(R.string.meal_lunch)
+            TimeOfDay.EVENING -> getString(R.string.meal_dinner)
         }
     }
 

@@ -1,7 +1,23 @@
 package club.bweakfast.foodora.util
 
-import java.time.LocalDateTime
+import org.threeten.bp.LocalTime
 
-val midnight: LocalDateTime by lazy { LocalDateTime.now().withHour(0).withMinute(0) }
-val noon: LocalDateTime by lazy { LocalDateTime.now().withHour(12).withMinute(0) }
-val evening: LocalDateTime by lazy { LocalDateTime.now().withHour(18).withMinute(0) }
+val beforeMidnight: LocalTime by lazy { LocalTime.of(23, 59) }
+val afterMidnight: LocalTime by lazy { LocalTime.of(0, 0) }
+val noon: LocalTime by lazy { LocalTime.of(12, 0) }
+val evening: LocalTime by lazy { LocalTime.of(18, 0) }
+
+fun getTimeOfDay(): TimeOfDay {
+    val currentTime = LocalTime.now().withSecond(0).withNano(0)
+
+    return when {
+        currentTime.isAfter(afterMidnight) && (currentTime.isBefore(noon) || currentTime == noon) -> TimeOfDay.MORNING
+        currentTime.isAfter(noon) && (currentTime.isBefore(evening) || currentTime == evening) -> TimeOfDay.AFTERNOON
+        currentTime.isAfter(evening) && (currentTime.isBefore(beforeMidnight) || currentTime == beforeMidnight) -> TimeOfDay.EVENING
+        else -> throw UnsupportedOperationException()
+    }
+}
+
+enum class TimeOfDay {
+    MORNING, AFTERNOON, EVENING
+}
