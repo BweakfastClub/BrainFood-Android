@@ -36,8 +36,9 @@ class MainActivity : CustomToolbarActivity() {
                         title = getString(R.string.app_name)
                     }
                     R.id.tab_search -> {
-                        searchViewModel.searchListener = searchBox.listenForChanges()
-                        val fragment = SearchFragment.newInstance(searchBox.text.toString())
+                        val query = searchBox.text.toString()
+                        searchViewModel.searchListener = searchBox.listenForChanges(query)
+                        val fragment = SearchFragment.newInstance(query)
                         searchBox.requestFocus()
                         showFragment(fragment)
                         showSearchBox(true)

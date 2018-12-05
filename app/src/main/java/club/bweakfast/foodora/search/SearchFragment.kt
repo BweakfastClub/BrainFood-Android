@@ -110,9 +110,9 @@ class SearchFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
+    override fun onDestroy() {
         subscriptions.clear()
-        super.onDestroyView()
+        super.onDestroy()
     }
 
     private fun handleError(error: Throwable) {

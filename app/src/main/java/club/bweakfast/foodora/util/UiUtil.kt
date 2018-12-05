@@ -53,8 +53,8 @@ fun PreferenceActivity.showFragment(
     transaction.commit()
 }
 
-fun EditText.listenForChanges(): Flowable<String> {
-    var currentQuery = ""
+fun EditText.listenForChanges(initialValue: String = ""): Flowable<String> {
+    var currentQuery = initialValue
     var textWatcher: TextWatcher? = null
     return Flowable.create<String>({
         textWatcher = object : TextListener() {
