@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import club.bweakfast.foodora.FoodoraApp
 import club.bweakfast.foodora.R
-import club.bweakfast.foodora.getRandomRecipes
 import club.bweakfast.foodora.recipe.SelectableRecipesAdapter
 import club.bweakfast.foodora.util.onError
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -41,8 +40,8 @@ class SetupMealsFragment : PreferenceFragment() {
                 if (err != null) {
                     onError(err, activity)
                 } else {
-                    mealsGrid.recyclerView.adapter = SelectableRecipesAdapter(recipes, true) { recipeCount ->
-                        setupViewModel.isStep2Valid = recipeCount >= 3
+                    mealsGrid.recyclerView.adapter = SelectableRecipesAdapter(recipes, true) { recipeIDs ->
+                        setupViewModel.selectedRecipeIDs = recipeIDs
                     }
                     mealsGrid.recyclerView.layoutManager = GridLayoutManager(activity, 2)
                 }

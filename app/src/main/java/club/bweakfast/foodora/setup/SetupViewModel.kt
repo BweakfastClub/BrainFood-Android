@@ -1,11 +1,9 @@
 package club.bweakfast.foodora.setup
 
 import club.bweakfast.foodora.StorageService
-import club.bweakfast.foodora.recipe.Recipe
 import club.bweakfast.foodora.recipe.RecipeService
 import club.bweakfast.foodora.user.UserService
 import io.reactivex.Completable
-import io.reactivex.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,6 +23,13 @@ class SetupViewModel @Inject constructor(
         get() = validateStep1()
 
     var isStep2Valid: Boolean = false
+        private set
+
+    var selectedRecipeIDs = listOf<Int>()
+        set(value) {
+            field = value
+            isStep2Valid = value.size >= 3
+        }
 
     var name: String?
         get() = storageService.name
@@ -50,6 +55,8 @@ class SetupViewModel @Inject constructor(
 
         return userService.addAllergies(allergies)
     }
+
+    fun addLikedRecipes(): Completable = Completable.merge(selectedRecipeIDs.map { recipeService.likeRecipe(it) })
 
     fun getRandomRecipes(numRecipes: Int = 8) = recipeService.getRandomRecipes(numRecipes)
 

@@ -89,7 +89,8 @@ class SetupInfoActivity : CustomToolbarPreferenceActivity() {
                             Completable.merge(
                                 listOf(
                                     Completable.timer(2, TimeUnit.SECONDS),
-                                    setupViewModel.addAllergies()
+                                    setupViewModel.addAllergies(),
+                                    setupViewModel.addLikedRecipes()
                                 )
                             )
                                 .observeOn(AndroidSchedulers.mainThread())
