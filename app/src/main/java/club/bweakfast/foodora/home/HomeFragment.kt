@@ -49,11 +49,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.setOnRefreshListener { loadData() }
-        loadData()
+        swipeRefreshLayout.setOnRefreshListener { loadData(true) }
+        loadData(false)
     }
 
-    private fun loadData() {
+    private fun loadData(isRefreshing: Boolean) {
         var topRecipesLoaded = false
         var recommendationsLoaded = !userViewModel.isLoggedIn
 
@@ -93,6 +93,15 @@ class HomeFragment : Fragment() {
                         swipeRefreshLayout.isRefreshing = !(topRecipesLoaded && recommendationsLoaded)
                     }
             )
+
+            if (isRefreshing) {
+                subscriptions.add(
+                    userViewModel.getUserInfo()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe { _, err -> if (err != null) onError(err, requireContext()) }
+                )
+            }
         } else {
             topRecommendations.visibility = View.GONE
         }
