@@ -61,9 +61,9 @@
 
     <!-- Strings related to home page -->
     <string name="message_home">%s! In the mood for some new %s ideas?</string>
-    <string name="greeting_morning">Good morning %s</string>
-    <string name="greeting_afternoon">Good afternoon %s</string>
-    <string name="greeting_evening">Good evening %s</string>
+    <string name="greeting_morning">Good morning%s</string>
+    <string name="greeting_afternoon">Good afternoon%s</string>
+    <string name="greeting_evening">Good evening%s</string>
     <string name="meal_breakfast">breakfast</string>
     <string name="meal_lunch">lunch</string>
     <string name="meal_dinner">dinner</string>

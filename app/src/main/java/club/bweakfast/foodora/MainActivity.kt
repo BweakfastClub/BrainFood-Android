@@ -11,8 +11,8 @@ import club.bweakfast.foodora.search.SearchFragment
 import club.bweakfast.foodora.settings.SettingsActivity
 import club.bweakfast.foodora.user.ProfileActivity
 import club.bweakfast.foodora.util.TimeOfDay
-import club.bweakfast.foodora.util.listenForChanges
 import club.bweakfast.foodora.util.getTimeOfDay
+import club.bweakfast.foodora.util.listenForChanges
 import club.bweakfast.foodora.util.showFragment
 import club.bweakfast.foodora.util.showView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -76,7 +76,7 @@ class MainActivity : CustomToolbarActivity() {
     }
 
     private fun getGreetingStr(): String {
-        val name = userViewModel.name!!
+        val name = userViewModel.name?.let { " $it" } ?: ""
 
         return when (getTimeOfDay()) {
             TimeOfDay.MORNING -> getString(R.string.greeting_morning, name)
