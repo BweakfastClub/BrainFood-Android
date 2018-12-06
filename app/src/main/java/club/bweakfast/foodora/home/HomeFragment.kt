@@ -85,6 +85,11 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        subscriptions.clear()
+        super.onDestroyView()
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = HomeFragment()
