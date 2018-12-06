@@ -40,8 +40,8 @@ open class UserViewModel @Inject constructor(
     }
 
     fun getUserInfo(): Single<User> {
-        foodoraDB.clearDB()
         return userService.getUserInfo().flatMap { user ->
+            foodoraDB.clearDB()
             val dbOperations = mutableListOf<Completable>()
 
             storageService.name = user.name
