@@ -239,24 +239,24 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
 
     private fun clickOnLikeItem(recipe: Recipe, menuItem: MenuItem) {
         with(recipe) {
-            val completable = if (isFavourite) {
+            val completable = if (isLiked) {
                 recipeViewModel.unlikeRecipe(this)
             } else {
                 recipeViewModel.likeRecipe(this)
             }
-            isFavourite = !isFavourite
-            updateLikeIcon(isFavourite, menuItem)
+            isLiked = !isLiked
+            updateLikeIcon(isLiked, menuItem)
             subscriptions.add(
                 completable
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe({
-                        val snackbarText = if (isFavourite) "Added to favourites" else "Removed from favourites"
+                        val snackbarText = if (isLiked) "Added to favourites" else "Removed from favourites"
                         Snackbar.make(rootLayout, snackbarText, Snackbar.LENGTH_LONG).show()
                     }, {
-                        updateLikeIcon(!isFavourite, menuItem)
+                        isLiked = !isLiked
+                        updateLikeIcon(isLiked, menuItem)
                         onError(it, this@RecipeActivity)
-                        isFavourite = !isFavourite
                     })
             )
         }

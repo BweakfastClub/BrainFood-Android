@@ -17,8 +17,7 @@ data class Recipe(
     val prepMinutes: Int,
     val cookMinutes: Int,
     val readyMinutes: Int,
-    @SerializedName("imageUrl") val imageURL: String,
-    var isFavourite: Boolean = false
+    @SerializedName("imageUrl") val imageURL: String
 ) : KParcelable {
     var nutrition = mutableMapOf<String, NutritionValue>()
 
@@ -30,8 +29,7 @@ data class Recipe(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
-        parcel.readString(),
-        parcel.readBoolean()
+        parcel.readString()
     ) {
         parcel.readMap(nutrition, NutritionValue::class.java.classLoader)
     }
@@ -46,7 +44,6 @@ data class Recipe(
             writeInt(cookMinutes)
             writeInt(readyMinutes)
             writeString(imageURL)
-            writeBoolean(isFavourite)
             writeMap(nutrition)
         }
     }
