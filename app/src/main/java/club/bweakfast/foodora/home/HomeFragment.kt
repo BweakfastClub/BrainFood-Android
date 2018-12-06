@@ -54,6 +54,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadData() {
+        var topRecipesLoaded = false
+        var recommendationsLoaded = !userViewModel.isLoggedIn
+
         subscriptions.add(
             recipeViewModel.getTopRecipes()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -66,6 +69,8 @@ class HomeFragment : Fragment() {
                         topRecipesGrid.recyclerView.adapter = RecipesAdapter(recipes, true)
                         topRecipesGrid.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                     }
+                    topRecipesLoaded = true
+                    swipeRefreshLayout.isRefreshing = !(topRecipesLoaded && recommendationsLoaded)
                 }
         )
 
@@ -84,7 +89,8 @@ class HomeFragment : Fragment() {
                             topRecommendations.recyclerView.layoutManager =
                                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                         }
-                        swipeRefreshLayout.isRefreshing = false
+                        recommendationsLoaded = true
+                        swipeRefreshLayout.isRefreshing = !(topRecipesLoaded && recommendationsLoaded)
                     }
             )
         } else {
