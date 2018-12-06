@@ -59,6 +59,7 @@
         android:paddingEnd="20dp"
         android:text="@string/action_add_meal_plan"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_behavior="club.bweakfast.foodora.custom.ExtendedFabBehaviour" />
 
 </android.support.design.widget.CoordinatorLayout>

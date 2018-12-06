@@ -119,11 +119,6 @@ class MealPlanFragment : Fragment() {
             }
     }
 
-    private fun showEmptyView(show: Boolean) {
-        showView(emptyView, show)
-        showView(nutritionScrollingLayout, !show)
-    }
-
     override fun onDestroyView() {
         disposable.dispose()
         super.onDestroyView()
