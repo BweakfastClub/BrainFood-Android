@@ -48,6 +48,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        swipeRefreshLayout.setOnRefreshListener { loadData() }
+        loadData()
+    }
+
+    private fun loadData() {
         subscriptions.add(
             recipeViewModel.getTopRecipes()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -78,6 +83,7 @@ class HomeFragment : Fragment() {
                             topRecommendations.recyclerView.layoutManager =
                                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                         }
+                        swipeRefreshLayout.isRefreshing = false
                     }
             )
         } else {
