@@ -28,6 +28,10 @@ class ProfileActivity : CustomToolbarActivity() {
         leftIcon.setImageResource(R.drawable.ic_arrow_left)
         leftIcon.setOnClickListener { onBackPressed() }
         rightIcon.setOnClickListener { Intent(this, SettingsActivity::class.java).apply { startActivity(this) } }
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         disposable = recipeViewModel.getFavouriteRecipes()
             .observeOn(AndroidSchedulers.mainThread())
