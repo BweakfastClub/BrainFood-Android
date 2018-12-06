@@ -2,9 +2,10 @@ package club.bweakfast.foodora
 
 import android.content.Context
 import android.preference.PreferenceManager
+import androidx.core.content.edit
 import javax.inject.Inject
 
-class StorageService @Inject constructor(private val context: Context) {
+class StorageService @Inject constructor(context: Context) {
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
     var token: String?
         get() = preferences.getString(tokenKey, null)
@@ -72,6 +73,13 @@ class StorageService @Inject constructor(private val context: Context) {
 
     fun logout() {
         deleteToken()
+        preferences.edit {
+            remove(nameKey)
+            remove(veganKey)
+            remove(vegetarianKey)
+            remove(peanutAllergyKey)
+            remove(setupCompleteKey)
+        }
     }
 
     fun hasToken() = preferences.contains(tokenKey)
