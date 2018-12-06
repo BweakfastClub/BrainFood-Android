@@ -71,6 +71,7 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
 
         init(recipe)
         showView(fab, userViewModel.isLoggedIn)
+        showView(recommendedRecipes, userViewModel.isLoggedIn)
 
         fab.setOnClickListener(::clickOnMealPlanBtn)
 
@@ -219,8 +220,9 @@ class RecipeActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_recipe, menu)
+        menu[0].isVisible = userViewModel.isLoggedIn
         updateLikeIcon(isLiked, menu[0])
-        return userViewModel.isLoggedIn
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
